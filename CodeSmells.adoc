@@ -694,44 +694,28 @@ We had to use this option until the TOP clause (with ORDER BY) was implemented. 
 
 This is usually a reflex action to seeing the error 'The ORDER BY clause is invalid in views, inline functions, derived tables, subqueries, and common table expressions, unless TOP or FOR XML is also specified'. The message is usually a result of your ORDER BY clause being included in the wrong statement. You should include it only in the outermost query.
 
-ALTER FUNCTION dbo.CurrencyTable(@Region VARCHAR(20) == '%')
-
+[source,sql]
+----
+CREATE FUNCTION dbo.CurrencyTable(@Region VARCHAR(20) = '%')
 --returns the currency for the region, supports wildcards
-
 --SELECT * FROM dbo.CurrencyTable(DEFAULT) returns all
-
 --SELECT * FROM dbo.CurrencyTable('%Slov%')
-
 RETURNS TABLE
-
 WITH SCHEMABINDING
-
 AS
-
 RETURN
-
-(
-
-SELECT TOP 100 PERCENT CountryRegion.Name AS country,
-
-Currency.Name AS currency
-
-FROM Person.CountryRegion
-
-INNER JOIN Sales.CountryRegionCurrency
-
-ON CountryRegion.CountryRegionCode == CountryRegionCurrency.CountryRegionCode
-
-INNER JOIN Sales.Currency
-
-ON CountryRegionCurrency.CurrencyCode == Currency.CurrencyCode
-
-WHERE CountryRegion.Name LIKE @Region
-
-ORDER BY Currency.Name
-
+  (
+  SELECT TOP 100 PERCENT CountryRegion.Name AS country, Currency.Name AS currency
+    FROM Person.CountryRegion
+      INNER JOIN Sales.CountryRegionCurrency
+        ON CountryRegion.CountryRegionCode = CountryRegionCurrency.CountryRegionCode
+      INNER JOIN Sales.Currency
+        ON CountryRegionCurrency.CurrencyCode = Currency.CurrencyCode
+    WHERE CountryRegion.Name LIKE @Region
+    ORDER BY Currency.Name
+  );
 );
-
+----
 [[not-specifying-the-schema-name-for-a-procedure]]
 === Not specifying the Schema name for a procedure
 
