@@ -19,7 +19,7 @@ In describing all these two hundred code-smells in a booklet, I've been very con
 [[packing-lists-complex-data-or-other-multivariate-attributes-into-a-table-column]]
 === Packing lists, complex data, or other multivariate attributes into a table column
 
-It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, the as long as the value remains in the format in which it started. We store strings, after all, and a string is, hardly atomic since it consists of an ordinally significant collection of characters or words. A list or XML value stored in a column, whether by character map, bitmap or XML data type, can be a useful temporary expedient during development, but the column will likely need to be normalised if values will have to be shredded.
+It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn't represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised if values will have to be shredded.
 
 [[using-inappropriate-data-types]]
 === Using inappropriate data types
