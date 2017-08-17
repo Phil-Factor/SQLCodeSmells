@@ -20,6 +20,7 @@ In describing all these two hundred code-smells in a booklet, I've been very con
 === Packing lists, complex data, or other multivariate attributes into a table column
 
 It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn't represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised if values will have to be shredded.
+Occasionally, a data object is too complicated, peripheral, arcane or ephemeral to be worth integrating with the database's normalised structure. It is fair to then take an arm's-length approach and store it as XML, but in this case it will need to encapsulated by views and table-valued functions.
 
 [[using-inappropriate-data-types]]
 === Using inappropriate data types
