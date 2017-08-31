@@ -1,9 +1,9 @@
 ﻿[[introduction]]
 == Introduction
 
-Once you've done a number of SQL code-reviews, you'll be able to identify signs in the code that indicate all might not be well. These http://www.c2.com/cgi/wiki?CodeSmell['code smells'] are coding styles that, while not bugs, suggest design problems with the code.
+Once you've done a number of SQL code-reviews, you'll be able to spot signs in the code that indicate all might not be well. These http://www.c2.com/cgi/wiki?CodeSmell['code smells'] are coding styles that, while not bugs, suggest design problems with the code.
 
-Kent Beck and Massimo Arnoldi seem to have coined the term 'CodeSmell' in the 'http://www.c2.com/cgi/wiki?OnceAndOnlyOnce[Once And Only Once]' page of www.C2.com, where Kent also said that code 'wants to be simple'. Kent Beck and Martin Fowler expand on the issue of code challenges in their essay 'Bad Smells in Code', published as Chapter 3 of the book _Refactoring: Improving the Design of Existing Code_ (ISBN 978-0201485677).
+Kent Beck and Massimo Arnoldi seem to have coined the term 'Code Smell' in the 'http://www.c2.com/cgi/wiki?OnceAndOnlyOnce[Once And Only Once]' page of www.C2.com, where Kent also said that code 'wants to be simple'. Kent Beck and Martin Fowler expand on the issue of code challenges in their essay 'Bad Smells in Code', published as Chapter 3 of the book _Refactoring: Improving the Design of Existing Code_ (ISBN 978-0201485677).
 
 Although there are generic code smells, SQL has its own particular habits that will alert the programmer to the need to refactor code. (For grounding in code smells in C#, see 'https://www.simple-talk.com/dotnet/.net-framework/exploring-smelly-code/[Exploring Smelly Code'] and 'https://www.simple-talk.com/dotnet/.net-framework/code-deodorants-for-code-smells/[Code Deodorants for Code Smells]' by Nick Harrison.) Plamen Ratchev's wonderful article 'https://www.simple-talk.com/sql/t-sql-programming/ten-common-sql-programming-mistakes/[Ten Common SQL Programming Mistakes'] lists some of these code smells along with out-and-out mistakes, but there are more. The use of nested transactions, for example, isn't entirely incorrect, even though the database engine ignores all but the outermost, but their use does flag the possibility the programmer thinks that nested transactions are supported.
 
@@ -11,7 +11,7 @@ If you are moving towards continuous delivery of database applications, you shou
 
 One can be a bit defensive about SQL code smells. I will cheerfully write very long stored procedures, even though they are frowned upon. I'll even use dynamic SQL on occasion. You should use code smells only as an aid. It is fine to 'sign them off' as being inappropriate in certain circumstances. In fact, whole classes of code smells may be irrelevant for a particular database. The use of proprietary SQL, for example, is only a code smell if there is a chance that the database will be ported to another RDBMS. The use of dynamic SQL is a risk only with certain security models. Ultimately, you should rely on your own judgment. As the saying goes, a code smell is a hint of possible bad practice to a pragmatist, but a sure sign of bad practice to a purist.
 
-In describing all these two hundred code-smells in a booklet, I've been very constrained on space to describe each code-small. Some code-smells would require a whole article to explain them properly. Fortunately, SQL Server Central and Simple-Talk have, between them, published material on almost all these code smells, so if you get interested, please explore these essential archives of information.
+In describing all these code-smells in a booklet, I've been very constrained on space to describe each code-small. Some code-smells would require a whole article to explain them properly. Fortunately, SQL Server Central and Simple-Talk have, between them, published material on almost all these code smells, so if you get interested, please explore these essential archives of information.
 
 [[problems-with-database-design]]
 == Problems with Database Design
@@ -19,8 +19,8 @@ In describing all these two hundred code-smells in a booklet, I've been very con
 [[packing-lists-complex-data-or-other-multivariate-attributes-into-a-table-column]]
 === Packing lists, complex data, or other multivariate attributes into a table column
 
-It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn't represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised if values will have to be shredded.
-Occasionally, a data object is too complicated, peripheral, arcane or ephemeral to be worth integrating with the database's normalised structure. It is fair to then take an arm's-length approach and store it as XML, but in this case it will need to encapsulated by views and table-valued functions.
+It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn't represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised, and it will certainly be slow.
+Occasionally, a data object is too complicated, peripheral, arcane or ephemeral to be worth integrating with the database's normalised structure. It is fair to then take an arm's-length approach and store it as XML, but in this case it will need to be encapsulated by views and table-valued functions so that the SQL Programmer can easily access the contents.
 
 [[using-inappropriate-data-types]]
 === Using inappropriate data types
@@ -73,7 +73,7 @@ One way in which SQL Server maintains data integrity is by using constraints to 
 [[enabling-nocheck-on-referential-integrity-constraints]]
 === Enabling NOCHECK on referential integrity constraints
 
-Some scripting engines disable referential integrity during updates. You must ensure that WITH CHECK is enabled or else the constraint is marked as untrusted and therefore won't be used by the optimizer.
+Some scripting engines disable referential integrity during updates. You must ensure that WITH CHECK is enabled or else the constraint is marked as untrusted and therefore won't be used by the optimizer. 
 
 ==== [BP019Â Foreign key is disabled]
 
@@ -85,14 +85,16 @@ A table in a well-designed database with an appropriate clustered index will hav
 [[not-choosing-the-most-suitable-clustered-index-for-a-table]]
 === Not choosing the most suitable clustered index for a table
 
-You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely. The primary key is the usual, but not the only, correct choice.
+You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely.  Are you likely to select predominately single values, unsorted or sorted ranges? Are you predominately using one particular index other than your primary key? Is the table experiencing many more reads than writes, with queries that make reference to columns that aren’t part of the primary key? Are you typically selecting ranges within a particular category? Are your WHERE clauses returning many rows? These ways that the table participates in frequently-used queries are likely to be better accommodated by a clustered index.
+
+For your clustered index, you are likely to choose a ‘narrow’ index which is stored economically because this value has to be held in every index leaf-level pointer. This can be an interesting trade-off because the clustered index key is automatically included in all non-clustered indexes as the row locator so non-clustered indexes will cover queries that need only the non-clustered index key and the clustered index key.
 
 ==== [BP001 Index type is not specified]
 
 [[not-explicitly-declaring-which-index-is-the-clustered-one.]]
 === Not explicitly declaring which index is the clustered one.
 
-You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely. The primary key is the usual, but not the only, correct choice.
+The primary key is the usual, but not the only, correct choice to be the clustered index. A Clustered index shouldn’t necessarily be frittered away on a surrogate primary key, based on some meaningless ever-increasing integer. Do not be afraid to use the clustered index for another key if it fits better with the way you query the data, and specifically how the table participates in frequently-used queries.You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely. The primary key is the usual, but not the only, correct choice.
 
 [[misusing-null-values]]
 === Misusing NULL values
