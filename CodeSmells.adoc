@@ -94,7 +94,9 @@ For your clustered index, you are likely to choose a ‘narrow’ index which is
 [[not-explicitly-declaring-which-index-is-the-clustered-one.]]
 === Not explicitly declaring which index is the clustered one.
 
-The primary key is the usual, but not the only, correct choice to be the clustered index. A Clustered index shouldn’t necessarily be frittered away on a surrogate primary key, based on some meaningless ever-increasing integer. Do not be afraid to use the clustered index for another key if it fits better with the way you query the data, and specifically how the table participates in frequently-used queries.You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely. The primary key is the usual, but not the only, correct choice.
+The primary key is the usual, but not the only, correct choice to be the clustered index. It is seldom wrong to assign a clustered index to a primary key. It is just a problem if your choice of primary key is a ‘fat key’ without natural order that doesn’t work well as a clustered index, or if there is a much better use in the table for that clustered index, such as supporting range scans or avoiding sorts on a frequently-queried candidate key. 
+
+A Clustered index shouldn’t necessarily be frittered away on a surrogate primary key, based on some meaningless ever-increasing integer. Do not be afraid to use the clustered index for another key if it fits better with the way you query the data, and specifically how the table participates in frequently-used queries.You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely. The primary key is the usual, but not the only, correct choice.
 
 [[misusing-null-values]]
 === Misusing NULL values
@@ -104,19 +106,23 @@ The three-value logic required to handle NULL values can cause a problems in rep
 [[using-temporary-tables-for-very-small-result-sets]]
 === Using temporary tables for very small result sets
 
-Temporary tables can lead to recompiles, which can be costly. Table variables, while not useful for larger data sets (approximately 75 rows or more), avoid recompiles and are therefore preferred in smaller data sets.
+Temporary tables can lead to recompiles, which can be costly. Table variables, while not so useful for larger data sets (approximately 150 rows or more), avoid recompiles and are therefore preferred in smaller data sets.
 
 ==== [ST011/ST012 Consider using table variable instead of temporary table/Consider using temporary table instead of table variable]
 
 [[creating-a-table-without-specifying-a-schema]]
 === Creating a table without specifying a schema
 
-If you're creating tables from a script, they must, like views and routines, always be defined with two-part names. It is possible for different schemas to contain the same table name, and there are some perfectly legitimate reasons for doing this.
+If you're creating tables from a script, they must, like views and routines, always be defined with two-part names. It is possible for different schemas to contain the same table name, and there are some perfectly legitimate reasons for doing this. Don't rely on dbo being the default schema for the login that executes the create script: The default can be changed. 
+
+The user of any database is defaulted to the ‘dbo’ schema, unless explicitly assigned to a different schema. Unless objects are referenced by schema as well as name, they are assumed by the database engine to be in the user’s default schema, and if not there, in the dbo schema.
 
 [[most-tables-should-have-a-clustered-index]]
 === Most tables should have a clustered index
 
 SQL Server storage is built around the clustered index as a fundamental part of the data storage and retrieval engine. The data itself is stored with the clustered key. All this makes having an appropriate clustered index a vital part of database design. The places where a table without a clustered index is preferable are rare; which is why a missing clustered index is a common code smell in database design.
+
+A ‘table’ without a clustered index is actually a heap, which is a particularly bad idea when its data is usually returned in an aggregated form, or in a sorted order. Paradoxically, though, it can be rather good for implementing a log or a ‘staging’ table used for bulk inserts, since it is read very infrequently, and there is less overhead in writing to it. A table with a non-clustered index , but without a clustered index can sometimes perform well even though the index has to reference individual rows via a Row Identifier rather than a more meaningful clustered index. The arrangement can be effective for a table that isn’t often updated if the table is always accessed by a non-clustered index and there is no good candidate for a clustered index.
 
 [[using-the-same-column-name-in-different-tables-but-with-different-data-types]]
 === Using the same column name in different tables but with different data types
@@ -126,7 +132,7 @@ Any programmer will assume a sane database design in which columns with the same
 [[defining-a-table-column-without-explicitly-specifying-whether-it-is-nullable]]
 === Defining a table column without explicitly specifying whether it is nullable
 
-A column definition has not specified that a column is NULL or NOT NULL. The default nullability for a database's columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.
+In a CREATE TABLE DDL script, a column definition that has not specified that a column is NULL or NOT NULL is a risk. The default nullability for a database's columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.
 
 ==== [BP014 [NOT] NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)]
 
@@ -148,14 +154,14 @@ Now that SQL Server supports table partitioning, it is far better to use partiti
 [[using-varchar1-varchar2-etc.]]
 === Using VARCHAR(1), VARCHAR(2), etc.
 
-Columns of short or fixed length should have a fixed size since variable-length types have a disproportionate storage overhead. For a large table, this could be significant.
+Columns of a short or fixed length should have a fixed size because variable-length types have a disproportionate storage overhead. For a large table, this could be significant. The narrow a table, the faster it can be accessed.
 
 ==== [BP009 Avoid var types of length 1 or 2]
 
 [[declaring-var-type-variables-without-length]]
 === Declaring var type variables without length
 
-An VARCHAR, VARBINARY or NVARCHAR that is declared without an explicit length is shorthand for specifying a length of 1. Is this what you meant or did you do it by accident? Much better to be explicit.
+An VARCHAR, VARBINARY or NVARCHAR that is declared without an explicit length is shorthand for specifying a length of 1. Is this what you meant or did you do it by accident? Much better and safer to be explicit. 
 
 [[using-deprecated-language-elements-such-as-the-textntext-data-types]]
 === Using deprecated language elements such as the TEXT/NTEXT data types
@@ -187,7 +193,7 @@ Even with data storage being so cheap, a saving in a data type adds up and makes
 [[using-datetime-or-datetime2-when-youre-merely-recording-the-time-of-day]]
 === Using DATETIME or DATETIME2 when you're merely recording the time of day
 
-Being parsimonious with memory is important for large tables, not only to save space but also to reduce I/O activity during access. When appropriate, use the TIME or SMALLDATETIME type.
+Being parsimonious with memory is important for large tables, not only to save space but also to reduce I/O activity during access. When appropriate, use the TIME or SMALLDATETIME type. Queries too are generally simpler on the appropriate data type.
 
 [[using-sql_variant-inappropriately]]
 === Using sql_variant inappropriately
@@ -204,7 +210,7 @@ When you convert a datatype to a varchar, you do not have to specify the length.
 [[using-the-time-data-type-to-store-a-duration-rather-than-a-point-in-time]]
 === Using the TIME data type to store a duration rather than a point in time
 
-Durations are best stored as a start date/time value and end date/time value. This is especially true given that you usually need the start and end points to calculate a duration. It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for and can cause confusion for the next person who has to maintain your code.
+Durations are best stored as a start date/time value and end date/time value. This is especially true given that you usually need the start and end points to calculate a duration. It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code.
 
 [[using-varcharmax-or-nvarcharmax-when-it-isnt-necessary]]
 === Using VARCHAR(MAX) or NVARCHAR(MAX) when it isn't necessary
