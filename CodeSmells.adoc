@@ -3,12 +3,13 @@ by Phil Factor
 :doctype: article
 :encoding: utf-8
 :lang: en
-:toc: left
-:numbered:
 
 
 [[introduction]]
 == Introduction
+:toc: left
+:numbered:
+
 
 Once you've done a number of SQL code-reviews, you'll be able to spot signs in the code that indicate all might not be well. These http://www.c2.com/cgi/wiki?CodeSmell['code smells'] are coding styles that, while not bugs, suggest design problems with the code.
 
