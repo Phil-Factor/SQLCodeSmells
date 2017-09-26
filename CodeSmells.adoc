@@ -216,10 +216,11 @@ When you convert a datatype to a varchar, you do not have to specify the length.
 
 ==== [BP008 CAST/CONVERT to var types without length]
 
-[[using-the-time-data-type-to-store-a-duration-rather-than-a-point-in-time]]
-=== Using the TIME data type to store a duration rather than a point in time
+[[storing-a-duration-rather-than-a-point-in-time]]
+=== Storing a duration rather than a point in time
 
-Durations are best stored as a start date/time value and end date/time value. This is especially true given that you usually need the start and end points to calculate a duration. It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code.
+This takes some programmers by surprise. Although it is possible to store a time interval in a table it is not generally a good idea. A time interval is the difference between the start and end of a period of time. You may want to measure this in all sorts of ways, (milliseconds? Quarters? weeks?) and you may subsequently need to deal with all sorts of queries that have to work out what the status was at a particular time (e.g. how many rooms were booked at a particular point in time). By storing the time period as the start and end date-and-time, you leave your options open. If you store the time interval (in what? Seconds?) and maybe the start DateTime, you make subsequent queries more difficult.
+It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code. They will display very oddly depending on the representation of the time-of-day you use and wrap around every 24 hours!
 
 [[using-varcharmax-or-nvarcharmax-when-it-isnt-necessary]]
 === Using VARCHAR(MAX) or NVARCHAR(MAX) when it isn't necessary
