@@ -3,11 +3,11 @@ by Phil Factor
 :doctype: article
 :encoding: utf-8
 :lang: en
-
+:toc: left
 
 [[introduction]]
 == Introduction
-:toc: left
+
 :numbered:
 
 
