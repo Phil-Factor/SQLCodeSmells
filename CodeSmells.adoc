@@ -92,6 +92,7 @@ One way in which SQL Server maintains data integrity is by using constraints to 
 Some scripting engines disable referential integrity during updates. You must ensure that WITH CHECK is enabled or else the constraint is marked as untrusted and therefore won't be used by the optimizer. 
 
 *BP019- Foreign key is disabled*
+
 [[using-too-many-or-too-few-indexes]]
 === Using too many or too few indexes
 
@@ -105,6 +106,7 @@ You can only have one clustered index on a table, of course, and this choice has
 For your clustered index, you are likely to choose a ‘narrow’ index which is stored economically because this value has to be held in every index leaf-level pointer. This can be an interesting trade-off because the clustered index key is automatically included in all non-clustered indexes as the row locator so non-clustered indexes will cover queries that need only the non-clustered index key and the clustered index key.
 
 *BP001 Index type is not specified*
+
 [[not-explicitly-declaring-which-index-is-the-clustered-one.]]
 === Not explicitly declaring which index is the clustered one.
 
@@ -123,6 +125,7 @@ The three-value logic required to handle NULL values can cause a problems in rep
 Temporary tables can lead to recompiles, which can be costly. Table variables, while not so useful for larger data sets (approximately 150 rows or more), avoid recompiles and are therefore preferred in smaller data sets.
 
 *ST011/ST012 Consider using table variable instead of temporary table/Consider using temporary table instead of table variable*
+
 [[creating-a-table-without-specifying-a-schema]]
 === Creating a table without specifying a schema
 
@@ -148,12 +151,14 @@ Any programmer will assume a sane database design in which columns with the same
 In a CREATE TABLE DDL script, a column definition that has not specified that a column is NULL or NOT NULL is a risk. The default nullability for a database's columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.
 
 *BP014 [NOT] NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)*
+
 [[adding-not-null-column-without-default-value-to-a-table-with-data-will-fail]]
 === Adding NOT NULL column without default value to a table with data will fail
 
 Adding a NOT NULL column without a DEFAULT value to an existing table with data in it will fail because SQL Server has no way of adding that column to existing rows, because there must be a value in the column.
 
 *EI028 Adding NOT NULL column without default value*
+
 [[creating-dated-copies-of-the-same-table-to-manage-table-sizes]]
 === Creating dated copies of the same table to manage table sizes
 
@@ -168,6 +173,7 @@ Now that SQL Server supports table partitioning, it is far better to use partiti
 Columns of a short or fixed length should have a fixed size because variable-length types have a disproportionate storage overhead. For a large table, this could be significant. The narrow a table, the faster it can be accessed.
 
 *BP009 Avoid var types of length 1 or 2*
+
 [[declaring-var-type-variables-without-length]]
 === Declaring var type variables without length
 
@@ -179,6 +185,7 @@ An VARCHAR, VARBINARY or NVARCHAR that is declared without an explicit length is
 There is no good reason to use TEXT or NTEXT. They were a first, flawed attempt at BLOB storage and are there only for backward compatibility. Likewise, the WRITETEXT, UPDATETEXT and READTEXT statements are also deprecated. All this complexity has been replaced by the VARCHAR(MAX) and NVARCHAR(MAX) data types, which work with all of SQL Server's string functions.
 
 *DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.*
+
 [[using-money-data-type]]
 === Using MONEY data type
 
@@ -215,6 +222,7 @@ The sql_variant type is not your typical data type. It stores values from a numb
 When you convert a datatype to a varchar, you do not have to specify the length. If you don't do so, SQL Server will use a Varchar length sufficient to hold the string. It is better to specify the length because SQL Server has no idea what length you may subsequently need.
 
 *BP008 CAST/CONVERT to var types without length*
+
 [[storing-a-duration-rather-than-a-point-in-time]]
 === Storing a duration rather than a point in time
 
@@ -237,6 +245,7 @@ You can't require everyone to stop using national characters or accents any more
 An NVARCHAR that is declared without an explicit length is shorthand for specifying a length of 1. Is this what you meant or did you do it by accident? Much better to be explicit.
 
 *BP007 Declaring var type variables without length*
+
 [[problems-with-expressions]]
 == Problems with expressions
 
@@ -251,6 +260,7 @@ Some developers use parentheses even when they aren't necessary, as a safety net
 Some functions, such as ISNUMERIC, are there to tell you in very general terms whether a string can be converted to a number without an error. Sadly, it doesn't tell you what kind of number. (Try SELECT isNumeric(','); or SELECT ISNUMERIC('4D177'); for example.) This causes immense confusion. The ISNUMERIC function returns 1 when the input expression evaluates to a valid numeric data type; otherwise it returns 0. The function also returns 1 for some characters that are not numbers, such as plus (+), minus (-), and valid currency symbols such as the dollar sign ($). This is legitimate because these can be converted to numbers, but counter-intuitive. Unfortunately, most programmers want to know whether a number is a valid quantity of money, or a float, or integer. Use a function such as TRY_CAST() and TRY_CONVERT() that is appropriate for the data type whose validity you are testing. E.g. select try_convert(int,'12,345') or select try_convert(float,'5D105')
 
 *EI029 Avoid using ISNUMERIC() function*
+
 [[injudicious-use-of-the-ltrim-and-rtrim-functions]]
 === Injudicious use of the LTRIM and RTRIM functions
 
@@ -267,6 +277,7 @@ Although using the DATALENGTH function is valid, it can easily give you the wron
 Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable.
 
 *DEP023 Not ending Transact-SQL statements with a semicolon is deprecated*
+
 [[relying-on-data-being-implicitly-converted-between-types]]
 === Relying on data being implicitly converted between types
 
@@ -278,7 +289,7 @@ See: http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx[SR0014: Dat
 
 The generation of an IDENTITY value is not transactional, so in some circumstances, *@@IDENTITY* returns the wrong value and not the value from the row you just inserted. This is especially true when using triggers that insert data, depending on when the triggers fire. The *SCOPE_IDENTITY* function is safer because it always relates to the current batch (within the same scope). Also consider using the IDENT_CURRENT function, which returns the last IDENTITY value regardless of session or scope. The *OUTPUT* clause is a better and safer way of capturing identity values.
 
-*BP010 Usage of @@identity *
+*BP010 Usage of @@identity 
 [[using-between-for-datetime-ranges]]
 === Using BETWEEN for DATETIME ranges
 
@@ -290,18 +301,21 @@ You never get complete accuracy if you specify dates when using the BETWEEN logi
 Although there is a legitimate use in a batch for IF EXISTS (SELECT * FROM  ... ) or SELECT count(*), any other use is vulnerable to changes in column names or order. SELECT * was designed for interactive use, not as part of a batch. It assumes certain columns in a particular order, which may not last. Also, results should always consist of just the columns you need. Plus, requesting more columns from the database than are used by the application results in excess database I/O and network traffic, leading to slow application response and unhappy users.
 
 *BP005 Asterisk in select list*
+
 [[insert-without-column-list]]
 === INSERT without column list
 
 The INSERT statement need not have a column list, but omitting it assumes certain columns in a particular order. It likely to cause errors if the table in to which the inserts will be made is changed, particularly with table variables where insertions are not checked. Column lists also make code more intelligible
 
 See: http://msdn.microsoft.com/en-us/library/dd193296(v=vs.100).aspx[SR0001: Avoid SELECT * in a batch, stored procedures, views, and table-valued functions*
+
 [[order-by-clause-with-constants]]
 === ORDER BY clause with constants
 
 The use of constants in the ORDER BY is deprecated for removal in the future. They make ORDER BY statements more difficult to understand.
 
 *BP002 ORDER BY clause with constants*
+
 [[difficulties-with-query-syntax]]
 == Difficulties with Query Syntax
 
@@ -326,6 +340,7 @@ Views are like tables in their behaviour, but they can't be indexed to support j
 The deprecated syntax (which includes defining the join condition in the WHERE clause) is not standard SQL and is more difficult to inspect and maintain. Parts of this syntax are completely unsupported in SQL Server 2012 or higher.[[_Toc395168942]]
 
 *DEP017 NON-ANSI join (*== or =*) is used ST001 Old-style join is used (...from table1,table2...)*
+
 [[using-correlated-subqueries-instead-of-a-join]]
 === Using correlated subqueries instead of a join
 
@@ -347,12 +362,14 @@ It is true that SQL Server provides a number of system functions to simplify joi
 The compiler can interpret a two-part object name quicker than just one name. This applies particularly to tables, views, procedures and functions. The same name can be used in different schemas, so it pays to make your queries unambiguous. In certain cases, you need versions of the same stored procedure to be different depending on the user role. You can put different SPs of the same name in different schemas. You then need to specify the stored procedure without the schema because sql server will then choose the stored procedure from the schema associated with the role of the user.
 
 *PE001/PE002 Schema name for procedure is not specified/Schema name for table or view is not specified*
+
 [[using-insert-into-without-specifying-the-columns-and-their-order]]
 === Using INSERT INTO without specifying the columns and their order
 
 Not specifying column names is fine for interactive work, but if you write code that relies on the hope that nothing will ever change, then refactoring could prove to be impossible. It is much better to trigger an error now than to risk corrupted results after the SQL code has changed. Column lists also make code more intelligible
 
 *BP004 INSERT without column list*
+
 [[using-full-outer-joins-unnecessarily.]]
 === Using full outer joins unnecessarily.
 
@@ -402,18 +419,21 @@ The query optimizer will not be able to generate a reasonable query plan if the 
 Object names need only to be unique within a schema. However, when referencing an object in a SELECT, UPDATE, DELETE, MERGE or EXECUTE statementâ€”or when calling the OBJECT_ID functionâ€”the database engine can find the objects more easily found if the names are qualified with the schema name.
 
 *PE001/PE002 Schema name for procedure is not specified/Schema name for table or view is not specified*
+
 [[using-null-or-null-to-filter-a-nullable-column-for-nulls]]
 === Using '== NULL' or '<> NULL' to filter a nullable column for NULLs
 
 An expression that returns a NULL as either the left value (Lvalue) or right value (Rvalue) will always evaluate to NULL. Use IS NULL or IS NOT NULL.
 
 *BP011 NULL comparison or addition/substring*
+
 [[not-using-nocount-on-in-stored-procedures-and-triggers]]
 === Not using NOCOUNT ON in stored procedures and triggers
 
 Unless you need to return messages that give you the row count of each statement, you should specify the NOCOUNT ON option to explicitly turn off this feature. This option is not likely to be a significant performance factor one way or the other.
 
 *PE009 No SET NOCOUNT ON before DML*
+
 [[using-the-not-in-predicate-in-the-where-clause]]
 === Using the NOT IN predicate in the WHERE clause
 
@@ -438,6 +458,7 @@ See: http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx[SR0006: Mov
 If the value of the function does not depend on the data row that you wish to select, then it is better to put its value in a variable before the SELECT query and use the variable instead.
 
 *PE017 Incorrect usage of const UDF*
+
 See: http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx[SR0015: Extract deterministic function calls from WHERE predicates*
 [[using-select-distinct-to-mask-a-join-problem]]
 === Using SELECT DISTINCT to mask a join problem
@@ -455,12 +476,14 @@ If you are using a NOT IN predicate to select only those rows that match the res
 It is very easy to delete an entire table when you mean to delete just one or more rows.
 
 *BP017 DELETE statement without WHERE clause*
+
 [[an-update-statement-has-omitted-the-where-clause-which-would-update-every-row-in-the-table]]
 === An UPDATE statement has omitted the WHERE clause, which would update every row in the table
 
 It is very easy to update an entire table, losing the data in it, when you mean to update just one or more rows. At the console, Delete or Update statements should also be in a transaction so you can check the result before committing.
 
 *BP018 UPDATE statement without WHERE clause*
+
 [[problems-with-naming]]
 == Problems with naming
 
@@ -475,6 +498,7 @@ Identifiers should help to make SQL readable as if it were English. Short names 
 The sp_ prefix has a special meaning in SQL Server and doesn't mean 'stored procedure' but 'special', which tells the database engine to first search the master database for the object.
 
 *EI024 Stored procedure name starts with sp_*
+
 [[tibbling-sql-server-objects-with-reverse-hungarian-prefixes-such-as-tbl_-vw_-pk_-fn_-and-usp_]]
 === 'Tibbling' SQL Server objects with Reverse-Hungarian prefixes such as tbl_, vw_, pk_, fn_, and usp_
 
@@ -523,6 +547,7 @@ Being antisocial is no excuse. Either is being in a hurry. Your scripts should b
 When you use the EXECUTE command to execute a stored procedure, or call the stored procedure from an application, an integer is returned that can be assigned to a variable. It is generally used to communicate the success of the operation.
 
 *BP016 Return without result code*
+
 [[excessively-overloading-routines]]
 === Excessively 'overloading' routines
 
@@ -564,6 +589,7 @@ Sometimes it is important to have long procedures, maybe with many code routes. 
 You cannot use the ORDER BY clause without the TOP clause or the OFFSET ... FETCH clause in views (or inline functions, derived tables, or subqueries). Even if you resort to using the TOP 100% trick, the resulting order isn't guaranteed. Specify the ORDER BY clause in the query that calls the view.
 
 *EI030 Order by in view or single-statement TVF*
+
 [[unnecessarily-using-stored-procedures-or-multiline-table-valued-functions-where-a-view-is-sufficient]]
 === Unnecessarily using stored procedures or multiline table-valued functions where a view is sufficient
 
@@ -602,6 +628,7 @@ In a stored procedure, you must use an INSERT ... EXEC statement to retrieve dat
 It is perfectly OK to execute a stored procedure without getting the result, but it is better to keep to the convention of doing so, so that the user of the procedure is safe to assume that it is there. The return code that is returned is used to pass back information about the success of the stored procedure, but the value must be assigned in code, These return codes are generally used in control-of-flow blocks within procedures to set the return code value for each possible error. To get a SQL Server error rather than a process error, you can use the @@ERROR function
 
 *EI025 Executing stored procedure without getting result*
+
 [[forgetting-to-set-an-output-variable]]
 === Forgetting to set an output variable
 
@@ -614,12 +641,14 @@ See http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx[SR0013: Outp
 When calling a stored procedure, it is generally better to pass in parameters by assignment rather than just relying on the order in which the parameters are defined within the procedure. This makes the code easier to understand and maintain. As with all rules, there are exceptions: It doesn't really become a problem when there are less than a handful of parameters. Also, natively compiled procedures work fastest by passing in parameters by order.
 
 *EI018 Missing parameter(s) name in procedure call*
+
 [[try-to-avoid-using-hardcoded-references-to-other-databases.]]
 === Try to avoid using hardcoded references to other databases.
 
 There is nothing wrong in executing procedures in other databases, but it is better to avoid hard-coding these references and use synonyms instead.
 
 *EI016 Reference to procedure in other database*
+
 [[use-of-a-hardcoded-current-database-name-in-a-procedure-call]]
 === Use of a Hardcoded current database name in a procedure call
 
@@ -632,12 +661,14 @@ It is better to avoid using hardcoded references to the current database as this
 Stored procedures use the SET settings specified at execute time, except for SET ANSI_NULLS and SET QUOTED_IDENTIFIER. Stored procedures that specify either the SET ANSI_NULLS or SET QUOTED_IDENTIFIER use the setting specified at stored procedure creation time. If used inside a stored procedure, any such SET command is ignored
 
 *MI008 QUOTED_IDENTIFIERS option inside stored procedure, trigger or function*
+
 [[creating-a-routine-with-ansi_nulls-or-quoted_identifier-options-set-to-off.]]
 === Creating a routine with ANSI_NULLS or QUOTED_IDENTIFIER options set to OFF.
 
 At the time the routine is created (parse time), both options should normally be set to ON. They are ignored on execution. The reason for keeping Quoted Identifiers ON is that it is necessary when you are creating or changing indexes on computed columns or indexed views. If set to OFF, then CREATE, UPDATE, INSERT, and DELETE statements on tables with indexes on computed columns or indexed views will fail. SET QUOTED_IDENTIFIER must be ON when you are creating a filtered index or when you invoke XML data type methods. ANSI_NULLS will eventually be set to ON and this ISO compliant treatment of NULLS will not be switchable to OFF.
 
 *DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.*
+
 [[updating-a-primary-key-column]]
 === Updating a primary key column
 
@@ -664,12 +695,14 @@ Avoid using the NOLOCK hint. It is much better and safer to specify the correct 
 SQL routines or batches are not designed to include artificial delays. If many WAITFOR statements are specified on the same server, too many threads can be tied up waiting. Also, including WAITFOR will delay the completion of the SQL Server process and can result in a timeout message in the application.
 
 *MI007 WAIT FOR DELAY/TIME used*
+
 [[using-set-rowcount-to-specify-how-many-rows-should-be-returned]]
 === Using SET ROWCOUNT to specify how many rows should be returned
 
 We had to use this option until the TOP clause (with ORDER BY) was implemented. The TOP option is much easier for the query optimizer.
 
 *DEP014 SET ROWCOUNT option is deprecated.*
+
 [[using-top-100-percent-in-views-inline-functions-derived-tables-subqueries-and-common-table-expressions-ctes.]]
 === Using TOP 100 PERCENT in views, inline functions, derived tables, subqueries, and common table expressions (CTEs).
 
@@ -717,30 +750,35 @@ WHILE loops must always have an error exit. The condition that you set in the WH
 Triggers are designed for enforcing data rules, not for returning data or information. Developers often embed PRINT statements in triggers during development to provide a crude idea of how the code is progressing, but the statements need to be removed or commented out before the code is promoted beyond development.
 
 *PE011 PRINT statement is used in trigger*
+
 [[select-statement-in-trigger-that-returns-data-to-the-client]]
 === SELECT statement in trigger that returns data to the client
 
 Although it is possible to do, it is unwise. A trigger should never return data to a client. It is possible to place a SELECT statement in a trigger but it serves no practical useful purpose, and can have unexpected effects. A trigger behaves much like a stored procedure in that, when the trigger fires, results can be returned to the calling application. This requires special handling because these returned results would have to be handled in some way, and this would have to be written into every application in which modifications to the trigger table are allowed.
 
 *BP003 SELECT in trigger*
+
 [[using-top-without-order-by]]
 === Using TOP without ORDER BY
 
 Using TOP without an ORDER BY clause in a SELECT statement is meaningless and cannot be guaranteed to give consistent results. because asking for the TOP 10 rows implies a certain order, and tables have no implicit logical order.
 
 *BP006 TOP without ORDER BY*
+
 [[using-a-case-statement-without-the-else-clause]]
 === Using a CASE statement without the ELSE clause
 
 Always specify a default option even if you believe that it is impossible for that condition to happen. Someone might change the logic, or you could be wrong in thinking a particular outcome is impossible.
 
 *BP012 CASE without ELSE*
+
 [[using-executestring]]
 === Using EXECUTE(string)
 
 Don't use EXEC to run dynamic SQL. It is there only for backward compatibility and is a commonly used vector for SQL injection. Use sp_executesql instead because it allows parameter substitutions for both inputs and outputs and also because the execution plan that sp_executesql produces is more likely to be reused.
 
 *BP013 EXECUTE(string) is used*
+
 [[using-the-group-by-all-column-group-by-number-compute-or-compute-by-clause]]
 === Using the GROUP BY ALL <column>, GROUP BY <number>, COMPUTE, or COMPUTE BY clause
 
@@ -752,12 +790,14 @@ The GROUP BY ALL <column> clause and the GROUP BY <number> clause are deprecated
 It is certainly possible to specify nonnegative integers to represent the columns in an ORDER BY clause, based on how those columns appear in the select list, but this approach makes it difficult to understand the code at a glance and can lead to unexpected consequences when you forget you've done it and alter the order of the columns in the select list.
 
 *DEP003 GROUP BY ALL clause is deprecated.*
+
 [[using-unnecessary-three-part-and-four-part-column-references-in-a-select-list]]
 === Using unnecessary three-part and four-part column references in a select list
 
 Sometimes, when a table is referenced in another database or server, programmers believe that the two or three-part table name needs to be applied to the columns. This is unnecessary and meaningless. Just the table name is required for the columns. Three-part column names might be necessary in a join if you have duplicate table names, with duplicate column names, in different schemas, in which case, you ought to be using aliases. The same goes for cross-database joins.
 
 *DEP026 Three-part and four-part column references in SELECT list are deprecated.*
+
 [[using-range-rather-than-rows-in-sql-server-2012]]
 === Using RANGE rather than ROWS in SQL Server 2012
 
@@ -774,12 +814,14 @@ The database engine releases locks only when the transaction is rolled back or c
 ROLLBACK TRANSACTION rolls back a transaction to the beginning of it, or to a savepoint inside the transaction. You don't need a ROLLBACK TRANSACTION statement within a transaction, but if there isn't one, then it may be a sign that error handling has not been refined to production standards
 
 *EI019 BEGIN TRANSACTION without ROLLBACK TRANSACTION*
+
 [[use-of-rollback-transaction-without-begin-transaction]]
 === Use of ROLLBACK TRANSACTION without BEGIN TRANSACTION
 
 It is possible to have a ROLLBACK TRANSACTION within a block where there is no explicit transaction. This will trigger an error if the code is executed outside a transaction, and suggests that transactions are being held open unnecessarily.
 
 *EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION*
+
 [[not-defining-a-default-value-for-a-select-assignment-to-a-variable]]
 === Not defining a default value for a SELECT assignment to a variable
 
@@ -806,6 +848,7 @@ The NULLIF expression compares two expressions and returns the first one if the 
 Don't mix data manipulation language (DML) statements with data definition language (DDL_ statements. Instead, put all the DDL statements at the beginning of your procedures or batches.
 
 *PE010 Interleaving DDL and DML in stored procedure/trigger.*
+
 [[using-meaningless-aliases-for-tables-e.g.-a-b-c-d-e]]
 === Using meaningless aliases for tables (e.g., a, b, c, d, e)
 
@@ -817,12 +860,14 @@ Aliases aren't actually meant to cut down on the typing but rather to make your 
 A parameter passed to a procedure or function must be of a type that can be cast into the variable datatype declared for that parameter in the body of the routine. It should be of exactly the same type so as to avoid the extra processing to resolve an implicit conversion.
 
 *EI001 Incompatible variable type for procedure call*
+
 [[literal-type-is-not-fully-compatible-with-procedure-parameter-type]]
 === Literal type is not fully compatible with procedure parameter type
 
 A parameter passed to a procedure can be a literal (e.g. 1,'03 jun 2017' or 'hello world') but it must be possible to cast it unambiguously to the variable datatype declared for that parameter in the body of the routine.
 
 *EI002 Incompatible literal type for procedure call*
+
 [[subquery-may-return-more-than-one-row]]
 === Subquery may return more than one row
 
@@ -835,12 +880,14 @@ A subquery can only be scalar, meaning that it can return just one value. Even i
 Parameters can be passed by position in a comma-delimited list, or by name, where order position isn't required. Any parameters that are specified by name must have the name identical to the definition for that procedure
 
 *EI004 Extra parameter passed*
+
 [[use-of-the-position-notation-after-the-named-notation-for-parameters-when-calling-a-procedure]]
 === Use of the position notation after the named notation for parameters when calling a procedure
 
 Parameters can be passed by position in a comma-delimited list, or by name, but it is a bad idea to mix the two methods even when it is possible. If a parameter has a default value assigned to it, it can be left out of the parameter list, and it is difficult to check whether the values you supply are for the parameters you intend.
 
 *EI005 Unnamed call after named call*
+
 [[parameter-is-not-passed-to-a-procedure-and-no-default-is-provided.]]
 === Parameter is not passed to a procedure and no default is provided.
 
@@ -853,18 +900,21 @@ With procedures and functions, parameters can be assigned default values that ar
 Output scalar parameters for procedures are passed to the procedure, and can have their value altered within the procedure. This allows procedures to return scalar output. The formal parameter must be declared as an OUTPUT parameter if the actual parameter that is passed had the OUTPUT keyword. This triggers an error.
 
 *EI007 Call parameter declared as output*
+
 [[procedure-parameter-is-defined-as-output-but-is-not-marked-as-output-in-procedure-call-statement.]]
 === Procedure parameter is defined as OUTPUT, but is not marked as OUTPUT in procedure call statement.
 
 Output scalar parameters for procedures are passed to the procedure, and can have their value altered within the procedure. This allows procedures to return scalar output. However, the matching variable passed as the output parameter in the module or command string must also have the keyword OUTPUT. There is no error but the resultant value is NULL, which you are unlikely to want.
 
 *EI008 Call parameter is not declared as output*
+
 [[number-of-passed-parameters-exceeds-the-number-of-procedure-parameters]]
 === Number of passed parameters exceeds the number of procedure parameters
 
 Parameters can be passed to procedures and functions in an ordered delimited list, but never more than the number of parameters. For a function, this must have the same number of list members as the parameters. For a procedure you can have fewer if defaults are declared in parameters
 
 *EI009 Call has more parameters than required*
+
 [[security-loopholes]]
 == Security Loopholes
 
@@ -881,16 +931,16 @@ Use xp_cmdshell in a routine only as a last resort, due to the elevated security
 [[authentication-set-to-mixed-mode]]
 === Authentication set to Mixed Mode
 
-Ensure that Windows Authentication Mode is used wherever possible. SQL Server authentication is necessary only when a server is remote or outside the domain, or if third-party software requires SQL authentication for remote maintenance. Windows Authentication is less vulnerable and avoids having to transmit passwords over the network or store them in connection strings.
+Ensure that Windows Authentication Mode is used wherever possible. SQL Server authentication is necessary only when a server is remote or outside the domain, or if third-party software requires SQL authentication for remote maintenance. Windows Authentication is less vulnerable, and avoids having to transmit passwords over the network or store them in connection strings.
 
 [[using-dynamic-sql-without-the-with-execute-as-clause]]
 === Using dynamic SQL without the WITH EXECUTE AS clause
 
-Because of ownership chaining and SQL injection risks, dynamic SQL requires constant vigilance to ensure that it is used only as intended. Use the EXECUTE AS clause to ensure the dynamic SQL code inside the procedure is executed only in the context you expect.
+Because of ownership chaining and SQL injection risks, dynamic SQL requires constant vigilance to ensure that it is used only as intended. Use the EXECUTE AS clause to ensure the dynamic SQL code inside the procedure is executed only in the context you expect, and use loginless users with just the specific permissions required but no others in the EXECUTE AS clause.
 
 [[using-dynamic-sql-with-the-possibility-of-sql-injection]]
 === Using dynamic SQL with the possibility of SQL injection
 
-SQL injection can be used not only from an application but also by a database user who lacks, but wants, the permissions necessary to perform a particular role, or who simply wants to access sensitive data. If dynamic SQL is executed within a stored procedure, under the temporary EXECUTE AS permission of a user with sufficient privileges to create users, and it can be accessed by a malicious user, then suitable precautions must be taken to make this impossible. These precautions start with giving EXECUTE AS permissions only to WITHOUT LOGIN users with least-necessary permissions, and using sp_ExecuteSQL with parameters rather than EXECUTE
+SQL injection can be used not only from an application but also by a database user who lacks, but wants, the permissions necessary to perform a particular role, or who simply wants to access sensitive data. If dynamic SQL is executed within a stored procedure, under the temporary EXECUTE AS permission of a user with sufficient privileges to create users, and it can be accessed by a malicious user, then suitable precautions must be taken to make this impossible. These precautions start with giving EXECUTE AS permissions only to WITHOUT LOGIN users with least-necessary permissions, and using sp_ExecuteSQL with parameters rather than EXECUTE. 
 
 *BP013 EXECUTE(string) is used*
