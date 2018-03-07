@@ -546,7 +546,7 @@ SQL names don't need prefixes because there isn't any ambiguity about what they 
 
 Using reserved words makes code more difficult to read, can cause problems to code formatters, and can cause errors when writing code.
 
-See: http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx[SR0012: Avoid using reserved words for type names*
+http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx[*SR0012: Avoid using reserved words for type names*]
 [[including-special-characters-in-object-names]]
 === Including special characters in object names
 
