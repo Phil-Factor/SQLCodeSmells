@@ -558,12 +558,11 @@ See: http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx[R0011: Avoi
 
 It should always serve as a warning to see tables named Year1, Year2, Year3 or so on, or even worse, automatically generated names such as tbl3546 or 567Accounts. If the name of the table doesn't describe the entity, there is a design problem
 
-[[see-sr0011-avoid-using-special-characters-in-object-names]]
-=== See: http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx[SR0011: Avoid using special characters in object names*
 [[using-square-brackets-unnecessarily-for-object-names]]
 === Using square brackets unnecessarily for object names
-
 If object names are valid and not reserved words, there is no need to use square brackets. Using invalid characters in object names is a code smell anyway, so there is little point in using them. If you can't avoid brackets, use them only for invalid names.
+
+See: http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx[SR0011: Avoid using special characters in object names*
 
 [[using-system-generated-object-names-particularly-for-constraints]]
 === Using system-generated object names, particularly for constraints
