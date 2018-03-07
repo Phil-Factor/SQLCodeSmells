@@ -516,6 +516,10 @@ It is very easy to update an entire table, over-writing the data in it, when you
 
 https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018[*BP018 UPDATE statement without WHERE clause*]
 
+=== Using a Common Table Expression (CTE) unnecessarily
+
+CTEs are there to make SQL Statements clearer. They specify a temporary named result set,  derived from a simple query and defined within the execution scope of a single SELECT, INSERT, UPDATE, or DELETE statement. They are convenient to use when an intermediate temporary result needs to be used more than once as a table-source within an expression. It is also useful for recursive statements because a common table expression can include references to itself. However, when neither of these rather rare requirements exist, a CTE becomes unnecessary and does nothing but provide extra overhead. It will slow down the performance.
+
 [[problems-with-naming]]
 == Problems with naming
 
