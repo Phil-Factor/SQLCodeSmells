@@ -562,7 +562,7 @@ It should always serve as a warning to see tables named Year1, Year2, Year3 or s
 === Using square brackets unnecessarily for object names
 If object names are valid and not reserved words, there is no need to use square brackets. Using invalid characters in object names is a code smell anyway, so there is little point in using them. If you can't avoid brackets, use them only for invalid names.
 
-See: http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx[SR0011: Avoid using special characters in object names*
+http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx[*SR0011: Avoid using special characters in object names*]
 
 [[using-system-generated-object-names-particularly-for-constraints]]
 === Using system-generated object names, particularly for constraints
