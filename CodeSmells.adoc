@@ -471,21 +471,20 @@ Even if you're not joining the two tables via the primary and foreign keys, with
 
 In the WHERE clause of a query it is good to avoid having a column reference or variable embedded within an expression, or used as a parameter of a function. A column reference or variable is best used as a single element on one side of the comparison operator , otherwise it will most probably trigger a table scan, which is expensive in a table of any size.
 
-See: http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx[SR0006: Move a column reference to one side of a comparison operator to use a column index*
+See: http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx[SR0006: Move a column reference to one side of a comparison operator to use a column index*]
 [[including-a-deterministic-function-in-a-where-clause]]
 === Including a deterministic function in a WHERE clause
 
 If the value of the function does not depend on the data row that you wish to select, then it is better to put its value in a variable before the SELECT query and use the variable instead.
 
+See: http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx[*SR0015: Extract deterministic function calls from WHERE predicates*]
 https://documentation.red-gate.com/codeanalysis/performance-rules/pe017[*PE017 Incorrect usage of const UDF*]
-
-See: http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx[SR0015: Extract deterministic function calls from WHERE predicates*
 
 === Using an unverified  scalar user-defined function as a constant.
 
 The incorrect use of a non-schema bound scalar UDF, as a global database constant, is a major performance problem and must be winkled out of any production code. The problem arises because SQL Server doesn't trust non-schema verified scalar functions as being precise and deterministic, and so chooses the safest, though slowest, option when executing them. It's a slightly insidious problem because it doesn't really show its full significance in the execution plan, though an Extended Events session will reveal what is really going on. 
 
-See: https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017[Misuse of the scalar user-defined function as a constant (PE017)]
+See: https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017[*Misuse of the scalar user-defined function as a constant (PE017)*]
 
 https://documentation.red-gate.com/codeanalysis/performance-rules/pe017[*PE017 Incorrect usage of const UDF*]
 
