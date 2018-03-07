@@ -483,7 +483,7 @@ See: http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx[SR0015: Ext
 
 === Using an unverified  scalar user-defined function as a constant.
 
-The incorrect use of a scalar UDF that hasn't been Schemabound as a global database constant is a major performance problem and must be winkled out of any production code. The problem arises because SQL Server doesn’t trust non-schema verified scalar functions as being precise and deterministic, and so chooses the safest, though slowest, option when executing them. It’s a slightly insidious problem because it doesn’t really show its full significance in the execution plan, though an Extended Events session will reveal what is really going on. 
+The incorrect use of a non-schema bound scalar UDF, as a global database constant, is a major performance problem and must be winkled out of any production code. The problem arises because SQL Server doesn't trust non-schema verified scalar functions as being precise and deterministic, and so chooses the safest, though slowest, option when executing them. It's a slightly insidious problem because it doesn't really show its full significance in the execution plan, though an Extended Events session will reveal what is really going on. 
 
 See: https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017[Misuse of the scalar user-defined function as a constant (PE017)]
 
