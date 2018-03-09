@@ -17,9 +17,9 @@
 <section xml:id="introduction">
 <title>Introduction</title>
 <simpara>Once you&#8217;ve done a number of SQL code-reviews, you&#8217;ll be able to spot signs in the code that indicate all might not be well. These <link xl:href="http://www.c2.com/cgi/wiki?CodeSmell">'code smells'</link> are coding styles that, while not bugs, suggest design problems with the code.</simpara>
-<simpara>Kent Beck and Massimo Arnoldi seem to have coined the term 'Code Smell' in the 'http://www.c2.com/cgi/wiki?OnceAndOnlyOnce[Once And Only Once]' page of www.C2.com, where Kent also said that code 'wants to be simple'. Kent Beck and Martin Fowler expand on the issue of code challenges in their essay 'Bad Smells in Code', published as Chapter 3 of the book <emphasis>Refactoring: Improving the Design of Existing Code</emphasis> (ISBN 978-0201485677).</simpara>
-<simpara>Although there are generic code smells, SQL has its own particular habits that will alert the programmer to the need to refactor code. (For grounding in code smells in C#, see 'https://www.simple-talk.com/dotnet/.net-framework/exploring-smelly-code/[Exploring Smelly Code'] and 'https://www.simple-talk.com/dotnet/.net-framework/code-deodorants-for-code-smells/[Code Deodorants for Code Smells]' by Nick Harrison.) Plamen Ratchev&#8217;s wonderful article 'https://www.simple-talk.com/sql/t-sql-programming/ten-common-sql-programming-mistakes/[Ten Common SQL Programming Mistakes'] lists some of these code smells along with out-and-out mistakes, but there are more. The use of nested transactions, for example, isn&#8217;t entirely incorrect, even though the database engine ignores all but the outermost, but their use does flag the possibility the programmer thinks that nested transactions are supported.</simpara>
-<simpara>If you are moving towards continuous delivery of database applications, you should automate as much as possible the preliminary SQL code-review. It&#8217;s a lot easier to trawl through your code automatically to pick out problems, than to do so manually. Imagine having something like the classic 'lint' tools used for C, or better still, a tool similar to <link xl:href="https://www.simple-talk.com/opinion/geek-of-the-week/peli-de-halleux-geek-of-the-week/">Jonathan 'Peli' de Halleux</link>'s Code Metrics plug-in for .NET Reflector, which finds code smells in .NET code.</simpara>
+<simpara>Kent Beck and Massimo Arnoldi seem to have coined the term 'Code Smell' in the <link xl:href="http://www.c2.com/cgi/wiki?OnceAndOnlyOnce">'Once And Only Once'</link> page of www.C2.com, where Kent also said that code 'wants to be simple'. Kent Beck and Martin Fowler expand on the issue of code challenges in their essay 'Bad Smells in Code', published as Chapter 3 of the book <emphasis>Refactoring: Improving the Design of Existing Code</emphasis> (ISBN 978-0201485677).</simpara>
+<simpara>Although there are generic code smells, SQL has its own particular habits that will alert the programmer to the need to refactor code. (For grounding in code smells in C#, see <link xl:href="https://www.simple-talk.com/dotnet/.net-framework/exploring-smelly-code/">'Exploring Smelly Code'</link> and <link xl:href="https://www.simple-talk.com/dotnet/.net-framework/code-deodorants-for-code-smells/">'Code Deodorants for Code Smells'</link> by Nick Harrison.) Plamen Ratchev&#8217;s wonderful article <link xl:href="https://www.simple-talk.com/sql/t-sql-programming/ten-common-sql-programming-mistakes/'">Ten Common SQL Programming Mistakes'</link> lists some of these code smells along with out-and-out mistakes, but there are more. The use of nested transactions, for example, isn&#8217;t entirely incorrect, even though the database engine ignores all but the outermost, but their use does flag the possibility the programmer thinks that nested transactions are supported.</simpara>
+<simpara>If you are moving towards continuous delivery of database applications, you should automate as much as possible the preliminary SQL code-review. It&#8217;s a lot easier to trawl through your code automatically to pick out problems, than to do so manually. Imagine having something like the classic 'lint' tools used for C, or better still, a tool similar to <link xl:href="https://www.simple-talk.com/opinion/geek-of-the-week/peli-de-halleux-geek-of-the-week/">Jonathan 'Peli' de Halleux&#8217;s</link> Code Metrics plug-in for .NET Reflector, which finds code smells in .NET code.</simpara>
 <simpara>One can be a bit defensive about SQL code smells. I will cheerfully write very long stored procedures, even though they are frowned upon. I&#8217;ll even use dynamic SQL on occasion. You should use code smells only as an aid. It is fine to 'sign them off' as being inappropriate in certain circumstances. In fact, whole classes of code smells may be irrelevant for a particular database. The use of proprietary SQL, for example, is only a code smell if there is a chance that the database will be ported to another RDBMS. The use of dynamic SQL is a risk only with certain security models. Ultimately, you should rely on your own judgment. As the saying goes, a code smell is a hint of possible bad practice to a pragmatist, but a sure sign of bad practice to a purist.</simpara>
 <simpara>In describing all these code-smells in a booklet, I&#8217;ve been very constrained on space to describe each code-small. Some code-smells would require a whole article to explain them properly. Fortunately, SQL Server Central and Simple-Talk have, between them, published material on almost all these code smells, so if you get interested, please explore these essential archives of information.</simpara>
 </section>
@@ -32,7 +32,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="images/smell1.bmp"/>
+<imagedata fileref="images/smell1.png"/>
 </imageobject>
 <textobject><phrase>smell1</phrase></textobject>
 </mediaobject>
@@ -56,7 +56,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="images/Polymorphic.bmp"/>
+<imagedata fileref="images/Polymorphic.png"/>
 </imageobject>
 <textobject><phrase>Polymorphic</phrase></textobject>
 </mediaobject>
@@ -76,7 +76,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="images/ole.bmp"/>
+<imagedata fileref="images/ole.png"/>
 </imageobject>
 <textobject><phrase>ole</phrase></textobject>
 </mediaobject>
@@ -96,7 +96,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="enabling-nocheck-on-referential-integrity-constraints">
 <title>Enabling NOCHECK on referential integrity constraints</title>
 <simpara>Some scripting engines disable referential integrity during updates. You must ensure that WITH CHECK is enabled or else the constraint is marked as untrusted and therefore won&#8217;t be used by the optimizer.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp019"><emphasis role="strong">BP019- Foreign key is disabled</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp019">BP019- Foreign key is disabled</link></simpara>
 </section>
 <section xml:id="using-too-many-or-too-few-indexes">
 <title>Using too many or too few indexes</title>
@@ -106,7 +106,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <title>Not choosing the most suitable clustered index for a table</title>
 <simpara>You can only have one clustered index on a table, of course, and this choice has a lot of influence on the performance of queries, so you should take care to select wisely.  Are you likely to select predominately single values, unsorted or sorted ranges? Are you predominately using one particular index other than your primary key? Is the table experiencing many more reads than writes, with queries that make reference to columns that aren’t part of the primary key? Are you typically selecting ranges within a particular category? Are your WHERE clauses returning many rows? These ways that the table participates in frequently-used queries are likely to be better accommodated by a clustered index.</simpara>
 <simpara>For your clustered index, you are likely to choose a ‘narrow’ index which is stored economically because this value has to be held in every index leaf-level pointer. This can be an interesting trade-off because the clustered index key is automatically included in all non-clustered indexes as the row locator so non-clustered indexes will cover queries that need only the non-clustered index key and the clustered index key.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001"><emphasis role="strong">BP001 Index type is not specified</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001">BP001 Index type is not specified</link></simpara>
 </section>
 <section xml:id="not-explicitly-declaring-which-index-is-the-clustered-one.">
 <title>Not explicitly declaring which index is the clustered one.</title>
@@ -139,12 +139,12 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="defining-a-table-column-without-explicitly-specifying-whether-it-is-nullable">
 <title>Defining a table column without explicitly specifying whether it is nullable</title>
 <simpara>In a CREATE TABLE DDL script, a column definition that has not specified that a column is NULL or NOT NULL is a risk. The default nullability for a database&#8217;s columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001"><emphasis role="strong">BP001 [NOT</link> NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</emphasis>]</simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001">BP001 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</link></simpara>
 </section>
 <section xml:id="adding-not-null-column-without-default-value-to-a-table-with-data-will-fail">
 <title>Trying to add a NOT NULL column without default value to a table with data</title>
 <simpara>Adding a NOT NULL column without a DEFAULT value to an existing table with data in it will fail because SQL Server has no way of adding that column to existing rows, because there must be a value in the column.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei028"><emphasis role="strong">EI028 Adding NOT NULL column without default value</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei028">EI028 Adding NOT NULL column without default value</link></simpara>
 </section>
 <section xml:id="creating-dated-copies-of-the-same-table-to-manage-table-sizes">
 <title>Creating dated copies of the same table to manage table sizes</title>
@@ -156,8 +156,8 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="using-varchar1-varchar2-etc.">
 <title>Using VARCHAR(1), VARCHAR(2), etc.</title>
 <simpara>Columns of a short or fixed length should have a fixed size because variable-length types have a disproportionate storage overhead. For a large table, this could be significant. The narrow a table, the faster it can be accessed. In addition, columns of variable length are stored after all columns of fixed length, which can have performance implications. For short strings,  use a fixed length type, such as CHAR, NCHAR, and BINARY.</simpara>
-<simpara><emphasis role="strong">BP009 Avoid var types of length 1 or 2</emphasis>
-<link xl:href="https://msdn.microsoft.com/en-us/library/dd193263(v=vs.100).aspx"><emphasis role="strong">SR0009: Avoid using types of variable length that are size 1 or 2</emphasis></link></simpara>
+<simpara><emphasis role="strong">BP009 Avoid var types of length 1 or 2</emphasis></simpara>
+<simpara><link xl:href="https://msdn.microsoft.com/en-us/library/dd193263(v=vs.100).aspx">SR0009: Avoid using types of variable length that are size 1 or 2</link></simpara>
 </section>
 <section xml:id="declaring-var-type-variables-without-length">
 <title>Declaring var type variables without length</title>
@@ -166,7 +166,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="using-deprecated-language-elements-such-as-the-textntext-data-types">
 <title>Using deprecated language elements such as the TEXT/NTEXT data types</title>
 <simpara>There is no good reason to use TEXT or NTEXT. They were a first, flawed attempt at BLOB storage and are there only for backward compatibility. Likewise, the WRITETEXT, UPDATETEXT and READTEXT statements are also deprecated. All this complexity has been replaced by the VARCHAR(MAX) and NVARCHAR(MAX) data types, which work with all of SQL Server&#8217;s string functions.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002"><emphasis role="strong">DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002">DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</link></simpara>
 </section>
 <section xml:id="using-money-data-type">
 <title>Using MONEY data type</title>
@@ -195,7 +195,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="the-length-of-the-varchar-varbinary-and-nvarchar-datatype-in-a-cast-or-convert-clause-wasnt-explicitly-specified">
 <title>The length of the VARCHAR, VARBINARY and NVARCHAR datatype in a CAST or CONVERT clause wasn&#8217;t explicitly specified</title>
 <simpara>When you convert a datatype to a varchar, you do not have to specify the length. If you don&#8217;t do so, SQL Server will use a Varchar length sufficient to hold the string. It is better to specify the length because SQL Server has no idea what length you may subsequently need.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp008"><emphasis role="strong">BP008 CAST/CONVERT to var types without length</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp008">BP008 CAST/CONVERT to var types without length</link></simpara>
 </section>
 <section xml:id="storing-a-duration-rather-than-a-point-in-time">
 <title>Storing a duration rather than a point in time</title>
@@ -213,7 +213,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="declaring-varchar-varbinary-and-nvarchar-datatypes-without-explicit-length">
 <title>Declaring VARCHAR, VARBINARY and NVARCHAR datatypes without explicit length</title>
 <simpara>An NVARCHAR that is declared without an explicit length is shorthand for specifying a length of 1. Is this what you meant or did you do it by accident? Much better to be explicit.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp007"><emphasis role="strong">BP007 Declaring var type variables without length</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp007">BP007 Declaring var type variables without length</link></simpara>
 </section>
 </section>
 <section xml:id="problems-with-expressions">
@@ -224,8 +224,8 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 </section>
 <section xml:id="using-functions-such-as-isnumeric-without-additional-checks">
 <title>Using functions such as 'ISNUMERIC' without additional checks</title>
-<simpara>Some functions, such as ISNUMERIC, are there to tell you in very general terms whether a string can be converted to a number without an error. Sadly, it doesn&#8217;t tell you what kind of number. (Try SELECT isNumeric(','); or SELECT ISNUMERIC('4D177'); for example.) This causes immense confusion. The ISNUMERIC function returns 1 when the input expression evaluates to a valid numeric data type; otherwise it returns 0. The function also returns 1 for some characters that are not numbers, such as plus (+), minus (-), and valid currency symbols such as the dollar sign ($). This is legitimate because these can be converted to numbers, but counter-intuitive. Unfortunately, most programmers want to know whether a number is a valid quantity of money, or a float, or integer. Use a function such as TRY_CAST() and TRY_CONVERT() that is appropriate for the data type whose validity you are testing. E.g. select try_convert(int,'12,345') or select try_convert(float,'5D105')</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei029"><emphasis role="strong">EI029 Avoid using ISNUMERIC() function</emphasis></link></simpara>
+<simpara>Some functions, such as <literal>ISNUMERIC</literal>, are there to tell you in very general terms whether a string can be converted to a number without an error. Sadly, it doesn&#8217;t tell you what kind of number. (Try <literal>SELECT isNumeric(',')</literal>; or <literal>SELECT ISNUMERIC('4D177')</literal>; for example.) This causes immense confusion. The <literal>ISNUMERIC</literal> function returns 1 when the input expression evaluates to a valid numeric data type; otherwise it returns 0. The function also returns 1 for some characters that are not numbers, such as plus (+), minus (-), and valid currency symbols such as the dollar sign ($). This is legitimate because these can be converted to numbers, but counter-intuitive. Unfortunately, most programmers want to know whether a number is a valid quantity of money, or a float, or integer. Use a function such as <literal>TRY_CAST()</literal> and <literal>TRY_CONVERT()</literal> that is appropriate for the data type whose validity you are testing. E.g. <literal>select try_convert(int,'12,345')</literal> or <literal>select try_convert(float,'5D105')</literal></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei029">EI029 Avoid using ISNUMERIC() function</link></simpara>
 </section>
 <section xml:id="injudicious-use-of-the-ltrim-and-rtrim-functions">
 <title>Injudicious use of the LTRIM and RTRIM functions</title>
@@ -238,7 +238,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="not-using-a-semicolon-to-terminate-sql-statements">
 <title>Not using a semicolon to terminate SQL statements</title>
 <simpara>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger etrrors when they become embedded.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023"><emphasis role="strong">DEP023 Not ending Transact-SQL statements with a semicolon is deprecated</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023">DEP023 Not ending Transact-SQL statements with a semicolon is deprecated</link></simpara>
 </section>
 <section xml:id="relying-on-data-being-implicitly-converted-between-types">
 <title>Relying on data being implicitly converted between types</title>
@@ -248,7 +248,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="using-the-identity-system-function">
 <title>Using the @@IDENTITY system function</title>
 <simpara>The generation of an IDENTITY value is not transactional, so in some circumstances, <emphasis role="strong">@@IDENTITY</emphasis> returns the wrong value and not the value from the row you just inserted. This is especially true when using triggers that insert data, depending on when the triggers fire. The <emphasis role="strong">SCOPE_IDENTITY</emphasis> function is safer because it always relates to the current batch (within the same scope). Also consider using the IDENT_CURRENT function, which returns the last IDENTITY value regardless of session or scope. The <emphasis role="strong">OUTPUT</emphasis> clause is a better and safer way of capturing identity values.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010"><emphasis role="strong">BP010 Usage of @@identity</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010">Usage of @@identity</link></simpara>
 </section>
 <section xml:id="using-between-for-datetime-ranges">
 <title>Using BETWEEN for DATETIME ranges</title>
@@ -257,17 +257,17 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="using-select-in-a-batch">
 <title>Using SELECT * in a batch</title>
 <simpara>Although there is a legitimate use in a batch for IF EXISTS (SELECT * FROM  &#8230;&#8203; ) or SELECT count(*), any other use is vulnerable to changes in column names or order. SELECT * was designed for interactive use, not as part of a batch. It assumes certain columns in a particular order, which may not last. Also, results should always consist of just the columns you need. Plus, requesting more columns from the database than are used by the application results in excess database I/O and network traffic, leading to slow application response and unhappy users.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005"><emphasis role="strong">BP005 Asterisk in select list</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005">Asterisk in select list</link></simpara>
 </section>
 <section xml:id="insert-without-column-list">
 <title>INSERT without column list</title>
 <simpara>The INSERT statement need not have a column list, but omitting it assumes certain columns in a particular order. It likely to cause errors if the table in to which the inserts will be made is changed, particularly with table variables where insertions are not checked. Column lists also make code more intelligible</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193296(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/dd193296(v=vs.100).aspx</link>[SR0001: Avoid SELECT * in a batch, stored procedures, views, and table-valued functions*</simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193296(v=vs.100).aspx">SR0001: Avoid SELECT * in a batch, stored procedures, views, and table-valued functions</link></simpara>
 </section>
 <section xml:id="order-by-clause-with-constants">
 <title>ORDER BY clause with constants</title>
 <simpara>The use of constants in the ORDER BY is deprecated for removal in the future. They make ORDER BY statements more difficult to understand.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp002"><emphasis role="strong">BP002 ORDER BY clause with constants</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp002">BP002 ORDER BY clause with constants</link></simpara>
 </section>
 </section>
 <section xml:id="difficulties-with-query-syntax">
@@ -289,7 +289,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <simpara>The deprecated syntax (which includes defining the join condition in the WHERE clause) is not standard SQL and is more difficult to inspect and maintain. Parts of this syntax are completely unsupported in SQL Server 2012 or higher.<anchor xml:id="_Toc395168942" xreflabel="[_Toc395168942]"/></simpara>
 <simpara>The “old style” Microsoft/Sybase JOIN style for SQL, which uses the =* and *= syntax, has been deprecated and is no longer used. Queries that use this syntax will fail when the database engine level is 10 (SQL Server 2008) or later (compatibility level 100). The ANSI-89 table citation list (FROM tableA, tableB) is still ISO standard for INNER JOINs only. Neither of these styles are worth using. It is always better to specify the type of join you require, INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER and CROSS, which has been standard since ANSI SQL-92 was published. While you can choose any supported JOIN style, without affecting the query plan used by SQL Server, using the ANSI-standard syntax will make your code easier to understand, more consistent, and portable to other relational database systems.</simpara>
 <simpara>See: <link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001">old-style join syntax</link></simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017"><emphasis role="strong">DEP017 NON-ANSI join (</emphasis>== or =*) is used</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017">DEP017 NON-ANSI join (<emphasis role="strong">== or =</emphasis>) is used</link></simpara>
 <simpara><emphasis role="strong">ST001 Old-style join is used (&#8230;&#8203;from table1,table2&#8230;&#8203;)</emphasis></simpara>
 </section>
 <section xml:id="using-correlated-subqueries-instead-of-a-join">
@@ -310,12 +310,12 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <simpara>The complete name of any schema-based database object consists of up to four identifiers: the server name, database name, schema name, and object name. Only if you are calling a remote stored procedure would you need a fully qualified name consisting of all four identifiers. If you are calling a procedure in another database, you obviously need its database identifier in the name. Within a database, you only need the object name itself so long as the procedure is in the same schema. By specifying the schema, the database engine needs less searching to identify it. Even system stored procedures should be qualified with the ‘sys’ schema name. When creating a stored procedure as well, it is a good habit to always specify the parent schema.</simpara>
 <simpara>It is a very good idea to get into the habit of qualifying the names of procedures with their schema. It is not only makes your code more resilient and maintainable, but as Microsoft introduces new features that use schemas, such as auditing mechanisms, you code contains no ambiguities that could cause problems.</simpara>
 <simpara>See:  <link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-procedures-lack-schema-qualification">procedures that lack schema-qualification</link></simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe001"><emphasis role="strong">PE001/PE002 Schema name for procedure is not specified/Schema name for table or view is not specified</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe001">PE001/PE002 Schema name for procedure is not specified/Schema name for table or view is not specified</link></simpara>
 </section>
 <section xml:id="using-insert-into-without-specifying-the-columns-and-their-order">
 <title>Using INSERT INTO without specifying the columns and their order</title>
 <simpara>Not specifying column names is fine for interactive work, but if you write code that relies on the hope that nothing will ever change, then refactoring could prove to be impossible. It is much better to trigger an error now than to risk corrupted results after the SQL code has changed. Column lists also make code more intelligible</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp004"><emphasis role="strong">BP004 INSERT without column list</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp004">BP004 INSERT without column list</link></simpara>
 </section>
 <section xml:id="using-full-outer-joins-unnecessarily.">
 <title>Using full outer joins unnecessarily.</title>
@@ -336,17 +336,17 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="not-handling-null-values-in-nullable-columns">
 <title>Not handling NULL values in nullable columns</title>
 <simpara>Generally, it is wise to explicitly handle NULLs in nullable columns, by using COALESCE to provide a default value. This is especially true when calculating or concatenating the results. (A NULL in part of a concatenated string, for example, will propagate to the entire string. Names and addresses are prone to this sort of error.)</simpara>
-<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx</link>[SR0007: Use ISNULL(column, default_value) on nullable columns in expressions*</simpara>
+<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx">SR0007: Use ISNULL(column, default_value) on nullable columns in expressions</link></simpara>
 </section>
 <section xml:id="referencing-an-unindexed-column-within-the-in-predicate-of-a-where-clause">
 <title>Referencing an unindexed column within the IN predicate of a WHERE clause</title>
 <simpara>A WHERE clause that references an unindexed column in the IN predicate causes a table scan and is therefore likely to run far more slowly than necessary.</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx</link>[SR0004: Avoid using columns that do not have indexes as test expressions in IN predicates*</simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx">SR0004: Avoid using columns that do not have indexes as test expressions in IN predicates</link></simpara>
 </section>
 <section xml:id="using-like-in-a-where-clause-with-an-initial-wildcard-character">
 <title>Using LIKE in a WHERE clause with an initial wildcard character</title>
 <simpara>An index cannot be used to find matches that start with a wildcard character ('%' or '_' ), so queries are unlikely to run well on large tables because they&#8217;ll require table scans.</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx</link>[SR0005: Avoid using patterns that start with a '%' in LIKE predicates*</simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx">SR0005: Avoid using patterns that start with a '%' in LIKE predicates</link></simpara>
 </section>
 <section xml:id="using-a-predicate-or-join-column-as-a-parameter-for-a-user-defined-function">
 <title>Using a predicate or join column as a parameter for a user-defined function</title>
@@ -354,13 +354,13 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 </section>
 <section xml:id="supplying-object-names-without-specifying-the-schema">
 <title>Supplying object names without specifying the schema</title>
-<simpara>Object names need only to be unique within a schema. However, when referencing an object in a SELECT, UPDATE, DELETE, MERGE or EXECUTE statementâ€”or when calling the OBJECT_ID functionâ€”the database engine can find the objects more easily found if the names are qualified with the schema name.</simpara>
+<simpara>Object names need only to be unique within a schema. However, when referencing an object in a SELECT, UPDATE, DELETE, MERGE or EXECUTE statements or when calling the OBJECT_ID function, the database engine can find the objects more easily found if the names are qualified with the schema name.</simpara>
 <simpara><emphasis role="strong">PE001/PE002 Schema name for procedure is not specified/Schema name for table or view is not specified</emphasis></simpara>
 </section>
 <section xml:id="using-null-or-null-to-filter-a-nullable-column-for-nulls">
 <title>Using '== NULL' or '&lt;&gt; NULL' to filter a nullable column for NULLs</title>
 <simpara>An expression that returns a NULL as either the left value (Lvalue) or right value (Rvalue) will always evaluate to NULL. Use IS NULL or IS NOT NULL.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp011"><emphasis role="strong">BP011 NULL comparison or addition/substring</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp011">BP011 NULL comparison or addition/substring</link></simpara>
 </section>
 <section xml:id="not-using-nocount-on-in-stored-procedures-and-triggers">
 <title>Not using NOCOUNT ON in stored procedures and triggers</title>
@@ -382,19 +382,19 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-a-non-sargable-search-argument..able-expression-in-a-where-clause">
 <title>Using a non-SARGable (Search ARGument..able) expression in a WHERE clause</title>
 <simpara>In the WHERE clause of a query it is good to avoid having a column reference or variable embedded within an expression, or used as a parameter of a function. A column reference or variable is best used as a single element on one side of the comparison operator , otherwise it will most probably trigger a table scan, which is expensive in a table of any size.</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx">SR0006: Move a column reference to one side of a comparison operator to use a column index*</link></simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx">SR0006: Move a column reference to one side of a comparison operator to use a column index</link></simpara>
 </section>
 <section xml:id="including-a-deterministic-function-in-a-where-clause">
 <title>Including a deterministic function in a WHERE clause</title>
 <simpara>If the value of the function does not depend on the data row that you wish to select, then it is better to put its value in a variable before the SELECT query and use the variable instead.</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx"><emphasis role="strong">SR0015: Extract deterministic function calls from WHERE predicates</emphasis></link>
-<link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017"><emphasis role="strong">PE017 Incorrect usage of const UDF</emphasis></link></simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx">SR0015: Extract deterministic function calls from WHERE predicates</link>
+<link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017">PE017 Incorrect usage of const UDF</link></simpara>
 </section>
 <section xml:id="_using_an_unverified_scalar_user_defined_function_as_a_constant">
 <title>Using an unverified  scalar user-defined function as a constant.</title>
 <simpara>The incorrect use of a non-schema bound scalar UDF, as a global database constant, is a major performance problem and must be winkled out of any production code. The problem arises because SQL Server doesn&#8217;t trust non-schema verified scalar functions as being precise and deterministic, and so chooses the safest, though slowest, option when executing them. It&#8217;s a slightly insidious problem because it doesn&#8217;t really show its full significance in the execution plan, though an Extended Events session will reveal what is really going on.</simpara>
-<simpara>See: <link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017"><emphasis role="strong">Misuse of the scalar user-defined function as a constant (PE017)</emphasis></link></simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017"><emphasis role="strong">PE017 Incorrect usage of const UDF</emphasis></link></simpara>
+<simpara>See: <link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017">Misuse of the scalar user-defined function as a constant (PE017)</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017">PE017 Incorrect usage of const UDF</link></simpara>
 </section>
 <section xml:id="using-select-distinct-to-mask-a-join-problem">
 <title>Using SELECT DISTINCT to mask a join problem</title>
@@ -403,18 +403,18 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-not-in-with-an-expression-that-allows-null-values">
 <title>Using NOT IN with an expression that allows null values</title>
 <simpara>If you are using a NOT IN predicate to select only those rows that match the results returned by a subquery or expression, make sure there are no NULL values in those results. Otherwise, your outer query won&#8217;t return the results you expect. In the case of both IN and NOT IN, it is better to use an appropriate outer join.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe019"><emphasis role="strong">PE019 Consider using [NOT</link> EXISTS instead of [NOT] IN (subquery)</emphasis>]</simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe019">PE019 Consider using NOT EXISTS instead of NOT IN (subquery)</link></simpara>
 <simpara>See <link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/consider-using-not-exists-instead-not-subquery">Consider using NOT EXISTS instead of NOT IN (subquery)</link></simpara>
 </section>
 <section xml:id="a-delete-statement-has-omitted-that-where-clause-which-would-delete-the-whole-table">
 <title>A DELETE statement has omitted that WHERE clause, which would delete the whole table</title>
 <simpara>It is very easy to delete an entire table when you mean to delete just one or more rows. There are occasionally good reasons for using DELETE to clear a table entirely. If you need to clear a table that is involved in replication or log shipping, or a table that has foreign key constraints that reference it, you have no choice. Otherwise, it is more usual to use the TRUNCATE TABLE statement that quickly deletes all records in a table by deallocating the data pages used by the table. The DELETE statement logs the deletions, aand establishes locks whereas the TRUNCATE statement only uses the transaction log to record the page deallocation. It also resets the IDENTITY back to the SEED, and the deallocated pages are recycled.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp017"><emphasis role="strong">BP017 DELETE statement without WHERE clause</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp017">BP017 DELETE statement without WHERE clause</link></simpara>
 </section>
 <section xml:id="an-update-statement-has-omitted-the-where-clause-which-would-update-every-row-in-the-table">
 <title>An UPDATE statement has omitted the WHERE clause, which would update every row in the table</title>
 <simpara>It is very easy to update an entire table, over-writing the data in it, when you mean to update just one or more rows. At the console, Delete or Update statements should also be in a transaction so you can check the result before committing.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018"><emphasis role="strong">BP018 UPDATE statement without WHERE clause</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018">BP018 UPDATE statement without WHERE clause</link></simpara>
 </section>
 <section xml:id="_using_a_common_table_expression_cte_unnecessarily">
 <title>Using a Common Table Expression (CTE) unnecessarily</title>
@@ -430,7 +430,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-sp_-prefixes-for-stored-procedures">
 <title>Using sp_ prefixes for stored procedures</title>
 <simpara>The sp_ prefix has a special meaning in SQL Server and doesn&#8217;t mean 'stored procedure' but 'special', which tells the database engine to first search the master database for the object.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei024"><emphasis role="strong">EI024 Stored procedure name starts with sp_</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei024">EI024 Stored procedure name starts with sp_</link></simpara>
 </section>
 <section xml:id="tibbling-sql-server-objects-with-reverse-hungarian-prefixes-such-as-tbl_-vw_-pk_-fn_-and-usp_">
 <title>'Tibbling' SQL Server objects with Reverse-Hungarian prefixes such as tbl_, vw_, pk_, fn_, and usp_</title>
@@ -439,22 +439,22 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-reserved-words-in-names">
 <title>Using reserved words in names</title>
 <simpara>Using reserved words makes code more difficult to read, can cause problems to code formatters, and can cause errors when writing code.</simpara>
-<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx"><emphasis role="strong">SR0012: Avoid using reserved words for type names</emphasis></link></simpara>
+<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx">SR0012: Avoid using reserved words for type names</link></simpara>
 </section>
 <section xml:id="including-special-characters-in-object-names">
 <title>Including special characters in object names</title>
 <simpara>SQL Server supports special character in object names for backward compatibility with older databases such as Microsoft Access, but using these characters in newly created databases causes more problems than they&#8217;re worth. Special characters requires brackets (or double quotations) around the object name, makes code difficult to read, and makes the object more difficult to reference. Avoid particularly using any whitespace characters, square brackets or either double or single quotation marks as part of the object name.</simpara>
-<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx"><emphasis role="strong">R0011: Avoid using special characters in object names</emphasis></link></simpara>
+<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx">R0011: Avoid using special characters in object names</link></simpara>
 </section>
 <section xml:id="using-numbers-in-table-names">
 <title>Using numbers in table names</title>
 <simpara>It should always serve as a warning to see tables named Year1, Year2, Year3 or so on, or even worse, automatically generated names such as tbl3546 or 567Accounts. If the name of the table doesn&#8217;t describe the entity, there is a design problem</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</link>[SR0011: Avoid using special characters in object names*</simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx">SR0011: Avoid using special characters in object names</link></simpara>
 </section>
 <section xml:id="using-square-brackets-unnecessarily-for-object-names">
 <title>Using square brackets unnecessarily for object names</title>
 <simpara>If object names are valid and not reserved words, there is no need to use square brackets. Using invalid characters in object names is a code smell anyway, so there is little point in using them. If you can&#8217;t avoid brackets, use them only for invalid names.</simpara>
-<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx"><emphasis role="strong">SR0011: Avoid using special characters in object names</emphasis></link></simpara>
+<simpara><link xl:href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx">SR0011: Avoid using special characters in object names</link></simpara>
 </section>
 <section xml:id="using-system-generated-object-names-particularly-for-constraints">
 <title>Using system-generated object names, particularly for constraints</title>
@@ -470,7 +470,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="you-have-a-stored-procedure-that-does-not-return-a-result-code">
 <title>You have a stored procedure that does not return a result code</title>
 <simpara>When you use the EXECUTE command to execute a stored procedure, or call the stored procedure from an application, an integer is returned that can be assigned to a variable. It is generally used to communicate the success of the operation. It provides a very useful way of reacting to problems in a process and can make a batch process far less convoluted</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp016"><emphasis role="strong">BP016 Return without result code</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp016">BP016 Return without result code</link></simpara>
 </section>
 <section xml:id="excessively-overloading-routines">
 <title>Excessively 'overloading' routines</title>
@@ -503,7 +503,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-an-order-by-clause-within-a-view">
 <title>Using an ORDER BY clause within a view</title>
 <simpara>You cannot use the ORDER BY clause without the TOP clause or the OFFSET &#8230;&#8203; FETCH clause in views (or inline functions, derived tables, or subqueries). Even if you resort to using the TOP 100% trick, the resulting order isn&#8217;t guaranteed. Specify the ORDER BY clause in the query that calls the view.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei030"><emphasis role="strong">EI030 Order by in view or single-statement TVF</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei030">EI030 Order by in view or single-statement TVF</link></simpara>
 </section>
 <section xml:id="unnecessarily-using-stored-procedures-or-multiline-table-valued-functions-where-a-view-is-sufficient">
 <title>Unnecessarily using stored procedures or multiline table-valued functions where a view is sufficient</title>
@@ -516,7 +516,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="you-have-not-explicitly-defined-the-scope-of-a-cursor">
 <title>You have not explicitly defined the scope of a cursor</title>
 <simpara>When you define a cursor with the DECLARE CURSOR statement you can, and should, define the scope of the cursor name. GLOBAL means that the cursor name should be global to the connection. LOCAL specifies that the cursor name is LOCAL to the stored procedure, trigger, or batch containing the DECLARE CURSOR statement.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp015"><emphasis role="strong">BP015 Scope of cursor (LOCAL/GLOBAL) is not specified</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp015">BP015 Scope of cursor (LOCAL/GLOBAL) is not specified</link></simpara>
 </section>
 <section xml:id="overusing-clr-routines">
 <title>Overusing CLR routines</title>
@@ -533,37 +533,37 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="stored-procedure-that-does-not-set-a-return-code">
 <title>Executing stored procedure without getting result</title>
 <simpara>If a stored procedure provides one or more result, the rows will be sent to the client. For large result sets the stored procedure execution will not continue to the next statement until the result set has been completely sent to the client. For small result sets the results will be spooled for return to the client and execution will continue. Within a batch, a stored procedure that returns a result should be called with INSERT &#8230;&#8203;EXECUTE syntax.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei025"><emphasis role="strong">EI025 Executing stored procedure without getting result</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei025">EI025 Executing stored procedure without getting result</link></simpara>
 </section>
 <section xml:id="forgetting-to-set-an-output-variable">
 <title>Forgetting to set an output variable</title>
 <simpara>The values of the output parameters must be explicitly set in all code paths, otherwise the value of the output variable will be NULL. This can result in the accidental propagation of NULL values. Good defensive coding requires that you initialize the output parameters to a default value at the start of the procedure body.</simpara>
-<simpara>See <link xl:href="http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx">http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx</link>[SR0013: Output parameter (parameter) is not populated in all code paths*</simpara>
+<simpara>See <link xl:href="http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx">SR0013: Output parameter (parameter) is not populated in all code paths</link></simpara>
 </section>
 <section xml:id="specifying-parameters-by-order-rather-by-assignment-where-there-are-more-than-four-parameters">
 <title>Specifying parameters by order rather by assignment, where there are more than four parameters</title>
 <simpara>When calling a stored procedure, it is generally better to pass in parameters by assignment rather than just relying on the order in which the parameters are defined within the procedure. This makes the code easier to understand and maintain. As with all rules, there are exceptions: It doesn&#8217;t really become a problem when there are less than a handful of parameters. Also, natively compiled procedures work fastest by passing in parameters by order.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei018"><emphasis role="strong">EI018 Missing parameter(s) name in procedure call</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei018">EI018 Missing parameter(s) name in procedure call</link></simpara>
 </section>
 <section xml:id="try-to-avoid-using-hardcoded-references-to-other-databases.">
 <title>Try to avoid using hardcoded references to other databases.</title>
 <simpara>There is nothing wrong in executing procedures in other databases, but it is better to avoid hard-coding these references and use synonyms instead.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei016"><emphasis role="strong">EI016 Reference to procedure in other database</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei016">EI016 Reference to procedure in other database</link></simpara>
 </section>
 <section xml:id="use-of-a-hardcoded-current-database-name-in-a-procedure-call">
 <title>Use of a Hardcoded current database name in a procedure call</title>
 <simpara>You only need to specify the database when calling a procedure in a different database.  It is better to avoid using hardcoded references to the current database as this causes problems if you later do the inconceivable by changing the databases name or cut-and-pasting a routine. There is no performance advantage whatsoever in specifying the current database if the procedure is in the same database.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei017"><emphasis role="strong">EI017 Hardcoded current database name in procedure call</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei017">EI017 Hardcoded current database name in procedure call</link></simpara>
 </section>
 <section xml:id="setting-the-quoted_identifier-or-ansi_nulls-options-inside-stored-procedures">
 <title>Setting the QUOTED_IDENTIFIER or ANSI_NULLS options inside stored procedures</title>
 <simpara>Stored procedures use the SET settings specified at execute time, except for SET ANSI_NULLS and SET QUOTED_IDENTIFIER. Stored procedures that specify either the SET ANSI_NULLS or SET QUOTED_IDENTIFIER use the setting specified at stored procedure creation time. If used inside a stored procedure, any such SET command is ignored</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008"><emphasis role="strong">MI008 QUOTED_IDENTIFIERS option inside stored procedure, trigger or function</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008">MI008 QUOTED_IDENTIFIERS option inside stored procedure, trigger or function</link></simpara>
 </section>
 <section xml:id="creating-a-routine-with-ansi_nulls-or-quoted_identifier-options-set-to-off.">
 <title>Creating a routine with ANSI_NULLS or QUOTED_IDENTIFIER options set to OFF.</title>
 <simpara>At the time the routine is created (parse time), both options should normally be set to ON. They are ignored on execution. The reason for keeping Quoted Identifiers ON is that it is necessary when you are creating or changing indexes on computed columns or indexed views. If set to OFF, then CREATE, UPDATE, INSERT, and DELETE statements on tables with indexes on computed columns or indexed views will fail. SET QUOTED_IDENTIFIER must be ON when you are creating a filtered index or when you invoke XML data type methods. ANSI_NULLS will eventually be set to ON and this ISO compliant treatment of NULLS will not be switchable to OFF.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028"><emphasis role="strong">DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028">DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</link></simpara>
 </section>
 <section xml:id="updating-a-primary-key-column">
 <title>Updating a primary key column</title>
@@ -584,12 +584,12 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-a-waitfor-delaytime-statement-in-a-routine-or-batch">
 <title>Using a WAITFOR DELAY/TIME statement in a routine or batch</title>
 <simpara>SQL routines or batches are not designed to include artificial delays. If many WAITFOR statements are specified on the same server, too many threads can be tied up waiting. Also, including WAITFOR will delay the completion of the SQL Server process and can result in a timeout message in the application. Sometimes, a transaction that is the victim of a deadlock can be re-executed after a very short delay, and you&#8217;ll find a WAIT used for this, which is legitimate.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001"><emphasis role="strong">MI001 WAIT FOR DELAY/TIME used</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001">MI001 WAIT FOR DELAY/TIME used</link></simpara>
 </section>
 <section xml:id="using-set-rowcount-to-specify-how-many-rows-should-be-returned">
 <title>Using SET ROWCOUNT to specify how many rows should be returned</title>
 <simpara>We had to use this option until the TOP clause (with ORDER BY) was implemented. The TOP option is much easier for the query optimizer.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014"><emphasis role="strong">DEP014 SET ROWCOUNT option is deprecated.</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014">DEP014 SET ROWCOUNT option is deprecated.</link></simpara>
 </section>
 <section xml:id="using-top-100-percent-in-views-inline-functions-derived-tables-subqueries-and-common-table-expressions-ctes.">
 <title>Using TOP 100 PERCENT in views, inline functions, derived tables, subqueries, and common table expressions (CTEs).</title>
@@ -629,27 +629,27 @@ RETURN
 <section xml:id="using-a-print-statement-or-statement-that-returns-a-result-in-a-trigger">
 <title>Using a PRINT statement or statement that returns a result in a trigger</title>
 <simpara>Triggers are designed for enforcing data rules, not for returning data or information. Developers often embed PRINT statements in triggers during development to provide a crude idea of how the code is progressing, but the statements need to be removed or commented out before the code is promoted beyond development.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe011"><emphasis role="strong">PE011 PRINT statement is used in trigger</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe011">PE011 PRINT statement is used in trigger</link></simpara>
 </section>
 <section xml:id="select-statement-in-trigger-that-returns-data-to-the-client">
 <title>SELECT statement in trigger that returns data to the client</title>
 <simpara>Although it is possible to do, it is unwise. A trigger should never return data to a client. It is possible to place a SELECT statement in a trigger but it serves no practical useful purpose, and can have unexpected effects. A trigger behaves much like a stored procedure in that, when the trigger fires, results can be returned to the calling application. This requires special handling because these returned results would have to be handled in some way, and this would have to be written into every application in which modifications to the trigger table are allowed.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp003"><emphasis role="strong">BP003 SELECT in trigger</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp003">BP003 SELECT in trigger</link></simpara>
 </section>
 <section xml:id="using-top-without-order-by">
 <title>Using TOP without ORDER BY</title>
 <simpara>Using TOP without an ORDER BY clause in a SELECT statement is meaningless and cannot be guaranteed to give consistent results. because asking for the TOP 10 rows implies a certain order, and tables have no implicit logical order.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp006"><emphasis role="strong">BP006 TOP without ORDER BY</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp006">BP006 TOP without ORDER BY</link></simpara>
 </section>
 <section xml:id="using-a-case-statement-without-the-else-clause">
 <title>Using a CASE statement without the ELSE clause</title>
 <simpara>Always specify a default option even if you believe that it is impossible for that condition to happen. Someone might change the logic, or you could be wrong in thinking a particular outcome is impossible.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp012"><emphasis role="strong">BP012 CASE without ELSE</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp012">BP012 CASE without ELSE</link></simpara>
 </section>
 <section xml:id="using-executestring">
 <title>Using EXECUTE(string)</title>
 <simpara>Don&#8217;t use EXEC to run dynamic SQL. It is there only for backward compatibility and is a commonly used vector for SQL injection. Use sp_executesql instead because it allows parameter substitutions for both inputs and outputs and also because the execution plan that sp_executesql produces is more likely to be reused.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013"><emphasis role="strong">BP013 EXECUTE(string) is used</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013">BP013 EXECUTE(string) is used</link></simpara>
 </section>
 <section xml:id="using-the-group-by-all-column-group-by-number-compute-or-compute-by-clause">
 <title>Using the GROUP BY ALL &lt;column&gt;, GROUP BY &lt;number&gt;, COMPUTE, or COMPUTE BY clause</title>
@@ -658,12 +658,12 @@ RETURN
 <section xml:id="using-numbers-in-the-order-by-clause-to-specify-column-order">
 <title>Using numbers in the ORDER BY clause to specify column order</title>
 <simpara>It is certainly possible to specify nonnegative integers to represent the columns in an ORDER BY clause, based on how those columns appear in the select list, but this approach makes it difficult to understand the code at a glance and can lead to unexpected consequences when you forget you&#8217;ve done it and alter the order of the columns in the select list.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003"><emphasis role="strong">DEP003 GROUP BY ALL clause is deprecated.</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003">DEP003 GROUP BY ALL clause is deprecated.</link></simpara>
 </section>
 <section xml:id="using-unnecessary-three-part-and-four-part-column-references-in-a-select-list">
 <title>Using unnecessary three-part and four-part column references in a select list</title>
 <simpara>Sometimes, when a table is referenced in another database or server, programmers believe that the two or three-part table name needs to be applied to the columns. This is unnecessary and meaningless. Just the table name is required for the columns. Three-part column names might be necessary in a join if you have duplicate table names, with duplicate column names, in different schemas, in which case, you ought to be using aliases. The same goes for cross-database joins.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026"><emphasis role="strong">DEP026 Three-part and four-part column references in SELECT list are deprecated.</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026">DEP026 Three-part and four-part column references in SELECT list are deprecated.</link></simpara>
 </section>
 <section xml:id="using-range-rather-than-rows-in-sql-server-2012">
 <title>Using RANGE rather than ROWS in SQL Server 2012</title>
@@ -676,12 +676,12 @@ RETURN
 <section xml:id="use-of-begin-transaction-without-rollback-transaction">
 <title>Use of BEGIN TRANSACTION without ROLLBACK TRANSACTION</title>
 <simpara>ROLLBACK TRANSACTION rolls back a transaction to the beginning of it, or to a savepoint inside the transaction. You don&#8217;t need a ROLLBACK TRANSACTION statement within a transaction, but if there isn&#8217;t one, then it may be a sign that error handling has not been refined to production standards</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei019"><emphasis role="strong">EI019 BEGIN TRANSACTION without ROLLBACK TRANSACTION</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei019">EI019 BEGIN TRANSACTION without ROLLBACK TRANSACTION</link></simpara>
 </section>
 <section xml:id="use-of-rollback-transaction-without-begin-transaction">
 <title>Use of ROLLBACK TRANSACTION without BEGIN TRANSACTION</title>
 <simpara>It is possible to have a ROLLBACK TRANSACTION within a block where there is no explicit transaction. This will trigger an error if the code is executed outside a transaction, and suggests that transactions are being held open unnecessarily.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020"><emphasis role="strong">EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020">EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</link></simpara>
 </section>
 <section xml:id="not-defining-a-default-value-for-a-select-assignment-to-a-variable">
 <title>Not defining a default value for a SELECT assignment to a variable</title>
@@ -702,7 +702,7 @@ RETURN
 <section xml:id="not-putting-all-the-ddl-statements-at-the-beginning-of-the-batch">
 <title>Not putting all the DDL statements at the beginning of the batch</title>
 <simpara>Don&#8217;t mix data manipulation language (DML) statements with data definition language (DDL_ statements. Instead, put all the DDL statements at the beginning of your procedures or batches.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe010"><emphasis role="strong">PE010 Interleaving DDL and DML in stored procedure/trigger.</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe010">PE010 Interleaving DDL and DML in stored procedure/trigger.</link></simpara>
 </section>
 <section xml:id="using-meaningless-aliases-for-tables-e.g.-a-b-c-d-e">
 <title>Using meaningless aliases for tables (e.g., a, b, c, d, e)</title>
@@ -711,47 +711,47 @@ RETURN
 <section xml:id="variable-type-is-not-fully-compatible-with-procedure-parameter-type">
 <title>Variable type is not fully compatible with procedure parameter type</title>
 <simpara>A parameter passed to a procedure or function must be of a type that can be cast into the variable datatype declared for that parameter in the body of the routine. It should be of exactly the same type so as to avoid the extra processing to resolve an implicit conversion.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei001"><emphasis role="strong">EI001 Incompatible variable type for procedure call</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei001">EI001 Incompatible variable type for procedure call</link></simpara>
 </section>
 <section xml:id="literal-type-is-not-fully-compatible-with-procedure-parameter-type">
 <title>Literal type is not fully compatible with procedure parameter type</title>
 <simpara>A parameter passed to a procedure can be a literal (e.g. 1,'03 jun 2017' or 'hello world') but it must be possible to cast it unambiguously to the variable datatype declared for that parameter in the body of the routine.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei002"><emphasis role="strong">EI002 Incompatible literal type for procedure call</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei002">EI002 Incompatible literal type for procedure call</link></simpara>
 </section>
 <section xml:id="subquery-may-return-more-than-one-row">
 <title>Subquery may return more than one row</title>
 <simpara>A subquery can only be scalar, meaning that it can return just one value. Even if you correctly place just one expression in your select list, you must also ensure that just one row is returned. TOP 1 can be used if there is an ORDER BY clause</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei003">EI003 Non-scalar subquery in place of a scalar*</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei003">EI003 Non-scalar subquery in place of a scalar</link></simpara>
 </section>
 <section xml:id="a-named-parameter-is-not-found-in-parameter-list-of-a-procedure">
 <title>A named parameter is not found in parameter list of a procedure</title>
 <simpara>Parameters can be passed by position in a comma-delimited list, or by name, where order position isn&#8217;t required. Any parameters that are specified by name must have the name identical to the definition for that procedure</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei004"><emphasis role="strong">EI004 Extra parameter passed</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei004">EI004 Extra parameter passed</link></simpara>
 </section>
 <section xml:id="use-of-the-position-notation-after-the-named-notation-for-parameters-when-calling-a-procedure">
 <title>Use of the position notation after the named notation for parameters when calling a procedure</title>
 <simpara>Parameters can be passed by position in a comma-delimited list, or by name, but it is a bad idea to mix the two methods even when it is possible. If a parameter has a default value assigned to it, it can be left out of the parameter list, and it is difficult to check whether the values you supply are for the parameters you intend.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei005"><emphasis role="strong">EI005 Unnamed call after named call</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei005">EI005 Unnamed call after named call</link></simpara>
 </section>
 <section xml:id="parameter-is-not-passed-to-a-procedure-and-no-default-is-provided.">
 <title>Parameter is not passed to a procedure and no default is provided.</title>
 <simpara>With procedures and functions, parameters can be assigned default values that are used when a value isn&#8217;t passed for that parameter when calling the procedure. However, if a parameter isn&#8217;t assigned a value and there is no default provided it is an error. If you don&#8217;t want to provide a value and a default is provided, use the DEFAULT keyword to specify that the default value should be used.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei006"><emphasis role="strong">EI006 Required parameter is not passed</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei006">EI006 Required parameter is not passed</link></simpara>
 </section>
 <section xml:id="procedure-parameter-is-not-defined-as-output-but-marked-as-output-in-procedure-call-statement.">
 <title>Procedure parameter is not defined as OUTPUT, but marked as OUTPUT in procedure call statement.</title>
 <simpara>Output scalar parameters for procedures are passed to the procedure, and can have their value altered within the procedure. This allows procedures to return scalar output. The formal parameter must be declared as an OUTPUT parameter if the actual parameter that is passed had the OUTPUT keyword. This triggers an error.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei007"><emphasis role="strong">EI007 Call parameter declared as output</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei007">EI007 Call parameter declared as output</link></simpara>
 </section>
 <section xml:id="procedure-parameter-is-defined-as-output-but-is-not-marked-as-output-in-procedure-call-statement.">
 <title>Procedure parameter is defined as OUTPUT, but is not marked as OUTPUT in procedure call statement.</title>
 <simpara>Output scalar parameters for procedures are passed to the procedure, and can have their value altered within the procedure. This allows procedures to return scalar output. However, the matching variable passed as the output parameter in the module or command string must also have the keyword OUTPUT. There is no error but the resultant value is NULL, which you are unlikely to want.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei008"><emphasis role="strong">EI008 Call parameter is not declared as output</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei008">EI008 Call parameter is not declared as output</link></simpara>
 </section>
 <section xml:id="number-of-passed-parameters-exceeds-the-number-of-procedure-parameters">
 <title>Number of passed parameters exceeds the number of procedure parameters</title>
 <simpara>Parameters can be passed to procedures and functions in an ordered delimited list, but never more than the number of parameters. For a function, this must have the same number of list members as the parameters. For a procedure you can have fewer if defaults are declared in parameters</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei009"><emphasis role="strong">EI009 Call has more parameters than required</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei009">EI009 Call has more parameters than required</link></simpara>
 </section>
 </section>
 <section xml:id="security-loopholes">
@@ -775,7 +775,7 @@ RETURN
 <section xml:id="using-dynamic-sql-with-the-possibility-of-sql-injection">
 <title>Using dynamic SQL with the possibility of SQL injection</title>
 <simpara>SQL injection can be used not only from an application but also by a database user who lacks, but wants, the permissions necessary to perform a particular role, or who simply wants to access sensitive data. If dynamic SQL is executed within a stored procedure, under the temporary EXECUTE AS permission of a user with sufficient privileges to create users, and it can be accessed by a malicious user, then suitable precautions must be taken to make this impossible. These precautions start with giving EXECUTE AS permissions only to WITHOUT LOGIN users with least-necessary permissions, and using sp_ExecuteSQL with parameters rather than EXECUTE.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013"><emphasis role="strong">BP013 EXECUTE(string) is used</emphasis></link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013">BP013 EXECUTE(string) is used</link></simpara>
 </section>
 </section>
 </article>
