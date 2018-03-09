@@ -194,7 +194,7 @@ https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002[DEP002 W
 The MONEY data type confuses the storage of data values with their display, though it clearly suggests, by its name, the sort of data held. Using the DECIMAL data type is almost always better.
 
 [[using-float-or-real-data-types]]
-=== _Using FLOAT or REAL data types_
+=== Using FLOAT or REAL data types
 
 The FLOAT (8 byte) and REAL (4 byte) data types are suitable only for specialist scientific use since they are approximate types with an enormous range (-1.79E+308 to -2.23E-308, 0 and 2.23E-308 to 1.79E+308, in the case of FLOAT). Any other use needs to be regarded as suspect, and a FLOAT or REAL used as a key or found in an index needs to be investigated. The DECIMAL type is an exact data type and has an impressive range from -10^38+1 through 10^38-1. Although it requires more storage than the FLOAT or REAL types, it is generally a better choice.
 
