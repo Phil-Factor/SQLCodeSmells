@@ -32,7 +32,7 @@ In describing all these code-smells in a booklet, I've been very constrained on 
 It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn't represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised, and it will certainly be slow.
 Occasionally, a data object is too complicated, peripheral, arcane or ephemeral to be worth integrating with the database's normalised structure. It is fair to then take an arm's-length approach and store it as XML, but in this case it will need to be encapsulated by views and table-valued functions so that the SQL Programmer can easily access the contents.
 
-image::images/smell1.bmp[]
+image::images/smell1.png[]
 
 [[using-inappropriate-data-types]]
 === Using inappropriate data types
@@ -54,7 +54,7 @@ The use of an EAV model is almost never justified and leads to very tortuous SQL
 
 Sometimes, one sees table designs which have 'keys' that can reference more than one table, whose identity is usually denoted by a separate column. This is where an entity can relate to one of a number of different entities according to the value in another column that provides the identity of the entity. This sort of relationship cannot be subject to foreign key constraints, and any joins are difficult for the query optimizer to provide good plans for. Also, the logic for the joins is likely to get complicated. Instead, use an intersection table, or if you are attempting an object-oriented mapping, look at the method by which SQL Server represents the database metadata by creating an 'object' supertype class that all of the individual object types extend. Both these devices give you the flexibility of design that polymorphic associations attempt.
 
-image::images/Polymorphic.bmp[]
+image::images/Polymorphic.png[]
 
 [[creating-tables-as-god-objects]]
 === Creating tables as 'God Objects'
@@ -71,7 +71,7 @@ Quite often, the database designer will need to create an interface to provide a
 
 In designing a database application, there is sometimes functionality that cannot be done purely in SQL, usually when other server-based, or network-based, resources must be accessed. Now that SQL Server's integration with PowerShell is so much more mature, it is better to use that, rather than xp_cmdshell or sp_OACreate (or similar), to access the file system or other server-based resources. This needs some thought and planning: You should also use SQL Agent jobs when possible to schedule your server-related tasks. This requires up-front design to prevent them becoming unmanageable monsters prey to ad-hoc growth.
 
-image::images/ole.bmp[]
+image::images/ole.png[]
 
 [[problems-with-table-design]]
 == Problems with Table Design

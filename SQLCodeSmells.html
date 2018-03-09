@@ -534,9 +534,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#using-reserved-words-in-names">6.4. Using reserved words in names</a></li>
 <li><a href="#including-special-characters-in-object-names">6.5. Including special characters in object names</a></li>
 <li><a href="#using-numbers-in-table-names">6.6. Using numbers in table names</a></li>
-<li><a href="#see-sr0011-avoid-using-special-characters-in-object-names">6.7. See: <a href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</a>[SR0011: Avoid using special characters in object names*</a></li>
-<li><a href="#using-square-brackets-unnecessarily-for-object-names">6.8. Using square brackets unnecessarily for object names</a></li>
-<li><a href="#using-system-generated-object-names-particularly-for-constraints">6.9. Using system-generated object names, particularly for constraints</a></li>
+<li><a href="#using-square-brackets-unnecessarily-for-object-names">6.7. Using square brackets unnecessarily for object names</a></li>
+<li><a href="#using-system-generated-object-names-particularly-for-constraints">6.8. Using system-generated object names, particularly for constraints</a></li>
 </ul>
 </li>
 <li><a href="#problems-with-routines">7. Problems with routines</a>
@@ -1215,7 +1214,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>In the WHERE clause of a query it is good to avoid having a column reference or variable embedded within an expression, or used as a parameter of a function. A column reference or variable is best used as a single element on one side of the comparison operator , otherwise it will most probably trigger a table scan, which is expensive in a table of any size.</p>
 </div>
 <div class="paragraph">
-<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx</a>[SR0006: Move a column reference to one side of a comparison operator to use a column index*</p>
+<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx">SR0006: Move a column reference to one side of a comparison operator to use a column index*</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1224,19 +1223,17 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>If the value of the function does not depend on the data row that you wish to select, then it is better to put its value in a variable before the SELECT query and use the variable instead.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017"><strong>PE017 Incorrect usage of const UDF</strong></a></p>
-</div>
-<div class="paragraph">
-<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx</a>[SR0015: Extract deterministic function calls from WHERE predicates*</p>
+<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx"><strong>SR0015: Extract deterministic function calls from WHERE predicates</strong></a>
+<a href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017"><strong>PE017 Incorrect usage of const UDF</strong></a></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="trueusing-an-unverified-scalar-user-defined-function-as-a-constant"><a class="anchor" href="#trueusing-an-unverified-scalar-user-defined-function-as-a-constant"></a>5.25. Using an unverified  scalar user-defined function as a constant.</h3>
 <div class="paragraph">
-<p>The incorrect use of a scalar UDF that hasn&#8217;t been Schemabound as a global database constant is a major performance problem and must be winkled out of any production code. The problem arises because SQL Server doesn’t trust non-schema verified scalar functions as being precise and deterministic, and so chooses the safest, though slowest, option when executing them. It’s a slightly insidious problem because it doesn’t really show its full significance in the execution plan, though an Extended Events session will reveal what is really going on.</p>
+<p>The incorrect use of a non-schema bound scalar UDF, as a global database constant, is a major performance problem and must be winkled out of any production code. The problem arises because SQL Server doesn&#8217;t trust non-schema verified scalar functions as being precise and deterministic, and so chooses the safest, though slowest, option when executing them. It&#8217;s a slightly insidious problem because it doesn&#8217;t really show its full significance in the execution plan, though an Extended Events session will reveal what is really going on.</p>
 </div>
 <div class="paragraph">
-<p>See: <a href="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017">Misuse of the scalar user-defined function as a constant (PE017)</a></p>
+<p>See: <a href="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017"><strong>Misuse of the scalar user-defined function as a constant (PE017)</strong></a></p>
 </div>
 <div class="paragraph">
 <p><a href="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017"><strong>PE017 Incorrect usage of const UDF</strong></a></p>
@@ -1316,7 +1313,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>Using reserved words makes code more difficult to read, can cause problems to code formatters, and can cause errors when writing code.</p>
 </div>
 <div class="paragraph">
-<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx</a>[SR0012: Avoid using reserved words for type names*</p>
+<p><a href="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx"><strong>SR0012: Avoid using reserved words for type names</strong></a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1325,7 +1322,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>SQL Server supports special character in object names for backward compatibility with older databases such as Microsoft Access, but using these characters in newly created databases causes more problems than they&#8217;re worth. Special characters requires brackets (or double quotations) around the object name, makes code difficult to read, and makes the object more difficult to reference. Avoid particularly using any whitespace characters, square brackets or either double or single quotation marks as part of the object name.</p>
 </div>
 <div class="paragraph">
-<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</a>[R0011: Avoid using special characters in object names*</p>
+<p><a href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx"><strong>R0011: Avoid using special characters in object names</strong></a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1333,19 +1330,21 @@ Whenever you execute a query, a short message is returned to the client with the
 <div class="paragraph">
 <p>It should always serve as a warning to see tables named Year1, Year2, Year3 or so on, or even worse, automatically generated names such as tbl3546 or 567Accounts. If the name of the table doesn&#8217;t describe the entity, there is a design problem</p>
 </div>
+<div class="paragraph">
+<p>See: <a href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</a>[SR0011: Avoid using special characters in object names*</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="see-sr0011-avoid-using-special-characters-in-object-names"><a class="anchor" href="#see-sr0011-avoid-using-special-characters-in-object-names"></a>6.7. See: <a href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" class="bare">http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</a>[SR0011: Avoid using special characters in object names*</h3>
-
-</div>
-<div class="sect2">
-<h3 id="using-square-brackets-unnecessarily-for-object-names"><a class="anchor" href="#using-square-brackets-unnecessarily-for-object-names"></a>6.8. Using square brackets unnecessarily for object names</h3>
+<h3 id="using-square-brackets-unnecessarily-for-object-names"><a class="anchor" href="#using-square-brackets-unnecessarily-for-object-names"></a>6.7. Using square brackets unnecessarily for object names</h3>
 <div class="paragraph">
 <p>If object names are valid and not reserved words, there is no need to use square brackets. Using invalid characters in object names is a code smell anyway, so there is little point in using them. If you can&#8217;t avoid brackets, use them only for invalid names.</p>
 </div>
+<div class="paragraph">
+<p><a href="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx"><strong>SR0011: Avoid using special characters in object names</strong></a></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="using-system-generated-object-names-particularly-for-constraints"><a class="anchor" href="#using-system-generated-object-names-particularly-for-constraints"></a>6.9. Using system-generated object names, particularly for constraints</h3>
+<h3 id="using-system-generated-object-names-particularly-for-constraints"><a class="anchor" href="#using-system-generated-object-names-particularly-for-constraints"></a>6.8. Using system-generated object names, particularly for constraints</h3>
 <div class="paragraph">
 <p>This tends to happen with primary keys and foreign keys if, in the data definition language (DDL), you don&#8217;t supply the constraint name. Auto-generated names are difficult to type and easily confused, and they tend to confuse SQL comparison tools. When installing SharePoint via the GUI, the database names get GUID suffixes, making them very difficult to deal with.</p>
 </div>
@@ -1874,7 +1873,7 @@ RETURN
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-09 13:38:10 GMTST
+Last updated 2018-03-09 13:58:25 GMTST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
