@@ -4,7 +4,7 @@
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>SQL Code Smells</title>
-<date>2018-03-09</date>
+<date>2018-03-12</date>
 <author>
 <personname>
 <firstname>by</firstname>
@@ -121,6 +121,14 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <title>Using temporary tables for very small result sets</title>
 <simpara>Temporary tables can lead to recompiles, which can be costly. Table variables, while not so useful for larger data sets (approximately 150 rows or more), avoid recompiles and are therefore preferred in smaller data sets.</simpara>
 <simpara><emphasis role="strong">ST011/ST012 Consider using table variable instead of temporary table/Consider using temporary table instead of table variable</emphasis></simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/Temporal.png"/>
+</imageobject>
+<textobject><phrase>Temporal</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="creating-a-table-without-specifying-a-schema">
 <title>Creating a table without specifying a schema</title>
@@ -149,6 +157,14 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="creating-dated-copies-of-the-same-table-to-manage-table-sizes">
 <title>Creating dated copies of the same table to manage table sizes</title>
 <simpara>Now that SQL Server supports table partitioning, it is far better to use partitions than to create dated tables, such as Invoices2012, Invoices2013, etc. If old data is no longer used, archive the data, store only aggregations, or both.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/Dated.png"/>
+</imageobject>
+<textobject><phrase>Dated</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 </section>
 <section xml:id="problems-with-data-types">
@@ -173,7 +189,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <simpara>The MONEY data type confuses the storage of data values with their display, though it clearly suggests, by its name, the sort of data held. Using the DECIMAL data type is almost always better.</simpara>
 </section>
 <section xml:id="using-float-or-real-data-types">
-<title><emphasis>Using FLOAT or REAL data types</emphasis></title>
+<title>Using FLOAT or REAL data types</title>
 <simpara>The FLOAT (8 byte) and REAL (4 byte) data types are suitable only for specialist scientific use since they are approximate types with an enormous range (-1.79E+308 to -2.23E-308, 0 and 2.23E-308 to 1.79E+308, in the case of FLOAT). Any other use needs to be regarded as suspect, and a FLOAT or REAL used as a key or found in an index needs to be investigated. The DECIMAL type is an exact data type and has an impressive range from -10^38+1 through 10^38-1. Although it requires more storage than the FLOAT or REAL types, it is generally a better choice.</simpara>
 </section>
 <section xml:id="mixing-parameter-data-types-in-a-coalesce-expression">
@@ -201,6 +217,14 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <title>Storing a duration rather than a point in time</title>
 <simpara>This takes some programmers by surprise. Although it is possible to store a time interval in a table it is not generally a good idea. A time interval is the difference between the start and end of a period of time. You may want to measure this in all sorts of ways, (milliseconds? Quarters? weeks?) and you may subsequently need to deal with all sorts of queries that have to work out what the status was at a particular time (e.g. how many rooms were booked at a particular point in time). By storing the time period as the start and end date-and-time, you leave your options open. If you store the time interval (in what? Seconds?) and maybe the start DateTime, you make subsequent queries more difficult.
 It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code. They will display very oddly depending on the representation of the time-of-day you use and wrap around every 24 hours!</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/pointInTime.png"/>
+</imageobject>
+<textobject><phrase>pointInTime</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="using-varcharmax-or-nvarcharmax-when-it-isnt-necessary">
 <title>Using VARCHAR(MAX) or NVARCHAR(MAX) when it isn&#8217;t necessary</title>
@@ -244,6 +268,14 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <title>Relying on data being implicitly converted between types</title>
 <simpara>Implicit conversions can have unexpected results, such as truncating data or reducing performance. It is not always clear in expressions how differences in data types are going to be resolved. If data is implicitly converted in a join operation, the database engine is more likely to build a poor execution plan. More often then not, you should explicitly define your conversions to avoid unintentional consequences.</simpara>
 <simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx">SR0014: Data loss might occur when casting from {Type1} to {Type2}</link></simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/ImplicitlyCoverted.png"/>
+</imageobject>
+<textobject><phrase>ImplicitlyCoverted</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="using-the-identity-system-function">
 <title>Using the @@IDENTITY system function</title>
@@ -283,6 +315,14 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="joins-between-large-views">
 <title>Joins between large views</title>
 <simpara>Views are like tables in their behaviour, but they can&#8217;t be indexed to support joins. When large views participate in joins, you never get good performance. Instead, either create a view that joins the appropriately indexed base tables, or create indexed temporary tables to contain the filtered rows from the views you wish to 'join'.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/LargeViews.png"/>
+</imageobject>
+<textobject><phrase>LargeViews</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="using-the-old-sybase-join-syntax">
 <title>Using the old Sybase JOIN syntax</title>
@@ -328,6 +368,14 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="mixing-data-types-in-joins-or-where-clauses">
 <title>Mixing data types in joins or WHERE clauses</title>
 <simpara>If you compare or join columns that have different data types, you rely on implicit conversions, which result in a poor execution plans that use table scans. This approach can also lead to errors because no constraints are in place to ensure the data is the correct type.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/MixingDataTypes.png"/>
+</imageobject>
+<textobject><phrase>MixingDataTypes</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="assuming-that-select-statements-all-have-roughly-the-same-execution-time">
 <title>Assuming that SELECT statements all have roughly the same execution time</title>
@@ -378,6 +426,14 @@ Whenever you execute a query, a short message is returned to the client with the
 <title>Defining foreign keys without a supporting index</title>
 <simpara>Unlike some relational database management systems (RDBMSs), SQL Server does not automatically index a foreign key column, even though an index will likely be needed. It is left to the implementers of the RDBMS as to whether an index is automatically created to support a foreign key constraint. SQL Server chooses not to do so, probably because, if the referenced table is a lookup table with just a few values, an index isn&#8217;t useful. SQL Server also does not mandate a NOT NULL constraint on the foreign key, perhaps to allow rows that aren&#8217;t related to the referenced table.</simpara>
 <simpara>Even if you&#8217;re not joining the two tables via the primary and foreign keys, with a table of any size, an index is usually necessary to check changes to PRIMARY KEY constraints against referencing FOREIGN KEY constraints in other tables to verify that changes to the primary key are reflected in the foreign key</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/DefiningForeignKeys.png"/>
+</imageobject>
+<textobject><phrase>DefiningForeignKeys</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="using-a-non-sargable-search-argument..able-expression-in-a-where-clause">
 <title>Using a non-SARGable (Search ARGument..able) expression in a WHERE clause</title>
@@ -483,6 +539,14 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="creating-stored-procedures-that-return-more-than-one-result-set">
 <title>Creating stored procedures that return more than one result set</title>
 <simpara>Although applications can use stored procedures that return multiple result sets, the results cannot be accessed within SQL. Although they can be used by the application via ODBC, the order of tables will be significant and changing the order of the result sets in a refactoring will then break the application in ways that may not even cause an error, and will be difficult to test automatically from within SQL.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/CreatingStoredProcedures.png"/>
+</imageobject>
+<textobject><phrase>CreatingStoredProcedures</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="creating-a-multi-statement-table-valued-function-or-a-scalar-function-when-an-inline-function-is-possible">
 <title>Creating a Multi-statement table-valued function, or a scalar function when an inline function is possible</title>
@@ -512,6 +576,14 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-cursors">
 <title>Using Cursors</title>
 <simpara>SQL Server originally supported cursors to more easily port dBase II applications to SQL Server, but even then, you can sometimes use a WHILE loop as an effective substitute. However, modern versions of SQL Server provide window functions and the CROSS/OUTER APPLY syntax to cope with most of the traditional valid uses of the cursor.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/UsingCursors.png"/>
+</imageobject>
+<textobject><phrase>UsingCursors</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="you-have-not-explicitly-defined-the-scope-of-a-cursor">
 <title>You have not explicitly defined the scope of a cursor</title>
@@ -621,6 +693,14 @@ RETURN
 <section xml:id="duplicating-names-of-objects-of-different-types">
 <title>Duplicating names of objects of different types</title>
 <simpara>Although it is sometimes necessary to use the same name for the same type of object in different schemas, it is never necessary to do it for different object types and it can be very confusing. You would never want a SalesStaff table and SalesStaff view and SalesStaff stored procedure.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/DuplicatingNamesOfObjects.png"/>
+</imageobject>
+<textobject><phrase>DuplicatingNamesOfObjects</phrase></textobject>
+</mediaobject>
+</informalfigure>
 </section>
 <section xml:id="using-while-not-done-loops-without-an-error-exit">
 <title>Using WHILE (not done) loops without an error exit</title>
@@ -756,6 +836,14 @@ RETURN
 </section>
 <section xml:id="security-loopholes">
 <title>Security Loopholes</title>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/SecurityLoopholes.png"/>
+</imageobject>
+<textobject><phrase>SecurityLoopholes</phrase></textobject>
+</mediaobject>
+</informalfigure>
 <section xml:id="using-sql-server-logins-especially-without-password-expirations-or-windows-password-policy">
 <title>Using SQL Server logins, especially without password expirations or Windows password policy</title>
 <simpara>Sometimes you must use SQL Server logins. For example, with Microsoft Azure SQL Database, you have no other option, but it isn&#8217;t satisfactory. SQL Server logins and passwords have to be sent across the network and can be read by sniffers. They also require passwords to be stored on client machines and in connection strings. SQL logins are particularly vulnerable to a brute-force attacks. They are also less convenient because the SQL Server Management Studio (SSMS) registered servers don&#8217;t store password information and so can&#8217;t be used for executing SQL across a range of servers. Windows-based authentication is far more robust and should be used where possible.</simpara>
@@ -777,5 +865,91 @@ RETURN
 <simpara>SQL injection can be used not only from an application but also by a database user who lacks, but wants, the permissions necessary to perform a particular role, or who simply wants to access sensitive data. If dynamic SQL is executed within a stored procedure, under the temporary EXECUTE AS permission of a user with sufficient privileges to create users, and it can be accessed by a malicious user, then suitable precautions must be taken to make this impossible. These precautions start with giving EXECUTE AS permissions only to WITHOUT LOGIN users with least-necessary permissions, and using sp_ExecuteSQL with parameters rather than EXECUTE.</simpara>
 <simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013">BP013 EXECUTE(string) is used</link></simpara>
 </section>
+</section>
+<section xml:id="_acknowledgements">
+<title>Acknowledgements</title>
+<simpara>For a booklet like this, it is best to go with the
+established opinion of what constitutes a SQL
+Code Smell. There is little room for creativity. In
+order to identify only those SQL coding habits that
+could, in some circumstances, lead to problems,
+I must rely on the help of experts, and I am very
+grateful for the help, support and writings of the
+following people in particular.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Dave Howard</simpara>
+</listitem>
+<listitem>
+<simpara>Merrill Aldrich</simpara>
+</listitem>
+<listitem>
+<simpara>Plamen Ratchev</simpara>
+</listitem>
+<listitem>
+<simpara>Dave Levy</simpara>
+</listitem>
+<listitem>
+<simpara>Mike Reigler</simpara>
+</listitem>
+<listitem>
+<simpara>Anil Das</simpara>
+</listitem>
+<listitem>
+<simpara>Adrian Hills</simpara>
+</listitem>
+<listitem>
+<simpara>Sam Stange</simpara>
+</listitem>
+<listitem>
+<simpara>Ian Stirk</simpara>
+</listitem>
+<listitem>
+<simpara>Aaron Bertrand</simpara>
+</listitem>
+<listitem>
+<simpara>Neil Hambly</simpara>
+</listitem>
+<listitem>
+<simpara>Matt Whitfield</simpara>
+</listitem>
+<listitem>
+<simpara>Nick Harrison</simpara>
+</listitem>
+<listitem>
+<simpara>Bill Fellows</simpara>
+</listitem>
+<listitem>
+<simpara>Jeremiah Peschka</simpara>
+</listitem>
+<listitem>
+<simpara>Diane McNurlan</simpara>
+</listitem>
+<listitem>
+<simpara>Robert L Davis</simpara>
+</listitem>
+<listitem>
+<simpara>Dave Ballantyne</simpara>
+</listitem>
+<listitem>
+<simpara>John Stafford</simpara>
+</listitem>
+<listitem>
+<simpara>Alex Kusnetsov</simpara>
+</listitem>
+<listitem>
+<simpara>Gail Shaw</simpara>
+</listitem>
+<listitem>
+<simpara>Jeff Moden</simpara>
+</listitem>
+<listitem>
+<simpara>Joe Celko</simpara>
+</listitem>
+<listitem>
+<simpara>Robert Young</simpara>
+</listitem>
+</orderedlist>
+<simpara>And special thanks to our technical referees, Grant Fritchey and Jonathan Allen.</simpara>
 </section>
 </article>

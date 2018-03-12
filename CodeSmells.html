@@ -618,6 +618,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#using-dynamic-sql-with-the-possibility-of-sql-injection">8.5. Using dynamic SQL with the possibility of SQL injection</a></li>
 </ul>
 </li>
+<li><a href="#_acknowledgements">9. Acknowledgements</a></li>
 </ul>
 </div>
 </div>
@@ -779,6 +780,11 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <div class="paragraph">
 <p><strong>ST011/ST012 Consider using table variable instead of temporary table/Consider using temporary table instead of table variable</strong></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Temporal.png" alt="Temporal">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="creating-a-table-without-specifying-a-schema">2.9. Creating a table without specifying a schema</h3>
@@ -826,6 +832,11 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <h3 id="creating-dated-copies-of-the-same-table-to-manage-table-sizes">2.14. Creating dated copies of the same table to manage table sizes</h3>
 <div class="paragraph">
 <p>Now that SQL Server supports table partitioning, it is far better to use partitions than to create dated tables, such as Invoices2012, Invoices2013, etc. If old data is no longer used, archive the data, store only aggregations, or both.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Dated.png" alt="Dated">
+</div>
 </div>
 </div>
 </div>
@@ -911,6 +922,11 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <p>This takes some programmers by surprise. Although it is possible to store a time interval in a table it is not generally a good idea. A time interval is the difference between the start and end of a period of time. You may want to measure this in all sorts of ways, (milliseconds? Quarters? weeks?) and you may subsequently need to deal with all sorts of queries that have to work out what the status was at a particular time (e.g. how many rooms were booked at a particular point in time). By storing the time period as the start and end date-and-time, you leave your options open. If you store the time interval (in what? Seconds?) and maybe the start DateTime, you make subsequent queries more difficult.
 It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code. They will display very oddly depending on the representation of the time-of-day you use and wrap around every 24 hours!</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pointInTime.png" alt="pointInTime">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="using-varcharmax-or-nvarcharmax-when-it-isnt-necessary">3.12. Using VARCHAR(MAX) or NVARCHAR(MAX) when it isn&#8217;t necessary</h3>
@@ -982,6 +998,11 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <div class="paragraph">
 <p>See: <a href="http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx">SR0014: Data loss might occur when casting from {Type1} to {Type2}</a></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImplicitlyCoverted.png" alt="ImplicitlyCoverted">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="using-the-identity-system-function">4.7. Using the @@IDENTITY system function</h3>
@@ -1046,6 +1067,11 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <h3 id="joins-between-large-views">5.3. Joins between large views</h3>
 <div class="paragraph">
 <p>Views are like tables in their behaviour, but they can&#8217;t be indexed to support joins. When large views participate in joins, you never get good performance. Instead, either create a view that joins the appropriately indexed base tables, or create indexed temporary tables to contain the filtered rows from the views you wish to 'join'.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LargeViews.png" alt="LargeViews">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1127,6 +1153,11 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <h3 id="mixing-data-types-in-joins-or-where-clauses">5.12. Mixing data types in joins or WHERE clauses</h3>
 <div class="paragraph">
 <p>If you compare or join columns that have different data types, you rely on implicit conversions, which result in a poor execution plans that use table scans. This approach can also lead to errors because no constraints are in place to ensure the data is the correct type.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MixingDataTypes.png" alt="MixingDataTypes">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1215,6 +1246,11 @@ Whenever you execute a query, a short message is returned to the client with the
 </div>
 <div class="paragraph">
 <p>Even if you&#8217;re not joining the two tables via the primary and foreign keys, with a table of any size, an index is usually necessary to check changes to PRIMARY KEY constraints against referencing FOREIGN KEY constraints in other tables to verify that changes to the primary key are reflected in the foreign key</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DefiningForeignKeys.png" alt="DefiningForeignKeys">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1395,6 +1431,11 @@ Whenever you execute a query, a short message is returned to the client with the
 <div class="paragraph">
 <p>Although applications can use stored procedures that return multiple result sets, the results cannot be accessed within SQL. Although they can be used by the application via ODBC, the order of tables will be significant and changing the order of the result sets in a refactoring will then break the application in ways that may not even cause an error, and will be difficult to test automatically from within SQL.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CreatingStoredProcedures.png" alt="CreatingStoredProcedures">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="creating-a-multi-statement-table-valued-function-or-a-scalar-function-when-an-inline-function-is-possible">7.6. Creating a Multi-statement table-valued function, or a scalar function when an inline function is possible</h3>
@@ -1439,6 +1480,11 @@ Whenever you execute a query, a short message is returned to the client with the
 <h3 id="using-cursors">7.12. Using Cursors</h3>
 <div class="paragraph">
 <p>SQL Server originally supported cursors to more easily port dBase II applications to SQL Server, but even then, you can sometimes use a WHILE loop as an effective substitute. However, modern versions of SQL Server provide window functions and the CROSS/OUTER APPLY syntax to cope with most of the traditional valid uses of the cursor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UsingCursors.png" alt="UsingCursors">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1612,6 +1658,11 @@ RETURN
 <h3 id="duplicating-names-of-objects-of-different-types">7.32. Duplicating names of objects of different types</h3>
 <div class="paragraph">
 <p>Although it is sometimes necessary to use the same name for the same type of object in different schemas, it is never necessary to do it for different object types and it can be very confusing. You would never want a SalesStaff table and SalesStaff view and SalesStaff stored procedure.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DuplicatingNamesOfObjects.png" alt="DuplicatingNamesOfObjects">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1844,6 +1895,11 @@ RETURN
 <div class="sect1">
 <h2 id="security-loopholes">8. Security Loopholes</h2>
 <div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityLoopholes.png" alt="SecurityLoopholes">
+</div>
+</div>
 <div class="sect2">
 <h3 id="using-sql-server-logins-especially-without-password-expirations-or-windows-password-policy">8.1. Using SQL Server logins, especially without password expirations or Windows password policy</h3>
 <div class="paragraph">
@@ -1879,10 +1935,104 @@ RETURN
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_acknowledgements">9. Acknowledgements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For a booklet like this, it is best to go with the
+established opinion of what constitutes a SQL
+Code Smell. There is little room for creativity. In
+order to identify only those SQL coding habits that
+could, in some circumstances, lead to problems,
+I must rely on the help of experts, and I am very
+grateful for the help, support and writings of the
+following people in particular.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dave Howard</p>
+</li>
+<li>
+<p>Merrill Aldrich</p>
+</li>
+<li>
+<p>Plamen Ratchev</p>
+</li>
+<li>
+<p>Dave Levy</p>
+</li>
+<li>
+<p>Mike Reigler</p>
+</li>
+<li>
+<p>Anil Das</p>
+</li>
+<li>
+<p>Adrian Hills</p>
+</li>
+<li>
+<p>Sam Stange</p>
+</li>
+<li>
+<p>Ian Stirk</p>
+</li>
+<li>
+<p>Aaron Bertrand</p>
+</li>
+<li>
+<p>Neil Hambly</p>
+</li>
+<li>
+<p>Matt Whitfield</p>
+</li>
+<li>
+<p>Nick Harrison</p>
+</li>
+<li>
+<p>Bill Fellows</p>
+</li>
+<li>
+<p>Jeremiah Peschka</p>
+</li>
+<li>
+<p>Diane McNurlan</p>
+</li>
+<li>
+<p>Robert L Davis</p>
+</li>
+<li>
+<p>Dave Ballantyne</p>
+</li>
+<li>
+<p>John Stafford</p>
+</li>
+<li>
+<p>Alex Kusnetsov</p>
+</li>
+<li>
+<p>Gail Shaw</p>
+</li>
+<li>
+<p>Jeff Moden</p>
+</li>
+<li>
+<p>Joe Celko</p>
+</li>
+<li>
+<p>Robert Young</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>And special thanks to our technical referees, Grant Fritchey and Jonathan Allen.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-09 17:30:44 GMT
+Last updated 2018-03-12 18:05:20 GMT
 </div>
 </div>
 </body>

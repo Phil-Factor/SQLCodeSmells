@@ -126,6 +126,8 @@ Temporary tables can lead to recompiles, which can be costly. Table variables, w
 
 *ST011/ST012 Consider using table variable instead of temporary table/Consider using temporary table instead of table variable*
 
+image::images\Temporal.png[]
+
 [[creating-a-table-without-specifying-a-schema]]
 === Creating a table without specifying a schema
 
@@ -163,6 +165,8 @@ https://documentation.red-gate.com/codeanalysis/execution-rules/ei028[EI028 Addi
 === Creating dated copies of the same table to manage table sizes
 
 Now that SQL Server supports table partitioning, it is far better to use partitions than to create dated tables, such as Invoices2012, Invoices2013, etc. If old data is no longer used, archive the data, store only aggregations, or both.
+
+image::images\Dated.png[]
 
 [[problems-with-data-types]]
 == Problems with Data Types
@@ -231,6 +235,8 @@ https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp008[BP008 
 This takes some programmers by surprise. Although it is possible to store a time interval in a table it is not generally a good idea. A time interval is the difference between the start and end of a period of time. You may want to measure this in all sorts of ways, (milliseconds? Quarters? weeks?) and you may subsequently need to deal with all sorts of queries that have to work out what the status was at a particular time (e.g. how many rooms were booked at a particular point in time). By storing the time period as the start and end date-and-time, you leave your options open. If you store the time interval (in what? Seconds?) and maybe the start DateTime, you make subsequent queries more difficult.
 It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code. They will display very oddly depending on the representation of the time-of-day you use and wrap around every 24 hours!
 
+image::images\pointInTime.png[]
+
 [[using-varcharmax-or-nvarcharmax-when-it-isnt-necessary]]
 === Using VARCHAR(MAX) or NVARCHAR(MAX) when it isn't necessary
 
@@ -286,6 +292,9 @@ https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023[DEP023 N
 Implicit conversions can have unexpected results, such as truncating data or reducing performance. It is not always clear in expressions how differences in data types are going to be resolved. If data is implicitly converted in a join operation, the database engine is more likely to build a poor execution plan. More often then not, you should explicitly define your conversions to avoid unintentional consequences.
 
 See: http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx[SR0014: Data loss might occur when casting from \{Type1} to \{Type2}]
+
+image::images\ImplicitlyCoverted.png[]
+
 [[using-the-identity-system-function]]
 === Using the @@IDENTITY system function
 
@@ -336,6 +345,8 @@ Views are important for abstracting the base tables. However, they do not lend t
 === Joins between large views
 
 Views are like tables in their behaviour, but they can't be indexed to support joins. When large views participate in joins, you never get good performance. Instead, either create a view that joins the appropriately indexed base tables, or create indexed temporary tables to contain the filtered rows from the views you wish to 'join'.
+
+image::images\LargeViews.png[]
 
 [[using-the-old-sybase-join-syntax]]
 === Using the old Sybase JOIN syntax
@@ -400,6 +411,8 @@ It is tempting to produce queries in routines that have complex conditionals in 
 === Mixing data types in joins or WHERE clauses
 
 If you compare or join columns that have different data types, you rely on implicit conversions, which result in a poor execution plans that use table scans. This approach can also lead to errors because no constraints are in place to ensure the data is the correct type.
+
+image::images\MixingDataTypes.png[]
 
 [[assuming-that-select-statements-all-have-roughly-the-same-execution-time]]
 === Assuming that SELECT statements all have roughly the same execution time
@@ -469,6 +482,8 @@ You're queries will often perform poorly if your WHERE clause includes a NOT IN 
 Unlike some relational database management systems (RDBMSs), SQL Server does not automatically index a foreign key column, even though an index will likely be needed. It is left to the implementers of the RDBMS as to whether an index is automatically created to support a foreign key constraint. SQL Server chooses not to do so, probably because, if the referenced table is a lookup table with just a few values, an index isn't useful. SQL Server also does not mandate a NOT NULL constraint on the foreign key, perhaps to allow rows that aren't related to the referenced table.
 
 Even if you're not joining the two tables via the primary and foreign keys, with a table of any size, an index is usually necessary to check changes to PRIMARY KEY constraints against referencing FOREIGN KEY constraints in other tables to verify that changes to the primary key are reflected in the foreign key
+
+image::images\DefiningForeignKeys.png[]
 
 [[using-a-non-sargable-search-argument..able-expression-in-a-where-clause]]
 === Using a non-SARGable (Search ARGument..able) expression in a WHERE clause
@@ -604,6 +619,8 @@ Occasionally, long routines provide the most efficient way to execute a process,
 
 Although applications can use stored procedures that return multiple result sets, the results cannot be accessed within SQL. Although they can be used by the application via ODBC, the order of tables will be significant and changing the order of the result sets in a refactoring will then break the application in ways that may not even cause an error, and will be difficult to test automatically from within SQL.
 
+image::images\CreatingStoredProcedures.png[]
+
 [[creating-a-multi-statement-table-valued-function-or-a-scalar-function-when-an-inline-function-is-possible]]
 === Creating a Multi-statement table-valued function, or a scalar function when an inline function is possible
 
@@ -640,6 +657,8 @@ Stored procedures are not designed for delivering result sets. You can use store
 === Using Cursors
 
 SQL Server originally supported cursors to more easily port dBase II applications to SQL Server, but even then, you can sometimes use a WHILE loop as an effective substitute. However, modern versions of SQL Server provide window functions and the CROSS/OUTER APPLY syntax to cope with most of the traditional valid uses of the cursor.
+
+image::images\UsingCursors.png[]
 
 [[you-have-not-explicitly-defined-the-scope-of-a-cursor]]
 === You have not explicitly defined the scope of a cursor
@@ -783,6 +802,8 @@ Usually, performance is slightly better if you specify the schema, but in certai
 === Duplicating names of objects of different types
 
 Although it is sometimes necessary to use the same name for the same type of object in different schemas, it is never necessary to do it for different object types and it can be very confusing. You would never want a SalesStaff table and SalesStaff view and SalesStaff stored procedure.
+
+image::images\DuplicatingNamesOfObjects.png[]
 
 [[using-while-not-done-loops-without-an-error-exit]]
 === Using WHILE (not done) loops without an error exit
@@ -964,6 +985,8 @@ https://documentation.red-gate.com/codeanalysis/execution-rules/ei009[EI009 Call
 [[security-loopholes]]
 == Security Loopholes
 
+image::images\SecurityLoopholes.png[]
+
 [[using-sql-server-logins-especially-without-password-expirations-or-windows-password-policy]]
 === Using SQL Server logins, especially without password expirations or Windows password policy
 
@@ -990,3 +1013,41 @@ Because of ownership chaining and SQL injection risks, dynamic SQL requires cons
 SQL injection can be used not only from an application but also by a database user who lacks, but wants, the permissions necessary to perform a particular role, or who simply wants to access sensitive data. If dynamic SQL is executed within a stored procedure, under the temporary EXECUTE AS permission of a user with sufficient privileges to create users, and it can be accessed by a malicious user, then suitable precautions must be taken to make this impossible. These precautions start with giving EXECUTE AS permissions only to WITHOUT LOGIN users with least-necessary permissions, and using sp_ExecuteSQL with parameters rather than EXECUTE. 
 
 https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013[BP013 EXECUTE(string) is used]
+
+== Acknowledgements
+
+For a booklet like this, it is best to go with the
+established opinion of what constitutes a SQL
+Code Smell. There is little room for creativity. In
+order to identify only those SQL coding habits that
+could, in some circumstances, lead to problems,
+I must rely on the help of experts, and I am very
+grateful for the help, support and writings of the
+following people in particular.
+
+. Dave Howard
+. Merrill Aldrich
+. Plamen Ratchev
+. Dave Levy
+. Mike Reigler
+. Anil Das
+. Adrian Hills
+. Sam Stange
+. Ian Stirk
+. Aaron Bertrand
+. Neil Hambly
+. Matt Whitfield
+. Nick Harrison
+. Bill Fellows
+. Jeremiah Peschka
+. Diane McNurlan
+. Robert L Davis
+. Dave Ballantyne
+. John Stafford
+. Alex Kusnetsov
+. Gail Shaw
+. Jeff Moden
+. Joe Celko
+. Robert Young
+
+And special thanks to our technical referees, Grant Fritchey and Jonathan Allen.
