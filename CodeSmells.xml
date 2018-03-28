@@ -4,7 +4,7 @@
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>SQL Code Smells</title>
-<date>2018-03-12</date>
+<date>2018-03-15</date>
 <author>
 <personname>
 <firstname>by</firstname>
@@ -27,8 +27,6 @@
 <title>Problems with Database Design</title>
 <section xml:id="packing-lists-complex-data-or-other-multivariate-attributes-into-a-table-column">
 <title>Packing lists, complex data, or other multivariate attributes into a table column</title>
-<simpara>It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn&#8217;t represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised, and it will certainly be slow.
-Occasionally, a data object is too complicated, peripheral, arcane or ephemeral to be worth integrating with the database&#8217;s normalised structure. It is fair to then take an arm&#8217;s-length approach and store it as XML, but in this case it will need to be encapsulated by views and table-valued functions so that the SQL Programmer can easily access the contents.</simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -37,6 +35,8 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <textobject><phrase>smell1</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>It is permissible to put a list or data document in a column only if it is, from the database perspective, 'atomic', that is, never likely to be shredded into individual values; in other words, it is fine as long as the value remains in the format in which it started. You should never need to split an 'atomic' value. We can deal with values that contain more than a single item of information: We store strings, after all, and a string is hardly atomic in the sense that it consists of an ordinally significant collection of characters or words. However, the string shouldn&#8217;t represent a list of values. If you need to parse the value of a column to access values within it,  it is likely to need to be normalised, and it will certainly be slow.
+Occasionally, a data object is too complicated, peripheral, arcane or ephemeral to be worth integrating with the database&#8217;s normalised structure. It is fair to then take an arm&#8217;s-length approach and store it as XML, but in this case it will need to be encapsulated by views and table-valued functions so that the SQL Programmer can easily access the contents.</simpara>
 </section>
 <section xml:id="using-inappropriate-data-types">
 <title>Using inappropriate data types</title>
@@ -52,7 +52,6 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 </section>
 <section xml:id="using-a-polymorphic-association">
 <title>Using a polymorphic association</title>
-<simpara>Sometimes, one sees table designs which have 'keys' that can reference more than one table, whose identity is usually denoted by a separate column. This is where an entity can relate to one of a number of different entities according to the value in another column that provides the identity of the entity. This sort of relationship cannot be subject to foreign key constraints, and any joins are difficult for the query optimizer to provide good plans for. Also, the logic for the joins is likely to get complicated. Instead, use an intersection table, or if you are attempting an object-oriented mapping, look at the method by which SQL Server represents the database metadata by creating an 'object' supertype class that all of the individual object types extend. Both these devices give you the flexibility of design that polymorphic associations attempt.</simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -61,6 +60,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <textobject><phrase>Polymorphic</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>Sometimes, one sees table designs which have 'keys' that can reference more than one table, whose identity is usually denoted by a separate column. This is where an entity can relate to one of a number of different entities according to the value in another column that provides the identity of the entity. This sort of relationship cannot be subject to foreign key constraints, and any joins are difficult for the query optimizer to provide good plans for. Also, the logic for the joins is likely to get complicated. Instead, use an intersection table, or if you are attempting an object-oriented mapping, look at the method by which SQL Server represents the database metadata by creating an 'object' supertype class that all of the individual object types extend. Both these devices give you the flexibility of design that polymorphic associations attempt.</simpara>
 </section>
 <section xml:id="creating-tables-as-god-objects">
 <title>Creating tables as 'God Objects'</title>
@@ -72,7 +72,6 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 </section>
 <section xml:id="using-command-line-and-ole-automation-to-access-server-based-resources">
 <title>Using command-line and OLE automation to access server-based resources</title>
-<simpara>In designing a database application, there is sometimes functionality that cannot be done purely in SQL, usually when other server-based, or network-based, resources must be accessed. Now that SQL Server&#8217;s integration with PowerShell is so much more mature, it is better to use that, rather than xp_cmdshell or sp_OACreate (or similar), to access the file system or other server-based resources. This needs some thought and planning: You should also use SQL Agent jobs when possible to schedule your server-related tasks. This requires up-front design to prevent them becoming unmanageable monsters prey to ad-hoc growth.</simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -81,6 +80,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <textobject><phrase>ole</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>In designing a database application, there is sometimes functionality that cannot be done purely in SQL, usually when other server-based, or network-based, resources must be accessed. Now that SQL Server&#8217;s integration with PowerShell is so much more mature, it is better to use that, rather than xp_cmdshell or sp_OACreate (or similar), to access the file system or other server-based resources. This needs some thought and planning: You should also use SQL Agent jobs when possible to schedule your server-related tasks. This requires up-front design to prevent them becoming unmanageable monsters prey to ad-hoc growth.</simpara>
 </section>
 </section>
 <section xml:id="problems-with-table-design">
@@ -119,8 +119,6 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 </section>
 <section xml:id="using-temporary-tables-for-very-small-result-sets">
 <title>Using temporary tables for very small result sets</title>
-<simpara>Temporary tables can lead to recompiles, which can be costly. Table variables, while not so useful for larger data sets (approximately 150 rows or more), avoid recompiles and are therefore preferred in smaller data sets.</simpara>
-<simpara><emphasis role="strong">ST011/ST012 Consider using table variable instead of temporary table/Consider using temporary table instead of table variable</emphasis></simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -129,6 +127,20 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <textobject><phrase>Temporal</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>Temporary tables can lead to recompiles, which can be costly. Table variables, while not so useful for larger data sets (approximately 15000 rows or more), avoid recompiles and are therefore preferred in smaller data sets. Even with huge tables, they can perform well, but only when a clustered index column is used, and when the nature of the processing makes an index seek very effective.</simpara>
+<simpara>Table variables behave like other variables in their scoping rules. Once out of scope, they are disposed of without the developer needing to do any explicit cleanup. These are much easier to work with, and pretty secure, and they trigger fewer recompiles in the routines where they’re used than if you were to use temporary tables. Table variables require less locking resources as they are ‘private’ to the batch or process that created them. Transaction rollbacks do not affect them because table variables have limited scope and are not part of the persistent database.</simpara>
+<simpara>Where the number of rows in the table is moderate, you can even use them in joins as ‘Heaps’, unindexed. Beware, however, since, as the number of rows increase, joins on Table Variable heaps can easily become saddled by very poor execution plans, and this must be cured either by adding constraints (UNIQUE or PRIMARY KEY) or by adding the OPTION (RECOMPILE) hint if this is impossible. Occasionally, the way that the data is distributed prevents the efficient use of Table Variables, and this will require using a temporary table instead.</simpara>
+<simpara>See:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara><link xl:href="https://www.red-gate.com/simple-talk/blogs/table-variables-an-empirical-approach/">Table Variables: an empirical approach.</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://www.red-gate.com/simple-talk/sql/t-sql-programming/temporary-tables-in-sql-server/">Temporary Tables in SQL Server</link></simpara>
+</listitem>
+</orderedlist>
+<simpara><link xl:href="https://documentation.red-gate.com/scg/sql-code-guard-3-documentation/sql-static-code-analysis-rules/style-rules#Stylerules-ST011ST011%E2%80%93Considerusingtablevariableinsteadoftemporarytable">ST011 – Consider using table variable instead of temporary table</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/scg/sql-code-guard-3-documentation/sql-static-code-analysis-rules/style-rules#Stylerules-ST012ST012%E2%80%93Considerusingtemporarytableinsteadoftablevariable">ST012 – Consider using temporary table instead of table variable</link>I</simpara>
 </section>
 <section xml:id="creating-a-table-without-specifying-a-schema">
 <title>Creating a table without specifying a schema</title>
@@ -156,7 +168,6 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 </section>
 <section xml:id="creating-dated-copies-of-the-same-table-to-manage-table-sizes">
 <title>Creating dated copies of the same table to manage table sizes</title>
-<simpara>Now that SQL Server supports table partitioning, it is far better to use partitions than to create dated tables, such as Invoices2012, Invoices2013, etc. If old data is no longer used, archive the data, store only aggregations, or both.</simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -165,6 +176,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <textobject><phrase>Dated</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>Now that SQL Server supports table partitioning, it is far better to use partitions than to create dated tables, such as Invoices2012, Invoices2013, etc. If old data is no longer used, archive the data, store only aggregations, or both.</simpara>
 </section>
 </section>
 <section xml:id="problems-with-data-types">
@@ -215,8 +227,6 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 </section>
 <section xml:id="storing-a-duration-rather-than-a-point-in-time">
 <title>Storing a duration rather than a point in time</title>
-<simpara>This takes some programmers by surprise. Although it is possible to store a time interval in a table it is not generally a good idea. A time interval is the difference between the start and end of a period of time. You may want to measure this in all sorts of ways, (milliseconds? Quarters? weeks?) and you may subsequently need to deal with all sorts of queries that have to work out what the status was at a particular time (e.g. how many rooms were booked at a particular point in time). By storing the time period as the start and end date-and-time, you leave your options open. If you store the time interval (in what? Seconds?) and maybe the start DateTime, you make subsequent queries more difficult.
-It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code. They will display very oddly depending on the representation of the time-of-day you use and wrap around every 24 hours!</simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -225,6 +235,8 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <textobject><phrase>pointInTime</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>This takes some programmers by surprise. Although it is possible to store a time interval in a table it is not generally a good idea. A time interval is the difference between the start and end of a period of time. You may want to measure this in all sorts of ways, (milliseconds? Quarters? weeks?) and you may subsequently need to deal with all sorts of queries that have to work out what the status was at a particular time (e.g. how many rooms were booked at a particular point in time). By storing the time period as the start and end date-and-time, you leave your options open. If you store the time interval (in what? Seconds?) and maybe the start DateTime, you make subsequent queries more difficult.
+It is possible to use a TIME data type if the duration is less than 24 hours, but this is not what the type is intended for, and can be the cause of confusion for the next person who has to maintain your code. They will display very oddly depending on the representation of the time-of-day you use and wrap around every 24 hours!</simpara>
 </section>
 <section xml:id="using-varcharmax-or-nvarcharmax-when-it-isnt-necessary">
 <title>Using VARCHAR(MAX) or NVARCHAR(MAX) when it isn&#8217;t necessary</title>
@@ -266,8 +278,6 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 </section>
 <section xml:id="relying-on-data-being-implicitly-converted-between-types">
 <title>Relying on data being implicitly converted between types</title>
-<simpara>Implicit conversions can have unexpected results, such as truncating data or reducing performance. It is not always clear in expressions how differences in data types are going to be resolved. If data is implicitly converted in a join operation, the database engine is more likely to build a poor execution plan. More often then not, you should explicitly define your conversions to avoid unintentional consequences.</simpara>
-<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx">SR0014: Data loss might occur when casting from {Type1} to {Type2}</link></simpara>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -276,6 +286,8 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <textobject><phrase>ImplicitlyCoverted</phrase></textobject>
 </mediaobject>
 </informalfigure>
+<simpara>Implicit conversions can have unexpected results, such as truncating data or reducing performance. It is not always clear in expressions how differences in data types are going to be resolved. If data is implicitly converted in a join operation, the database engine is more likely to build a poor execution plan. More often then not, you should explicitly define your conversions to avoid unintentional consequences.</simpara>
+<simpara>See: <link xl:href="http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx">SR0014: Data loss might occur when casting from {Type1} to {Type2}</link></simpara>
 </section>
 <section xml:id="using-the-identity-system-function">
 <title>Using the @@IDENTITY system function</title>
