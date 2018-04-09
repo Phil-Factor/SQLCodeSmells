@@ -838,7 +838,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <p>In a CREATE TABLE DDL script, a column definition that has not specified that a column is NULL or NOT NULL is a risk. The default nullability for a database&#8217;s columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001">BP001 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp014">BP014 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -890,7 +890,8 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <p>There is no good reason to use TEXT or NTEXT. They were a first, flawed attempt at BLOB storage and are there only for backward compatibility. Likewise, the WRITETEXT, UPDATETEXT and READTEXT statements are also deprecated. All this complexity has been replaced by the VARCHAR(MAX) and NVARCHAR(MAX) data types, which work with all of SQL Server&#8217;s string functions.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002">DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002">DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</a>
+<a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001" class="bare">https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1006,10 +1007,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <div class="sect2">
 <h3 id="not-using-a-semicolon-to-terminate-sql-statements">4.5. Not using a semicolon to terminate SQL statements</h3>
 <div class="paragraph">
-<p>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger etrrors when they become embedded.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023">DEP023 Not ending Transact-SQL statements with a semicolon is deprecated</a></p>
+<p>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual to add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger errors when they become embedded.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1032,7 +1030,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <p>The generation of an IDENTITY value is not transactional, so in some circumstances, <strong>@@IDENTITY</strong> returns the wrong value and not the value from the row you just inserted. This is especially true when using triggers that insert data, depending on when the triggers fire. The <strong>SCOPE_IDENTITY</strong> function is safer because it always relates to the current batch (within the same scope). Also consider using the IDENT_CURRENT function, which returns the last IDENTITY value regardless of session or scope. The <strong>OUTPUT</strong> clause is a better and safer way of capturing identity values.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010">Usage of @@identity</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010">Usage of @@identity</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1047,7 +1045,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <p>Although there is a legitimate use in a batch for IF EXISTS (SELECT * FROM  &#8230;&#8203; ) or SELECT count(*), any other use is vulnerable to changes in column names or order. SELECT * was designed for interactive use, not as part of a batch. It assumes certain columns in a particular order, which may not last. Also, results should always consist of just the columns you need. Plus, requesting more columns from the database than are used by the application results in excess database I/O and network traffic, leading to slow application response and unhappy users.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005">Asterisk in select list</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005">Asterisk in select list</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1105,13 +1103,20 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <p>The “old style” Microsoft/Sybase JOIN style for SQL, which uses the =* and *= syntax, has been deprecated and is no longer used. Queries that use this syntax will fail when the database engine level is 10 (SQL Server 2008) or later (compatibility level 100). The ANSI-89 table citation list (FROM tableA, tableB) is still ISO standard for INNER JOINs only. Neither of these styles are worth using. It is always better to specify the type of join you require, INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER and CROSS, which has been standard since ANSI SQL-92 was published. While you can choose any supported JOIN style, without affecting the query plan used by SQL Server, using the ANSI-standard syntax will make your code easier to understand, more consistent, and portable to other relational database systems.</p>
 </div>
 <div class="paragraph">
-<p>See: <a href="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001">old-style join syntax</a></p>
+<p>See:</p>
 </div>
-<div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017">DEP017 NON-ANSI join (<strong>== or =</strong>) is used</a></p>
-</div>
-<div class="paragraph">
-<p><strong>ST001 Old-style join is used (&#8230;&#8203;from table1,table2&#8230;&#8203;)</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001">old-style join syntax</a></p>
+</li>
+<li>
+<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017">DEP017 NON-ANSI join (<strong>== or =</strong>) is used</a></p>
+</li>
+<li>
+<p><a href="https://documentation.red-gate.com/codeanalysis/style-rules/st001">ST001 Old-style join is used (&#8230;&#8203;from table1,table2&#8230;&#8203;)</a></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1596,7 +1601,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>At the time the routine is created (parse time), both options should normally be set to ON. They are ignored on execution. The reason for keeping Quoted Identifiers ON is that it is necessary when you are creating or changing indexes on computed columns or indexed views. If set to OFF, then CREATE, UPDATE, INSERT, and DELETE statements on tables with indexes on computed columns or indexed views will fail. SET QUOTED_IDENTIFIER must be ON when you are creating a filtered index or when you invoke XML data type methods. ANSI_NULLS will eventually be set to ON and this ISO compliant treatment of NULLS will not be switchable to OFF.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028">DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028">DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1629,7 +1634,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>SQL routines or batches are not designed to include artificial delays. If many WAITFOR statements are specified on the same server, too many threads can be tied up waiting. Also, including WAITFOR will delay the completion of the SQL Server process and can result in a timeout message in the application. Sometimes, a transaction that is the victim of a deadlock can be re-executed after a very short delay, and you&#8217;ll find a WAIT used for this, which is legitimate.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001">MI001 WAIT FOR DELAY/TIME used</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001">MI007 WAIT FOR DELAY/TIME used</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1638,7 +1643,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <p>We had to use this option until the TOP clause (with ORDER BY) was implemented. The TOP option is much easier for the query optimizer.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014">DEP014 SET ROWCOUNT option is deprecated.</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014">DEP014 SET ROWCOUNT option is deprecated.</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1750,7 +1755,7 @@ RETURN
 <p>It is certainly possible to specify nonnegative integers to represent the columns in an ORDER BY clause, based on how those columns appear in the select list, but this approach makes it difficult to understand the code at a glance and can lead to unexpected consequences when you forget you&#8217;ve done it and alter the order of the columns in the select list.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003">DEP003 GROUP BY ALL clause is deprecated.</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003">DEP003 GROUP BY ALL clause is deprecated.</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1759,7 +1764,7 @@ RETURN
 <p>Sometimes, when a table is referenced in another database or server, programmers believe that the two or three-part table name needs to be applied to the columns. This is unnecessary and meaningless. Just the table name is required for the columns. Three-part column names might be necessary in a join if you have duplicate table names, with duplicate column names, in different schemas, in which case, you ought to be using aliases. The same goes for cross-database joins.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026">DEP026 Three-part and four-part column references in SELECT list are deprecated.</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026">DEP026 Three-part and four-part column references in SELECT list are deprecated.</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1789,7 +1794,7 @@ RETURN
 <p>It is possible to have a ROLLBACK TRANSACTION within a block where there is no explicit transaction. This will trigger an error if the code is executed outside a transaction, and suggests that transactions are being held open unnecessarily.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020">EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</a></p>
+<p><a href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei020">EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -2054,7 +2059,7 @@ following people in particular.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-15 17:26:18 GMT
+Last updated 2018-04-09 17:45:14 BST
 </div>
 </div>
 </body>

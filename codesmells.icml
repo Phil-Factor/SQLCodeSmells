@@ -50,6 +50,32 @@
           </TabList>
         </Properties>
       </ParagraphStyle>
+      <ParagraphStyle Self="ParagraphStyle/BulList &gt; Paragraph" Name="BulList &gt; Paragraph" BulletsAndNumberingListType="BulletList" LeftIndent="0">
+        <Properties>
+          <BasedOn type="object">$ID/NormalParagraphStyle</BasedOn>
+          <TabList type="list">
+            <ListItem type="record">
+              <Alignment type="enumeration">LeftAlign</Alignment>
+              <AlignmentCharacter type="string">.</AlignmentCharacter>
+              <Leader type="string" />
+              <Position type="unit">10</Position>
+            </ListItem>
+          </TabList>
+        </Properties>
+      </ParagraphStyle>
+      <ParagraphStyle Self="ParagraphStyle/BulList &gt; first &gt; Paragraph" Name="BulList &gt; first &gt; Paragraph" BulletsAndNumberingListType="BulletList" LeftIndent="0">
+        <Properties>
+          <BasedOn type="object">$ID/NormalParagraphStyle</BasedOn>
+          <TabList type="list">
+            <ListItem type="record">
+              <Alignment type="enumeration">LeftAlign</Alignment>
+              <AlignmentCharacter type="string">.</AlignmentCharacter>
+              <Leader type="string" />
+              <Position type="unit">10</Position>
+            </ListItem>
+          </TabList>
+        </Properties>
+      </ParagraphStyle>
       <ParagraphStyle Self="ParagraphStyle/CodeBlock" Name="CodeBlock" LeftIndent="0">
         <Properties>
           <BasedOn type="object">$ID/NormalParagraphStyle</BasedOn>
@@ -662,7 +688,7 @@
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
   <HyperlinkTextSource Self="htss-14" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
-      <Content>BP001 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</Content>
+      <Content>BP014 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</Content>
     </CharacterStyleRange>
   </HyperlinkTextSource>
 </ParagraphStyleRange>
@@ -788,6 +814,14 @@
       <Content>DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</Content>
     </CharacterStyleRange>
   </HyperlinkTextSource>
+  <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
+    <Content> </Content>
+  </CharacterStyleRange>
+  <HyperlinkTextSource Self="htss-18" Name="" Hidden="false">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
+      <Content>https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001</Content>
+    </CharacterStyleRange>
+  </HyperlinkTextSource>
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Header2">
@@ -875,7 +909,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-18" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-19" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP008 CAST/CONVERT to var types without length</Content>
     </CharacterStyleRange>
@@ -958,7 +992,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-19" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-20" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP007 Declaring var type variables without length</Content>
     </CharacterStyleRange>
@@ -1041,7 +1075,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-20" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-21" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI029 Avoid using ISNUMERIC() function</Content>
     </CharacterStyleRange>
@@ -1080,16 +1114,8 @@
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
-    <Content>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger etrrors when they become embedded.</Content>
+    <Content>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual to add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger errors when they become embedded.</Content>
   </CharacterStyleRange>
-</ParagraphStyleRange>
-<Br />
-<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-21" Name="" Hidden="false">
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
-      <Content>DEP023 Not ending Transact-SQL statements with a semicolon is deprecated</Content>
-    </CharacterStyleRange>
-  </HyperlinkTextSource>
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Header2">
@@ -1344,8 +1370,11 @@
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
-    <Content>See: </Content>
+    <Content>See:</Content>
   </CharacterStyleRange>
+</ParagraphStyleRange>
+<Br />
+<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/BulList &gt; first &gt; Paragraph" NumberingContinue="false">
   <HyperlinkTextSource Self="htss-27" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>old-style join syntax</Content>
@@ -1353,7 +1382,7 @@
   </HyperlinkTextSource>
 </ParagraphStyleRange>
 <Br />
-<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
+<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/BulList &gt; Paragraph">
   <HyperlinkTextSource Self="htss-28" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>DEP017 NON-ANSI join (</Content>
@@ -1367,10 +1396,12 @@
   </HyperlinkTextSource>
 </ParagraphStyleRange>
 <Br />
-<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Bold">
-    <Content>ST001 Old-style join is used (…​from table1,table2…​)</Content>
-  </CharacterStyleRange>
+<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/BulList &gt; Paragraph">
+  <HyperlinkTextSource Self="htss-29" Name="" Hidden="false">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
+      <Content>ST001 Old-style join is used (…​from table1,table2…​)</Content>
+    </CharacterStyleRange>
+  </HyperlinkTextSource>
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Header2">
@@ -1437,7 +1468,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-29" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-30" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>procedures that lack schema-qualification</Content>
     </CharacterStyleRange>
@@ -1445,7 +1476,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-30" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-31" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>PE001/PE002 Schema name for procedure is not specified/Schema name for table or view is not specified</Content>
     </CharacterStyleRange>
@@ -1465,7 +1496,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-31" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-32" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP004 INSERT without column list</Content>
     </CharacterStyleRange>
@@ -1560,7 +1591,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-32" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-33" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0007: Use ISNULL(column, default_value) on nullable columns in expressions</Content>
     </CharacterStyleRange>
@@ -1583,7 +1614,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-33" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-34" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0004: Avoid using columns that do not have indexes as test expressions in IN predicates</Content>
     </CharacterStyleRange>
@@ -1606,7 +1637,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-34" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-35" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0005: Avoid using patterns that start with a '%' in LIKE predicates</Content>
     </CharacterStyleRange>
@@ -1656,7 +1687,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-35" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-36" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP011 NULL comparison or addition/substring</Content>
     </CharacterStyleRange>
@@ -1685,7 +1716,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-36" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-37" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>the SET NOCOUNT problem</Content>
     </CharacterStyleRange>
@@ -1771,7 +1802,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-37" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-38" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0006: Move a column reference to one side of a comparison operator to use a column index</Content>
     </CharacterStyleRange>
@@ -1794,7 +1825,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-38" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-39" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0015: Extract deterministic function calls from WHERE predicates</Content>
     </CharacterStyleRange>
@@ -1802,7 +1833,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content> </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-39" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-40" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>PE017 Incorrect usage of const UDF</Content>
     </CharacterStyleRange>
@@ -1825,7 +1856,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-40" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-41" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>Misuse of the scalar user-defined function as a constant (PE017)</Content>
     </CharacterStyleRange>
@@ -1833,7 +1864,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-41" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-42" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>PE017 Incorrect usage of const UDF</Content>
     </CharacterStyleRange>
@@ -1865,7 +1896,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-42" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-43" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>PE019 Consider using NOT EXISTS instead of NOT IN (subquery)</Content>
     </CharacterStyleRange>
@@ -1876,7 +1907,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-43" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-44" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>Consider using NOT EXISTS instead of NOT IN (subquery)</Content>
     </CharacterStyleRange>
@@ -1896,7 +1927,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-44" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-45" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP017 DELETE statement without WHERE clause</Content>
     </CharacterStyleRange>
@@ -1916,7 +1947,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-45" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-46" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP018 UPDATE statement without WHERE clause</Content>
     </CharacterStyleRange>
@@ -1966,7 +1997,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-46" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-47" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI024 Stored procedure name starts with sp_</Content>
     </CharacterStyleRange>
@@ -1998,7 +2029,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-47" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-48" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0012: Avoid using reserved words for type names</Content>
     </CharacterStyleRange>
@@ -2018,7 +2049,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-48" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-49" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>R0011: Avoid using special characters in object names</Content>
     </CharacterStyleRange>
@@ -2041,7 +2072,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See: </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-49" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-50" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0011: Avoid using special characters in object names</Content>
     </CharacterStyleRange>
@@ -2061,7 +2092,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-50" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-51" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0011: Avoid using special characters in object names</Content>
     </CharacterStyleRange>
@@ -2111,7 +2142,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-51" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-52" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP016 Return without result code</Content>
     </CharacterStyleRange>
@@ -2242,7 +2273,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-52" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-53" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI030 Order by in view or single-statement TVF</Content>
     </CharacterStyleRange>
@@ -2313,7 +2344,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-53" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-54" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP015 Scope of cursor (LOCAL/GLOBAL) is not specified</Content>
     </CharacterStyleRange>
@@ -2369,7 +2400,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-54" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-55" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI025 Executing stored procedure without getting result</Content>
     </CharacterStyleRange>
@@ -2392,7 +2423,7 @@
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
     <Content>See </Content>
   </CharacterStyleRange>
-  <HyperlinkTextSource Self="htss-55" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-56" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>SR0013: Output parameter (parameter) is not populated in all code paths</Content>
     </CharacterStyleRange>
@@ -2412,7 +2443,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-56" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-57" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI018 Missing parameter(s) name in procedure call</Content>
     </CharacterStyleRange>
@@ -2432,7 +2463,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-57" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-58" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI016 Reference to procedure in other database</Content>
     </CharacterStyleRange>
@@ -2452,7 +2483,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-58" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-59" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI017 Hardcoded current database name in procedure call</Content>
     </CharacterStyleRange>
@@ -2472,7 +2503,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-59" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-60" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>MI008 QUOTED_IDENTIFIERS option inside stored procedure, trigger or function</Content>
     </CharacterStyleRange>
@@ -2492,7 +2523,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-60" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-61" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</Content>
     </CharacterStyleRange>
@@ -2560,9 +2591,9 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-61" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-62" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
-      <Content>MI001 WAIT FOR DELAY/TIME used</Content>
+      <Content>MI007 WAIT FOR DELAY/TIME used</Content>
     </CharacterStyleRange>
   </HyperlinkTextSource>
 </ParagraphStyleRange>
@@ -2580,7 +2611,7 @@
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-62" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-63" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>DEP014 SET ROWCOUNT option is deprecated.</Content>
     </CharacterStyleRange>
@@ -2699,7 +2730,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-63" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-64" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>PE011 PRINT statement is used in trigger</Content>
     </CharacterStyleRange>
@@ -2719,7 +2750,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-64" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-65" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP003 SELECT in trigger</Content>
     </CharacterStyleRange>
@@ -2739,7 +2770,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-65" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-66" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP006 TOP without ORDER BY</Content>
     </CharacterStyleRange>
@@ -2759,7 +2790,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-66" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-67" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP012 CASE without ELSE</Content>
     </CharacterStyleRange>
@@ -2779,7 +2810,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-67" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-68" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP013 EXECUTE(string) is used</Content>
     </CharacterStyleRange>
@@ -2811,7 +2842,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-68" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-69" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>DEP003 GROUP BY ALL clause is deprecated.</Content>
     </CharacterStyleRange>
@@ -2831,7 +2862,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-69" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-70" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>DEP026 Three-part and four-part column references in SELECT list are deprecated.</Content>
     </CharacterStyleRange>
@@ -2875,7 +2906,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-70" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-71" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI019 BEGIN TRANSACTION without ROLLBACK TRANSACTION</Content>
     </CharacterStyleRange>
@@ -2895,7 +2926,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-71" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-72" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</Content>
     </CharacterStyleRange>
@@ -2969,7 +3000,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-72" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-73" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>PE010 Interleaving DDL and DML in stored procedure/trigger.</Content>
     </CharacterStyleRange>
@@ -3001,7 +3032,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-73" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-74" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI001 Incompatible variable type for procedure call</Content>
     </CharacterStyleRange>
@@ -3021,7 +3052,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-74" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-75" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI002 Incompatible literal type for procedure call</Content>
     </CharacterStyleRange>
@@ -3041,7 +3072,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-75" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-76" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI003 Non-scalar subquery in place of a scalar</Content>
     </CharacterStyleRange>
@@ -3061,7 +3092,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-76" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-77" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI004 Extra parameter passed</Content>
     </CharacterStyleRange>
@@ -3081,7 +3112,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-77" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-78" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI005 Unnamed call after named call</Content>
     </CharacterStyleRange>
@@ -3101,7 +3132,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-78" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-79" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI006 Required parameter is not passed</Content>
     </CharacterStyleRange>
@@ -3121,7 +3152,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-79" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-80" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI007 Call parameter declared as output</Content>
     </CharacterStyleRange>
@@ -3141,7 +3172,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-80" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-81" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI008 Call parameter is not declared as output</Content>
     </CharacterStyleRange>
@@ -3161,7 +3192,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-81" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-82" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>EI009 Call has more parameters than required</Content>
     </CharacterStyleRange>
@@ -3262,7 +3293,7 @@ RETURN
 </ParagraphStyleRange>
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
-  <HyperlinkTextSource Self="htss-82" Name="" Hidden="false">
+  <HyperlinkTextSource Self="htss-83" Name="" Hidden="false">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Link">
       <Content>BP013 EXECUTE(string) is used</Content>
     </CharacterStyleRange>
@@ -3433,227 +3464,234 @@ RETURN
 
   </Story>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-82" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" Source="htss-82" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-83" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" Source="htss-83" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp013</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei009" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei009" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-81" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei009" Source="htss-81" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-82" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei009" Source="htss-82" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei009</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei008" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei008" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-80" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei008" Source="htss-80" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-81" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei008" Source="htss-81" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei008</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei007" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei007" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-79" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei007" Source="htss-79" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-80" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei007" Source="htss-80" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei007</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei006" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei006" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-78" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei006" Source="htss-78" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-79" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei006" Source="htss-79" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei006</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei005" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei005" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-77" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei005" Source="htss-77" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-78" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei005" Source="htss-78" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei005</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei004" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei004" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-76" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei004" Source="htss-76" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-77" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei004" Source="htss-77" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei004</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei003" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei003" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-75" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei003" Source="htss-75" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-76" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei003" Source="htss-76" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei003</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei002" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei002" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-74" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei002" Source="htss-74" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-75" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei002" Source="htss-75" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei002</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei001" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei001" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-73" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei001" Source="htss-73" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-74" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei001" Source="htss-74" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei001</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe010" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/performance-rules/pe010" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-72" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe010" Source="htss-72" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-73" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe010" Source="htss-73" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe010</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/ei020" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-71" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020" Source="htss-71" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei020" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei020" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-72" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei020" Source="htss-72" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/ei020</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei020</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei019" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei019" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-70" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei019" Source="htss-70" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-71" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei019" Source="htss-71" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei019</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep026" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-69" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026" Source="htss-69" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-70" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026" Source="htss-70" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep026</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep003" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-68" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003" Source="htss-68" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-69" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003" Source="htss-69" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep003</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-67" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" Source="htss-67" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-68" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp013" Source="htss-68" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp013</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp012" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp012" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-66" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp012" Source="htss-66" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-67" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp012" Source="htss-67" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp012</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp006" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp006" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-65" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp006" Source="htss-65" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-66" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp006" Source="htss-66" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp006</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp003" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp003" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-64" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp003" Source="htss-64" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-65" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp003" Source="htss-65" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp003</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe011" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/performance-rules/pe011" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-63" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe011" Source="htss-63" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-64" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe011" Source="htss-64" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe011</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep014" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-62" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014" Source="htss-62" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-63" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014" Source="htss-63" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep014</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-61" Name="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001" Source="htss-61" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-62" Name="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001" Source="htss-62" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep028" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-60" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028" Source="htss-60" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-61" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028" Source="htss-61" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep028</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-59" Name="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008" Source="htss-59" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-60" Name="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008" Source="htss-60" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei017" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei017" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-58" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei017" Source="htss-58" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-59" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei017" Source="htss-59" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei017</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei016" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei016" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-57" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei016" Source="htss-57" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-58" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei016" Source="htss-58" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei016</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei018" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei018" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-56" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei018" Source="htss-56" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-57" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei018" Source="htss-57" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei018</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-55" Name="http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx" Source="htss-55" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-56" Name="http://msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx" Source="htss-56" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172136(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei025" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei025" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-54" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei025" Source="htss-54" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-55" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei025" Source="htss-55" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei025</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp015" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp015" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-53" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp015" Source="htss-53" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-54" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp015" Source="htss-54" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp015</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei030" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei030" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-52" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei030" Source="htss-52" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-53" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei030" Source="htss-53" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei030</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp016" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp016" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-51" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp016" Source="htss-51" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-52" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp016" Source="htss-52" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp016</Destination>
+    </Properties>
+  </Hyperlink>
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-51" Name="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" Source="htss-51" Visible="true" DestinationUniqueKey="1">
+    <Properties>
+      <BorderColor type="enumeration">Black</BorderColor>
+      <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" DestinationUniqueKey="1" />
@@ -3670,151 +3708,151 @@ RETURN
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-48" Name="http://msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx" Source="htss-48" Visible="true" DestinationUniqueKey="1">
-    <Properties>
-      <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd172134(v=vs.100).aspx</Destination>
-    </Properties>
-  </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-47" Name="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx" Source="htss-47" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-48" Name="http://msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx" Source="htss-48" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193421(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei024" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei024" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-46" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei024" Source="htss-46" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-47" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei024" Source="htss-47" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei024</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp018" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-45" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018" Source="htss-45" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-46" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018" Source="htss-46" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp018</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp017" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp017" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-44" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp017" Source="htss-44" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-45" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp017" Source="htss-45" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp017</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/consider-using-not-exists-instead-not-subquery" Name="link" DestinationURL="https://www.red-gate.com/hub/product-learning/sql-prompt/consider-using-not-exists-instead-not-subquery" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-43" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/consider-using-not-exists-instead-not-subquery" Source="htss-43" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-44" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/consider-using-not-exists-instead-not-subquery" Source="htss-44" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/consider-using-not-exists-instead-not-subquery</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe019" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/performance-rules/pe019" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-42" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe019" Source="htss-42" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-43" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe019" Source="htss-43" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe019</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe017" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-41" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017" Source="htss-41" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-42" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017" Source="htss-42" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe017</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017" Name="link" DestinationURL="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-40" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017" Source="htss-40" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-41" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017" Source="htss-41" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/misuse-scalar-user-defined-function-constant-pe017</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe017" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-39" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017" Source="htss-39" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-40" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe017" Source="htss-40" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe017</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-38" Name="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx" Source="htss-38" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-39" Name="http://msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx" Source="htss-39" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193285(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-37" Name="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx" Source="htss-37" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-38" Name="http://msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx" Source="htss-38" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193264(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-set-nocount-problem-pe008-pe009" Name="link" DestinationURL="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-set-nocount-problem-pe008-pe009" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-36" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-set-nocount-problem-pe008-pe009" Source="htss-36" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-37" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-set-nocount-problem-pe008-pe009" Source="htss-37" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-set-nocount-problem-pe008-pe009</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp011" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp011" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-35" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp011" Source="htss-35" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-36" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp011" Source="htss-36" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp011</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-34" Name="http://msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx" Source="htss-34" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-35" Name="http://msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx" Source="htss-35" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193273(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-33" Name="http://msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx" Source="htss-33" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-34" Name="http://msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx" Source="htss-34" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193249(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-32" Name="http://msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx" Source="htss-32" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-33" Name="http://msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx" Source="htss-33" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193267(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp004" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp004" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-31" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp004" Source="htss-31" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-32" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp004" Source="htss-32" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp004</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe001" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/performance-rules/pe001" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-30" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe001" Source="htss-30" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-31" Name="https://documentation.red-gate.com/codeanalysis/performance-rules/pe001" Source="htss-31" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/performance-rules/pe001</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-procedures-lack-schema-qualification" Name="link" DestinationURL="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-procedures-lack-schema-qualification" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-29" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-procedures-lack-schema-qualification" Source="htss-29" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-30" Name="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-procedures-lack-schema-qualification" Source="htss-30" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-procedures-lack-schema-qualification</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep017" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-28" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017" Source="htss-28" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/style-rules/st001" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/style-rules/st001" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-29" Name="https://documentation.red-gate.com/codeanalysis/style-rules/st001" Source="htss-29" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep017</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/style-rules/st001</Destination>
+    </Properties>
+  </Hyperlink>
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-28" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017" Source="htss-28" Visible="true" DestinationUniqueKey="1">
+    <Properties>
+      <BorderColor type="enumeration">Black</BorderColor>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001" Name="link" DestinationURL="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001" DestinationUniqueKey="1" />
@@ -3838,18 +3876,18 @@ RETURN
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193296(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-24" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005" Source="htss-24" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp005" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-24" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005" Source="htss-24" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp005</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-23" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010" Source="htss-23" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp010" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-23" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010" Source="htss-23" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp010</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx" Name="link" DestinationURL="http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx" DestinationUniqueKey="1" />
@@ -3859,39 +3897,39 @@ RETURN
       <Destination type="object">HyperlinkURLDestination/http%3a//msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep023" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-21" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023" Source="htss-21" Visible="true" DestinationUniqueKey="1">
-    <Properties>
-      <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep023</Destination>
-    </Properties>
-  </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei029" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/execution-rules/ei029" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-20" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei029" Source="htss-20" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-21" Name="https://documentation.red-gate.com/codeanalysis/execution-rules/ei029" Source="htss-21" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei029</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp007" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp007" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-19" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp007" Source="htss-19" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-20" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp007" Source="htss-20" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp007</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp008" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp008" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-18" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp008" Source="htss-18" Visible="true" DestinationUniqueKey="1">
+  <Hyperlink Self="uf-19" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp008" Source="htss-19" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp008</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep002" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-17" Name="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002" Source="htss-17" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-18" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001" Source="htss-18" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-rules/dep002</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001</Destination>
+    </Properties>
+  </Hyperlink>
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-17" Name="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002" Source="htss-17" Visible="true" DestinationUniqueKey="1">
+    <Properties>
+      <BorderColor type="enumeration">Black</BorderColor>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//msdn.microsoft.com/en-us/library/dd193263(v=vs.100).aspx" Name="link" DestinationURL="https://msdn.microsoft.com/en-us/library/dd193263(v=vs.100).aspx" DestinationUniqueKey="1" />
@@ -3908,11 +3946,11 @@ RETURN
       <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/execution-rules/ei028</Destination>
     </Properties>
   </Hyperlink>
-  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp001" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001" DestinationUniqueKey="1" />
-  <Hyperlink Self="uf-14" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001" Source="htss-14" Visible="true" DestinationUniqueKey="1">
+  <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp014" Name="link" DestinationURL="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp014" DestinationUniqueKey="1" />
+  <Hyperlink Self="uf-14" Name="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp014" Source="htss-14" Visible="true" DestinationUniqueKey="1">
     <Properties>
       <BorderColor type="enumeration">Black</BorderColor>
-      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp001</Destination>
+      <Destination type="object">HyperlinkURLDestination/https%3a//documentation.red-gate.com/codeanalysis/best-practice-rules/bp014</Destination>
     </Properties>
   </Hyperlink>
   <HyperlinkURLDestination Self="HyperlinkURLDestination/https%3a//documentation.red-gate.com/scg/sql-code-guard-3-documentation/sql-static-code-analysis-rules/style-rules#Stylerules-ST012ST012%E2%80%93Considerusingtemporarytableinsteadoftablevariable" Name="link" DestinationURL="https://documentation.red-gate.com/scg/sql-code-guard-3-documentation/sql-static-code-analysis-rules/style-rules#Stylerules-ST012ST012%E2%80%93Considerusingtemporarytableinsteadoftablevariable" DestinationUniqueKey="1" />

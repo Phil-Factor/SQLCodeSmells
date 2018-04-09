@@ -4,7 +4,7 @@
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>SQL Code Smells</title>
-<date>2018-03-15</date>
+<date>2018-04-09</date>
 <author>
 <personname>
 <firstname>by</firstname>
@@ -159,7 +159,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="defining-a-table-column-without-explicitly-specifying-whether-it-is-nullable">
 <title>Defining a table column without explicitly specifying whether it is nullable</title>
 <simpara>In a CREATE TABLE DDL script, a column definition that has not specified that a column is NULL or NOT NULL is a risk. The default nullability for a database&#8217;s columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001">BP001 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp014">BP014 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)</link></simpara>
 </section>
 <section xml:id="adding-not-null-column-without-default-value-to-a-table-with-data-will-fail">
 <title>Trying to add a NOT NULL column without default value to a table with data</title>
@@ -194,7 +194,8 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 <section xml:id="using-deprecated-language-elements-such-as-the-textntext-data-types">
 <title>Using deprecated language elements such as the TEXT/NTEXT data types</title>
 <simpara>There is no good reason to use TEXT or NTEXT. They were a first, flawed attempt at BLOB storage and are there only for backward compatibility. Likewise, the WRITETEXT, UPDATETEXT and READTEXT statements are also deprecated. All this complexity has been replaced by the VARCHAR(MAX) and NVARCHAR(MAX) data types, which work with all of SQL Server&#8217;s string functions.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002">DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002">DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.</link>
+<link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001">https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001</link></simpara>
 </section>
 <section xml:id="using-money-data-type">
 <title>Using MONEY data type</title>
@@ -273,8 +274,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 </section>
 <section xml:id="not-using-a-semicolon-to-terminate-sql-statements">
 <title>Not using a semicolon to terminate SQL statements</title>
-<simpara>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger etrrors when they become embedded.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023">DEP023 Not ending Transact-SQL statements with a semicolon is deprecated</link></simpara>
+<simpara>Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual to add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger errors when they become embedded.</simpara>
 </section>
 <section xml:id="relying-on-data-being-implicitly-converted-between-types">
 <title>Relying on data being implicitly converted between types</title>
@@ -292,7 +292,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="using-the-identity-system-function">
 <title>Using the @@IDENTITY system function</title>
 <simpara>The generation of an IDENTITY value is not transactional, so in some circumstances, <emphasis role="strong">@@IDENTITY</emphasis> returns the wrong value and not the value from the row you just inserted. This is especially true when using triggers that insert data, depending on when the triggers fire. The <emphasis role="strong">SCOPE_IDENTITY</emphasis> function is safer because it always relates to the current batch (within the same scope). Also consider using the IDENT_CURRENT function, which returns the last IDENTITY value regardless of session or scope. The <emphasis role="strong">OUTPUT</emphasis> clause is a better and safer way of capturing identity values.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010">Usage of @@identity</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010">Usage of @@identity</link></simpara>
 </section>
 <section xml:id="using-between-for-datetime-ranges">
 <title>Using BETWEEN for DATETIME ranges</title>
@@ -301,7 +301,7 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <section xml:id="using-select-in-a-batch">
 <title>Using SELECT * in a batch</title>
 <simpara>Although there is a legitimate use in a batch for IF EXISTS (SELECT * FROM  &#8230;&#8203; ) or SELECT count(*), any other use is vulnerable to changes in column names or order. SELECT * was designed for interactive use, not as part of a batch. It assumes certain columns in a particular order, which may not last. Also, results should always consist of just the columns you need. Plus, requesting more columns from the database than are used by the application results in excess database I/O and network traffic, leading to slow application response and unhappy users.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005">Asterisk in select list</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005">Asterisk in select list</link></simpara>
 </section>
 <section xml:id="insert-without-column-list">
 <title>INSERT without column list</title>
@@ -340,9 +340,18 @@ It is possible to use a TIME data type if the duration is less than 24 hours, bu
 <title>Using the old Sybase JOIN syntax</title>
 <simpara>The deprecated syntax (which includes defining the join condition in the WHERE clause) is not standard SQL and is more difficult to inspect and maintain. Parts of this syntax are completely unsupported in SQL Server 2012 or higher.<anchor xml:id="_Toc395168942" xreflabel="[_Toc395168942]"/></simpara>
 <simpara>The “old style” Microsoft/Sybase JOIN style for SQL, which uses the =* and *= syntax, has been deprecated and is no longer used. Queries that use this syntax will fail when the database engine level is 10 (SQL Server 2008) or later (compatibility level 100). The ANSI-89 table citation list (FROM tableA, tableB) is still ISO standard for INNER JOINs only. Neither of these styles are worth using. It is always better to specify the type of join you require, INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER and CROSS, which has been standard since ANSI SQL-92 was published. While you can choose any supported JOIN style, without affecting the query plan used by SQL Server, using the ANSI-standard syntax will make your code easier to understand, more consistent, and portable to other relational database systems.</simpara>
-<simpara>See: <link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001">old-style join syntax</link></simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017">DEP017 NON-ANSI join (<emphasis role="strong">== or =</emphasis>) is used</link></simpara>
-<simpara><emphasis role="strong">ST001 Old-style join is used (&#8230;&#8203;from table1,table2&#8230;&#8203;)</emphasis></simpara>
+<simpara>See:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><link xl:href="https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001">old-style join syntax</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017">DEP017 NON-ANSI join (<emphasis role="strong">== or =</emphasis>) is used</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/style-rules/st001">ST001 Old-style join is used (&#8230;&#8203;from table1,table2&#8230;&#8203;)</link></simpara>
+</listitem>
+</itemizedlist>
 </section>
 <section xml:id="using-correlated-subqueries-instead-of-a-join">
 <title>Using correlated subqueries instead of a join</title>
@@ -647,7 +656,7 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="creating-a-routine-with-ansi_nulls-or-quoted_identifier-options-set-to-off.">
 <title>Creating a routine with ANSI_NULLS or QUOTED_IDENTIFIER options set to OFF.</title>
 <simpara>At the time the routine is created (parse time), both options should normally be set to ON. They are ignored on execution. The reason for keeping Quoted Identifiers ON is that it is necessary when you are creating or changing indexes on computed columns or indexed views. If set to OFF, then CREATE, UPDATE, INSERT, and DELETE statements on tables with indexes on computed columns or indexed views will fail. SET QUOTED_IDENTIFIER must be ON when you are creating a filtered index or when you invoke XML data type methods. ANSI_NULLS will eventually be set to ON and this ISO compliant treatment of NULLS will not be switchable to OFF.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028">DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028">DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.</link></simpara>
 </section>
 <section xml:id="updating-a-primary-key-column">
 <title>Updating a primary key column</title>
@@ -668,12 +677,12 @@ Whenever you execute a query, a short message is returned to the client with the
 <section xml:id="using-a-waitfor-delaytime-statement-in-a-routine-or-batch">
 <title>Using a WAITFOR DELAY/TIME statement in a routine or batch</title>
 <simpara>SQL routines or batches are not designed to include artificial delays. If many WAITFOR statements are specified on the same server, too many threads can be tied up waiting. Also, including WAITFOR will delay the completion of the SQL Server process and can result in a timeout message in the application. Sometimes, a transaction that is the victim of a deadlock can be re-executed after a very short delay, and you&#8217;ll find a WAIT used for this, which is legitimate.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001">MI001 WAIT FOR DELAY/TIME used</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001">MI007 WAIT FOR DELAY/TIME used</link></simpara>
 </section>
 <section xml:id="using-set-rowcount-to-specify-how-many-rows-should-be-returned">
 <title>Using SET ROWCOUNT to specify how many rows should be returned</title>
 <simpara>We had to use this option until the TOP clause (with ORDER BY) was implemented. The TOP option is much easier for the query optimizer.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014">DEP014 SET ROWCOUNT option is deprecated.</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014">DEP014 SET ROWCOUNT option is deprecated.</link></simpara>
 </section>
 <section xml:id="using-top-100-percent-in-views-inline-functions-derived-tables-subqueries-and-common-table-expressions-ctes.">
 <title>Using TOP 100 PERCENT in views, inline functions, derived tables, subqueries, and common table expressions (CTEs).</title>
@@ -750,12 +759,12 @@ RETURN
 <section xml:id="using-numbers-in-the-order-by-clause-to-specify-column-order">
 <title>Using numbers in the ORDER BY clause to specify column order</title>
 <simpara>It is certainly possible to specify nonnegative integers to represent the columns in an ORDER BY clause, based on how those columns appear in the select list, but this approach makes it difficult to understand the code at a glance and can lead to unexpected consequences when you forget you&#8217;ve done it and alter the order of the columns in the select list.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003">DEP003 GROUP BY ALL clause is deprecated.</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003">DEP003 GROUP BY ALL clause is deprecated.</link></simpara>
 </section>
 <section xml:id="using-unnecessary-three-part-and-four-part-column-references-in-a-select-list">
 <title>Using unnecessary three-part and four-part column references in a select list</title>
 <simpara>Sometimes, when a table is referenced in another database or server, programmers believe that the two or three-part table name needs to be applied to the columns. This is unnecessary and meaningless. Just the table name is required for the columns. Three-part column names might be necessary in a join if you have duplicate table names, with duplicate column names, in different schemas, in which case, you ought to be using aliases. The same goes for cross-database joins.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026">DEP026 Three-part and four-part column references in SELECT list are deprecated.</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026">DEP026 Three-part and four-part column references in SELECT list are deprecated.</link></simpara>
 </section>
 <section xml:id="using-range-rather-than-rows-in-sql-server-2012">
 <title>Using RANGE rather than ROWS in SQL Server 2012</title>
@@ -773,7 +782,7 @@ RETURN
 <section xml:id="use-of-rollback-transaction-without-begin-transaction">
 <title>Use of ROLLBACK TRANSACTION without BEGIN TRANSACTION</title>
 <simpara>It is possible to have a ROLLBACK TRANSACTION within a block where there is no explicit transaction. This will trigger an error if the code is executed outside a transaction, and suggests that transactions are being held open unnecessarily.</simpara>
-<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020">EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</link></simpara>
+<simpara><link xl:href="https://documentation.red-gate.com/codeanalysis/execution-rules/ei020">EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION</link></simpara>
 </section>
 <section xml:id="not-defining-a-default-value-for-a-select-assignment-to-a-variable">
 <title>Not defining a default value for a SELECT assignment to a variable</title>
