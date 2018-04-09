@@ -165,7 +165,7 @@ Any programmer will assume a sane database design in which columns with the same
 
 In a CREATE TABLE DDL script, a column definition that has not specified that a column is NULL or NOT NULL is a risk. The default nullability for a database's columns can be altered by the 'ANSI_NULL_DFLT_ON' setting. Therefore one cannot assume whether a column will default to NULL or NOT NULL. It is safest to specify it in the column definition for noncomputed columns, and it is essential if you need any portability of your table design. Sparse columns must always allow NULL.
 
-https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp001[BP001 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)]
+https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp014[BP014 NOT NULL option is not specified in CREATE/DECLARE TABLE statement (registered once per table)]
 
 [[adding-not-null-column-without-default-value-to-a-table-with-data-will-fail]]
 === Trying to add a NOT NULL column without default value to a table with data
@@ -203,8 +203,8 @@ An VARCHAR, VARBINARY or NVARCHAR that is declared without an explicit length is
 
 There is no good reason to use TEXT or NTEXT. They were a first, flawed attempt at BLOB storage and are there only for backward compatibility. Likewise, the WRITETEXT, UPDATETEXT and READTEXT statements are also deprecated. All this complexity has been replaced by the VARCHAR(MAX) and NVARCHAR(MAX) data types, which work with all of SQL Server's string functions.
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep002[DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.]
-
+https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep002[DEP002 WRITETEXT,UPDATETEXT and READTEXT statements are deprecated.]
+https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep001
 [[using-money-data-type]]
 === Using MONEY data type
 
@@ -296,9 +296,7 @@ Although using the DATALENGTH function is valid, it can easily give you the wron
 [[not-using-a-semicolon-to-terminate-sql-statements]]
 === Not using a semicolon to terminate SQL statements
 
-Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger etrrors when they become embedded. 
-
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep023[DEP023 Not ending Transact-SQL statements with a semicolon is deprecated]
+Although the lack of semicolons is completely forgivable, it helps to understand more complicated code if individual statements are terminated. With one or two exceptions, such as delimiting the previous statement from a CTE, using semicolons is currently only a decoration, though it is a good habit to adopt to make code more future-proof and portable. When developing code, it is usual to add clauses on the end of statements, and in these circumstances, semicolons can be a considerable irritation because they trigger errors when they become embedded. 
 
 [[relying-on-data-being-implicitly-converted-between-types]]
 === Relying on data being implicitly converted between types
@@ -314,7 +312,7 @@ See: http://msdn.microsoft.com/en-us/library/dd193269(v=vs.100).aspx[SR0014: Dat
 
 The generation of an IDENTITY value is not transactional, so in some circumstances, *@@IDENTITY* returns the wrong value and not the value from the row you just inserted. This is especially true when using triggers that insert data, depending on when the triggers fire. The *SCOPE_IDENTITY* function is safer because it always relates to the current batch (within the same scope). Also consider using the IDENT_CURRENT function, which returns the last IDENTITY value regardless of session or scope. The *OUTPUT* clause is a better and safer way of capturing identity values.
 
-https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010BP010[Usage of @@identity]
+https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp010[Usage of @@identity]
 
 [[using-between-for-datetime-ranges]]
 === Using BETWEEN for DATETIME ranges
@@ -326,7 +324,7 @@ You never get complete accuracy if you specify dates when using the BETWEEN logi
 
 Although there is a legitimate use in a batch for IF EXISTS (SELECT * FROM  ... ) or SELECT count(*), any other use is vulnerable to changes in column names or order. SELECT * was designed for interactive use, not as part of a batch. It assumes certain columns in a particular order, which may not last. Also, results should always consist of just the columns you need. Plus, requesting more columns from the database than are used by the application results in excess database I/O and network traffic, leading to slow application response and unhappy users.
 
-https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005BP005[Asterisk in select list]
+https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp005[Asterisk in select list]
 
 [[insert-without-column-list]]
 === INSERT without column list
@@ -369,12 +367,14 @@ The deprecated syntax (which includes defining the join condition in the WHERE c
 
 The “old style” Microsoft/Sybase JOIN style for SQL, which uses the =* and *= syntax, has been deprecated and is no longer used. Queries that use this syntax will fail when the database engine level is 10 (SQL Server 2008) or later (compatibility level 100). The ANSI-89 table citation list (FROM tableA, tableB) is still ISO standard for INNER JOINs only. Neither of these styles are worth using. It is always better to specify the type of join you require, INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER and CROSS, which has been standard since ANSI SQL-92 was published. While you can choose any supported JOIN style, without affecting the query plan used by SQL Server, using the ANSI-standard syntax will make your code easier to understand, more consistent, and portable to other relational database systems.
 
-See: https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001[old-style join syntax]
+See:
+
+* https://www.red-gate.com/hub/product-learning/sql-prompt/finding-code-smells-using-sql-prompt-old-style-join-syntax-st001[old-style join syntax]
 
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep017[DEP017 NON-ANSI join (*== or =*) is used] 
+* https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep017[DEP017 NON-ANSI join (*== or =*) is used] 
 
-*ST001 Old-style join is used (...from table1,table2...)*
+* https://documentation.red-gate.com/codeanalysis/style-rules/st001[ST001 Old-style join is used (...from table1,table2...)]
 
 [[using-correlated-subqueries-instead-of-a-join]]
 === Using correlated subqueries instead of a join
@@ -745,7 +745,7 @@ https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi008[MI008 
 
 At the time the routine is created (parse time), both options should normally be set to ON. They are ignored on execution. The reason for keeping Quoted Identifiers ON is that it is necessary when you are creating or changing indexes on computed columns or indexed views. If set to OFF, then CREATE, UPDATE, INSERT, and DELETE statements on tables with indexes on computed columns or indexed views will fail. SET QUOTED_IDENTIFIER must be ON when you are creating a filtered index or when you invoke XML data type methods. ANSI_NULLS will eventually be set to ON and this ISO compliant treatment of NULLS will not be switchable to OFF.
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep028[DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.]
+https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep028[DEP028 The SQL module was created with ANSI_NULLS and/or QUOTED_IDENTIFIER options set to OFF.]
 
 [[updating-a-primary-key-column]]
 === Updating a primary key column
@@ -772,14 +772,14 @@ Avoid using the NOLOCK hint. It is much better and safer to specify the correct 
 
 SQL routines or batches are not designed to include artificial delays. If many WAITFOR statements are specified on the same server, too many threads can be tied up waiting. Also, including WAITFOR will delay the completion of the SQL Server process and can result in a timeout message in the application. Sometimes, a transaction that is the victim of a deadlock can be re-executed after a very short delay, and you'll find a WAIT used for this, which is legitimate.
 
-https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001[MI001 WAIT FOR DELAY/TIME used]
+https://documentation.red-gate.com/codeanalysis/miscellaneous-rules/mi001[MI007 WAIT FOR DELAY/TIME used]
 
 [[using-set-rowcount-to-specify-how-many-rows-should-be-returned]]
 === Using SET ROWCOUNT to specify how many rows should be returned
 
 We had to use this option until the TOP clause (with ORDER BY) was implemented. The TOP option is much easier for the query optimizer.
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep014[DEP014 SET ROWCOUNT option is deprecated.]
+https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep014[DEP014 SET ROWCOUNT option is deprecated.]
 
 [[using-top-100-percent-in-views-inline-functions-derived-tables-subqueries-and-common-table-expressions-ctes.]]
 === Using TOP 100 PERCENT in views, inline functions, derived tables, subqueries, and common table expressions (CTEs).
@@ -869,14 +869,14 @@ The GROUP BY ALL <column> clause and the GROUP BY <number> clause are deprecated
 
 It is certainly possible to specify nonnegative integers to represent the columns in an ORDER BY clause, based on how those columns appear in the select list, but this approach makes it difficult to understand the code at a glance and can lead to unexpected consequences when you forget you've done it and alter the order of the columns in the select list.
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep003[DEP003 GROUP BY ALL clause is deprecated.]
+https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep003[DEP003 GROUP BY ALL clause is deprecated.]
 
 [[using-unnecessary-three-part-and-four-part-column-references-in-a-select-list]]
 === Using unnecessary three-part and four-part column references in a select list
 
 Sometimes, when a table is referenced in another database or server, programmers believe that the two or three-part table name needs to be applied to the columns. This is unnecessary and meaningless. Just the table name is required for the columns. Three-part column names might be necessary in a join if you have duplicate table names, with duplicate column names, in different schemas, in which case, you ought to be using aliases. The same goes for cross-database joins.
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/dep026[DEP026 Three-part and four-part column references in SELECT list are deprecated.]
+https://documentation.red-gate.com/codeanalysis/deprecated-syntax-rules/dep026[DEP026 Three-part and four-part column references in SELECT list are deprecated.]
 
 [[using-range-rather-than-rows-in-sql-server-2012]]
 === Using RANGE rather than ROWS in SQL Server 2012
@@ -900,7 +900,7 @@ https://documentation.red-gate.com/codeanalysis/execution-rules/ei019[EI019 BEGI
 
 It is possible to have a ROLLBACK TRANSACTION within a block where there is no explicit transaction. This will trigger an error if the code is executed outside a transaction, and suggests that transactions are being held open unnecessarily.
 
-https://documentation.red-gate.com/codeanalysis/deprecated-rules/ei020[EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION]
+https://documentation.red-gate.com/codeanalysis/execution-rules/ei020[EI020 ROLLBACK TRANSACTION without BEGIN TRANSACTION]
 
 [[not-defining-a-default-value-for-a-select-assignment-to-a-variable]]
 === Not defining a default value for a SELECT assignment to a variable
