@@ -4,7 +4,7 @@
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>SQL Code Smells</title>
-<date>2018-04-09</date>
+<date>2018-04-12</date>
 <author>
 <personname>
 <firstname>by</firstname>
@@ -199,7 +199,7 @@ Occasionally, a data object is too complicated, peripheral, arcane or ephemeral 
 </section>
 <section xml:id="using-money-data-type">
 <title>Using MONEY data type</title>
-<simpara>The MONEY data type confuses the storage of data values with their display, though it clearly suggests, by its name, the sort of data held. Using the DECIMAL data type is almost always better.</simpara>
+<simpara>The MONEY data type confuses the storage of data values with their display, though it clearly suggests, by its name, the sort of data held. It is proprietary to SQL Server. It has limited precision (the underlying type is a BIGINT or in the case of SMALLMONEY an INT) so you can unintentionally get a loss of precision due to roundoff errors. While simple addition or subtraction is fine,  more complicated calculations that can be done for financial reports can show errors. Although the MONEY datatype generally takes less storage and takes less bandwidth when sent over networks via TDS, it is generally far better to use a data type such as the decimal/numeric type that is less likely to suffer from rounding errors or scale overflow.</simpara>
 </section>
 <section xml:id="using-float-or-real-data-types">
 <title>Using FLOAT or REAL data types</title>

@@ -832,7 +832,7 @@
 <Br />
 <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph">
   <CharacterStyleRange AppliedCharacterStyle="$ID/NormalCharacterStyle">
-    <Content>The MONEY data type confuses the storage of data values with their display, though it clearly suggests, by its name, the sort of data held. Using the DECIMAL data type is almost always better.</Content>
+    <Content>The MONEY data type confuses the storage of data values with their display, though it clearly suggests, by its name, the sort of data held. It is proprietary to SQL Server. It has limited precision (the underlying type is a BIGINT or in the case of SMALLMONEY an INT) so you can unintentionally get a loss of precision due to roundoff errors. While simple addition or subtraction is fine, more complicated calculations that can be done for financial reports can show errors. Although the MONEY datatype generally takes less storage and takes less bandwidth when sent over networks via TDS, it is generally far better to use a data type such as the decimal/numeric type that is less likely to suffer from rounding errors or scale overflow.</Content>
   </CharacterStyleRange>
 </ParagraphStyleRange>
 <Br />
