@@ -551,7 +551,7 @@ https://documentation.red-gate.com/codeanalysis/best-practice-rules/bp018[BP018 
 
 === Using a Common Table Expression (CTE) unnecessarily
 
-CTEs are there to make SQL Statements clearer. They specify a temporary named result set,  derived from a simple query and defined within the execution scope of a single SELECT, INSERT, UPDATE, or DELETE statement. They are convenient to use when an intermediate temporary result needs to be used more than once as a table-source within an expression. It is also useful for recursive statements because a common table expression can include references to itself. However, when neither of these rather rare requirements exist, a CTE becomes unnecessary and does nothing but provide extra overhead. It will slow down the performance.
+CTEs are there to make SQL Statements clearer. They specify a temporary named result set, derived from a simple query and defined within the execution scope of a single SELECT, INSERT, UPDATE, or DELETE statement. They are convenient to use when an intermediate temporary result needs to be used more than once as a table-source within an expression. It is also useful for recursive statements because a common table expression can include references to itself.  To use a CTE in other circumstances doesn’t  provide a performance benefit even though the code may look neater. It is only useful if  it makes the query easier to read and understand, and it compiles to the same query plan as the ordinary query.  Otherwise it  is unnecessary and may even provide extra overhead and  slow down the performance.
 
 [[problems-with-naming]]
 == Problems with naming
@@ -925,14 +925,14 @@ The NULLIF expression compares two expressions and returns the first one if the 
 [[not-putting-all-the-ddl-statements-at-the-beginning-of-the-batch]]
 === Not putting all the DDL statements at the beginning of the batch
 
-Don't mix data manipulation language (DML) statements with data definition language (DDL_ statements. Instead, put all the DDL statements at the beginning of your procedures or batches.
+Don't mix data manipulation language (DML) statements with data definition language (DDL_ statements. Instead, put all the DDL statements at the beginning of your procedures or batches. It no longer causes any performance problems to do so but just makes it slightly easier to maintain the code.
 
 https://documentation.red-gate.com/codeanalysis/performance-rules/pe010[PE010 Interleaving DDL and DML in stored procedure/trigger.]
 
 [[using-meaningless-aliases-for-tables-e.g.-a-b-c-d-e]]
 === Using meaningless aliases for tables (e.g., a, b, c, d, e)
 
-Aliases aren't actually meant to cut down on the typing but rather to make your code clearer. To use single characters is antisocial.
+Aliases aren't actually meant to cut down on the typing but rather to make your code clearer and allow self-joins. To use single characters is antisocial.
 
 [[variable-type-is-not-fully-compatible-with-procedure-parameter-type]]
 === Variable type is not fully compatible with procedure parameter type
@@ -996,6 +996,8 @@ Parameters can be passed to procedures and functions in an ordered delimited lis
 
 https://documentation.red-gate.com/codeanalysis/execution-rules/ei009[EI009 Call has more parameters than required]
 
+image::images\PassedParams.png[]
+
 [[security-loopholes]]
 == Security Loopholes
 
@@ -1014,7 +1016,7 @@ Use xp_cmdshell in a routine only as a last resort, due to the elevated security
 [[authentication-set-to-mixed-mode]]
 === Authentication set to Mixed Mode
 
-Ensure that Windows Authentication Mode is used wherever possible. SQL Server authentication is necessary only when a server is remote or outside the domain, or if third-party software requires SQL authentication for remote maintenance. Windows Authentication is less vulnerable, and avoids having to transmit passwords over the network or store them in connection strings.
+Ensure that Windows Authentication Mode is used wherever possible. SQL Server authentication is necessary only when a server is remote or outside the domain, or if third-party software requires SQL authentication for remote maintenance. For general access to SQL Server, Windows Authentication is less vulnerable; and avoids having to transmit passwords over the network or store them in connection strings.
 
 [[using-dynamic-sql-without-the-with-execute-as-clause]]
 === Using dynamic SQL without the WITH EXECUTE AS clause
